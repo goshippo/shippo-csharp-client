@@ -2,12 +2,6 @@ Shippo C# Bindings
 ==================
 This readme is meant as a simple guide for how to use the Shippo C# bindings. The Shippo C# bindings are built with Xamarin so that you can use them cross platform in your .NET projects.
 
-Install via NuGet
------------------
-To automatically include the code in a project you can use NuGet (https://www.nuget.org). In a Xamarin Studio project simply click on the gear icon next to “Packages” and click “Add Packages…”. A window will pop up with a browser for the official NuGet package repository. In the search box type Shippo, then add the package by pressing the button labeled “Add Package”.
-
-If for some reason this menu is not available to you, you may also click in the toolbar / menu bar the section labeled "Project", then "Add NuGet Packages..."
-
 Install Manually
 ----------------
 To manually include the code in a project of your own, just add the project to your solution, and then link it in the compiler. Shippo get's its packages via NuGet. The required packages are json.NET, and NUnit for testing.
