@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Xamarin.Shippo</id>
+    <version>$version$</version>
+    <title>Xamarin Shippo client library</title>
+    <authors>John Mercouris</authors>
+    <owners>Shippo</owners>
+    <description>Xamarin Shippo client library.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright></copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="5.0.6" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,9 @@
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/ShippoExample.exe.config
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/ShippoExample.exe.mdb
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/ShippoExample.exe
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/obj/x86/Debug/ShippoExample.exe
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/obj/x86/Debug/ShippoExample.exe.mdb
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/Newtonsoft.Json.dll
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/Shippo.dll
+/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoExample/bin/Debug/Shippo.dll.mdb
