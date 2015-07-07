@@ -13,9 +13,6 @@ namespace Shippo {
         [JsonProperty (PropertyName = "object_updated")]
         public object ObjectUpdaed { get; set; }
 
-        [JsonProperty (PropertyName = "object_id")]
-        public object ObjectId { get; set; }
-
         [JsonProperty (PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
