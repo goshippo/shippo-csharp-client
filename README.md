@@ -1,12 +1,20 @@
-Shippo C# Bindings
+Shippo C# API Client
 ==================
-This readme is meant as a simple guide for how to use the Shippo C# bindings. The Shippo C# bindings are built with Xamarin so that you can use them cross platform in your .NET projects.
+
+Shippo is a shipping API that connects you with multiple shipping carriers (such as USPS, UPS, Fedex, and DHL Express) all 
+throughone interface and allows you to create shipping labels. Shippo also offers you great discounts for US and international
+shipping rates.
+
+This readme is meant as a simple guide for how to use the Shippo C# bindings. The Shippo C# bindings are built with Xamarin
+so that you can use them cross platform in your .NET projects.
 
 Install Manually
 ----------------
-To manually include the code in a project of your own, just add the project to your solution, and then link it in the compiler. Shippo get's its packages via NuGet. The required packages are json.NET, and NUnit for testing.
+To manually include the code in a project of your own, just add the project to your solution, and then link it in the compiler.
+Shippo get's its packages via NuGet. The required packages are json.NET, and NUnit for testing.
 
-To load the code into your Visual Studio IDE or Xamarin Studio IDE, click "File --> Open" and then locate the solution file within the root directory of this folder.
+To load the code into your Visual Studio IDE or Xamarin Studio IDE, click "File --> Open" and then locate the solution file
+within the root directory of this folder.
 
 Running the Test Cases / Example
 --------------------------------
@@ -70,9 +78,12 @@ For convenience, a brief example to create, get, and list all parcels can be fou
 
 Wrapper Functionality Available
 ---------------------------
-To see all the possible methods and objects look in the project Shippo. In this project you'll see the definitions for every type of object you can create through the API.
+To see all the possible methods and objects look in the project Shippo. In this project you'll see the definitions for every type
+of object you can create through the API.
 
-A particularly important file is APIResource.cs, this file contains the code responsible for making requests. Also contained within this file are all the methods for generating different type of API objects. Each object's methods are contained within a region tag for convenient navigation. For example, the Parcel's methods are contained within: 
+A particularly important file is APIResource.cs, this file contains the code responsible for making requests. Also contained
+within this file are all the methods for generating different type of API objects. Each object's methods are contained within
+a region tag for convenient navigation. For example, the Parcel's methods are contained within: 
         
         #region Parcel
         /* Parcel Code */
