@@ -31,8 +31,8 @@ namespace Shippo {
 
 
     public class ShippoId : ShippoObject {
-        [JsonProperty (PropertyName = "id")] 
-        public string ID { get; set; }
+        [JsonProperty (PropertyName = "object_id")]
+        public string ObjectId { get; set; }
     }
 
     [JsonConverter (typeof(ShippoEnumConverter<ShippoObjectType>))]
