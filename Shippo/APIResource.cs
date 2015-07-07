@@ -70,7 +70,7 @@ namespace Shippo {
             req.Headers.Add ("Authorization", "ShippoToken " + accessToken);
             req.Timeout = TimeoutSeconds * 1000;
             // When Performing POST requests it is important that we set the headers to json
-            if (method == "POST")
+            if (method == "POST" || method == "PUT")
                 req.ContentType = "application/json";
             return req;
         }
@@ -356,6 +356,35 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/customs/declarations?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<CustomsDeclaration>> (ep);
+        }
+
+        #endregion
+
+        #region CarrierAccount
+
+        public CarrierAccount CreateCarrierAccount (Hashtable parameters)
+        {
+            string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
+            Console.WriteLine (parameters);
+            return DoRequest<CarrierAccount> (ep, "POST", serialize (parameters));
+        }
+
+        public CarrierAccount UpdateCarrierAccount (String object_id, Hashtable parameters)
+        {
+            string ep = String.Format ("{0}/carrier_accounts/{1}", api_endpoint, object_id);
+            return DoRequest<CarrierAccount> (ep, "PUT", serialize (parameters));
+        }
+
+        public CarrierAccount RetrieveCarrierAccount (String object_id)
+        {
+            string ep = String.Format ("{0}/carrier_accounts/{1}", api_endpoint, object_id);
+            return DoRequest<CarrierAccount> (ep, "GET");
+        }
+
+        public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
+        {
+            string ep = String.Format ("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
+            return DoRequest<ShippoCollection<CarrierAccount>> (ep);
         }
 
         #endregion
