@@ -1,9 +1,0 @@
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/ShippoTesting.dll.mdb
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/ShippoTesting.dll
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/obj/Debug/ShippoTesting.dll
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/obj/Debug/ShippoTesting.dll.mdb
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/nunit.framework.dll
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/Newtonsoft.Json.dll
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/Shippo.dll
-/Users/sbeidas/projects/shippo/gswd-vagrant/projects/shippo-c/ShippoTesting/bin/Debug/Shippo.dll.mdb
