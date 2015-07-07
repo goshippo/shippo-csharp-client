@@ -6,17 +6,17 @@ using Shippo;
 namespace ShippoTesting {
     [TestFixture]
     public class ShippoTest {
-        internal APIResource apiResource;
+		static internal APIResource apiResource;
         public APIResource staticAPIResource;
 
         [SetUp] public void Init ()
         { 
-            apiResource = new APIResource ("<Shippo Token>");
+			apiResource = new APIResource ("<Shippo Token>");
         }
 
         public static APIResource getAPIResource ()
         {
-            return new APIResource ("<Shippo Token>");
+			return apiResource;
         }
 
         public static Hashtable getInvalidHashtable ()
