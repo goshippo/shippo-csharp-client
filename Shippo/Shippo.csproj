@@ -59,6 +59,7 @@
     <Compile Include="Shipment.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Rate.cs" />
+    <Compile Include="CarrierAccount.cs" />
     <Compile Include="CustomsItem.cs" />
     <Compile Include="CustomsDeclaration.cs" />
     <Compile Include="Refund.cs" />
