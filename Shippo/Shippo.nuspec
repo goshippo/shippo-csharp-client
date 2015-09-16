@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Xamarin.Shippo</id>
-    <version>$version$</version>
-    <title>Xamarin Shippo client library</title>
+    <id>Shippo</id>
+    <version>1.4.4</version>
+    <title>Shippo client library</title>
     <authors>John Mercouris</authors>
     <owners>Shippo</owners>
-    <description>Xamarin Shippo client library.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <description>Shippo Shipping API client Library.</description>
+    <releaseNotes></releaseNotes>
     <copyright></copyright>
     <tags></tags>
     <dependencies>
