@@ -242,7 +242,7 @@ namespace Shippo {
 
         public ShippoCollection<Rate> GetShippingRatesSync (Hashtable parameters)
         {
-            string ep = String.Format ("{0}/rates?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
+
             String object_id = (String) parameters ["id"];
             Shipment shipment = RetrieveShipment (object_id);
             String object_status = (String) shipment.ObjectStatus;
@@ -257,7 +257,7 @@ namespace Shippo {
                 object_status = (String) shipment.ObjectStatus;
             }
 
-            return DoRequest<ShippoCollection<Rate>> (ep);
+            return CreateRate(parameters);
         }
 
         public Rate RetrieveRate (String id)
