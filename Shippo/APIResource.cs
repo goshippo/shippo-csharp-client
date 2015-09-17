@@ -37,14 +37,6 @@ namespace Shippo {
         static readonly Encoding encoding = Encoding.UTF8;
         String accessToken;
 
-        /* ENABLE BLOCK FOR BASIC AUTH
-        ICredentials credential;
-        public APIResource (string username, string password)
-        {
-            credential = new NetworkCredential (username, password);
-            TimeoutSeconds = 25;
-        } */
-
         // API Resource Constructor
         public APIResource (string inputToken)
         {
@@ -365,7 +357,6 @@ namespace Shippo {
         public CarrierAccount CreateCarrierAccount (Hashtable parameters)
         {
             string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
-            Console.WriteLine (parameters);
             return DoRequest<CarrierAccount> (ep, "POST", serialize (parameters));
         }
 
