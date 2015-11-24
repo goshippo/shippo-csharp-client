@@ -35,7 +35,7 @@ namespace ShippoExample {
             // to address
             Hashtable toAddressTable = new Hashtable ();
             toAddressTable.Add ("object_purpose", "PURCHASE");
-            toAddressTable.Add ("name", "Shippo Itle");
+            toAddressTable.Add ("name", "Mr. Hippo");
             toAddressTable.Add ("company", "Shippo");
             toAddressTable.Add ("street1", "215 Clayton St.");
             toAddressTable.Add ("city", "San Francisco");
@@ -48,7 +48,7 @@ namespace ShippoExample {
             // from address
             Hashtable fromAddressTable = new Hashtable ();
             fromAddressTable.Add ("object_purpose", "PURCHASE");
-            fromAddressTable.Add ("name", "Mr Hippo");
+            fromAddressTable.Add ("name", "Ms Hippo");
             fromAddressTable.Add ("company", "San Diego Zoo");
             fromAddressTable.Add ("street1", "2920 Zoo Drive");
             fromAddressTable.Add ("city", "San Diego");
@@ -74,22 +74,21 @@ namespace ShippoExample {
             shipmentTable.Add ("address_from", fromAddressTable);
             shipmentTable.Add ("parcel", parcelTable);
             shipmentTable.Add ("object_purpose", "PURCHASE");
+            shipmentTable.Add ("async", false);
 
             // create Shipment object
             Console.WriteLine ("Creating Shipment object..");
             Shipment shipment = resource.CreateShipment (shipmentTable);
 
-            // get shipping rates
-            Console.WriteLine ("Generating rates for shipment " + shipment.ObjectId);
-            ShippoCollection<Rate> rates = resource.GetShippingRatesSync ((String) shipment.ObjectId);
-
-            Console.WriteLine (String.Format ("Obtained " + rates.Data.Count + " rates for shipment " + shipment.ObjectId));
-            Rate rate = rates.Data [0];
+            // select desired shipping rate according to your business logic
+            // we simply select the first rate in this example
+            Rate rate = shipment.RatesList.Data [0];
 
             Console.WriteLine ("Getting shipping label..");
             Hashtable transactionParameters = new Hashtable ();
             transactionParameters.Add ("rate", rate.ObjectId);
-            Transaction transaction = resource.CreateTransactionSync (transactionParameters);
+            transactionParameters.Add ("async", false);
+            Transaction transaction = resource.CreateTransaction (transactionParameters);
 
 
             if (((String) transaction.ObjectStatus).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
