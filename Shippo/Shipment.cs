@@ -61,11 +61,15 @@ namespace Shippo {
         [JsonProperty (PropertyName = "rates_url")]
         public object RatesUrl { get; set; }
 
+	[JsonProperty (PropertyName = "rates_list")]
+	public Rate[] RatesList { get; set; }
+
         [JsonProperty (PropertyName = "metadata")]
         public object Metadata { get; set; }
 
         [JsonProperty (PropertyName = "messages")]
         public object Messages { get; set; }
+
     }
 }
 
