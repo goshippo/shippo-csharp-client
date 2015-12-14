@@ -61,7 +61,7 @@ namespace Shippo {
         [JsonProperty (PropertyName = "metadata")]
         public object Metadata { get; set; }
 
-		[JsonProperty (PropertyName = "is_residential")]
-		public object IsResidential { get; set; }
+	[JsonProperty (PropertyName = "is_residential")]
+	public object IsResidential { get; set; }
     }
 }
