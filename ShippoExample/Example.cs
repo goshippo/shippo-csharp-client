@@ -29,7 +29,7 @@ namespace ShippoExample {
         {
             // replace with your Shippo Token
             // don't have one? get more info here
-            // (https://g	oshippo.com/docs/#overview)
+            // (https://goshippo.com/docs/#overview)
 			APIResource resource = new APIResource ("<Shippo Token>");
 
 			// to address
@@ -89,7 +89,6 @@ namespace ShippoExample {
 			transactionParameters.Add ("rate", rate.ObjectId);
 			transactionParameters.Add ("async", false);
 			Transaction transaction = resource.CreateTransaction (transactionParameters);
-
 
 			if (((String) transaction.ObjectStatus).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
 				Console.WriteLine ("Label url : " + transaction.LabelURL);
