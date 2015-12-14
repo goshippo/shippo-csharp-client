@@ -29,75 +29,74 @@ namespace ShippoExample {
         {
             // replace with your Shippo Token
             // don't have one? get more info here
-            // (https://goshippo.com/docs/#overview)
-            APIResource resource = new APIResource ("<Shippo Token>");
+            // (https://g	oshippo.com/docs/#overview)
+			APIResource resource = new APIResource ("<Shippo Token>");
 
-            // to address
-            Hashtable toAddressTable = new Hashtable ();
-            toAddressTable.Add ("object_purpose", "PURCHASE");
-            toAddressTable.Add ("name", "Shippo Itle");
-            toAddressTable.Add ("company", "Shippo");
-            toAddressTable.Add ("street1", "215 Clayton St.");
-            toAddressTable.Add ("city", "San Francisco");
-            toAddressTable.Add ("state", "CA");
-            toAddressTable.Add ("zip", "94117");
-            toAddressTable.Add ("country", "US");
-            toAddressTable.Add ("phone", "+1 555 341 9393");
-            toAddressTable.Add ("email", "support@goshipppo.com");
+			// to address
+			Hashtable toAddressTable = new Hashtable ();
+			toAddressTable.Add ("object_purpose", "PURCHASE");
+			toAddressTable.Add ("name", "Mr. Hippo");
+			toAddressTable.Add ("company", "Shippo");
+			toAddressTable.Add ("street1", "215 Clayton St.");
+			toAddressTable.Add ("city", "San Francisco");
+			toAddressTable.Add ("state", "CA");
+			toAddressTable.Add ("zip", "94117");
+			toAddressTable.Add ("country", "US");
+			toAddressTable.Add ("phone", "+1 555 341 9393");
+			toAddressTable.Add ("email", "support@goshipppo.com");
 
-            // from address
-            Hashtable fromAddressTable = new Hashtable ();
-            fromAddressTable.Add ("object_purpose", "PURCHASE");
-            fromAddressTable.Add ("name", "Mr Hippo");
-            fromAddressTable.Add ("company", "San Diego Zoo");
-            fromAddressTable.Add ("street1", "2920 Zoo Drive");
-            fromAddressTable.Add ("city", "San Diego");
-            fromAddressTable.Add ("state", "CA");
-            fromAddressTable.Add ("zip", "92101");
-            fromAddressTable.Add ("country", "US");
-            fromAddressTable.Add ("email", "hippo@goshipppo.com");
-            fromAddressTable.Add ("phone", "+1 619 231 1515");
-            fromAddressTable.Add ("metadata", "Customer ID 123456");
+			// from address
+			Hashtable fromAddressTable = new Hashtable ();
+			fromAddressTable.Add ("object_purpose", "PURCHASE");
+			fromAddressTable.Add ("name", "Ms Hippo");
+			fromAddressTable.Add ("company", "San Diego Zoo");
+			fromAddressTable.Add ("street1", "2920 Zoo Drive");
+			fromAddressTable.Add ("city", "San Diego");
+			fromAddressTable.Add ("state", "CA");
+			fromAddressTable.Add ("zip", "92101");
+			fromAddressTable.Add ("country", "US");
+			fromAddressTable.Add ("email", "hippo@goshipppo.com");
+			fromAddressTable.Add ("phone", "+1 619 231 1515");
+			fromAddressTable.Add ("metadata", "Customer ID 123456");
 
-            // parcel
-            Hashtable parcelTable = new Hashtable ();
-            parcelTable.Add ("length", "5");
-            parcelTable.Add ("width", "5");
-            parcelTable.Add ("height", "5");
-            parcelTable.Add ("distance_unit", "in");
-            parcelTable.Add ("weight", "2");
-            parcelTable.Add ("mass_unit", "lb");
+			// parcel
+			Hashtable parcelTable = new Hashtable ();
+			parcelTable.Add ("length", "5");
+			parcelTable.Add ("width", "5");
+			parcelTable.Add ("height", "5");
+			parcelTable.Add ("distance_unit", "in");
+			parcelTable.Add ("weight", "2");
+			parcelTable.Add ("mass_unit", "lb");
 
-            // shipment
-            Hashtable shipmentTable = new Hashtable ();
-            shipmentTable.Add ("address_to", toAddressTable);
-            shipmentTable.Add ("address_from", fromAddressTable);
-            shipmentTable.Add ("parcel", parcelTable);
-            shipmentTable.Add ("object_purpose", "PURCHASE");
+			// shipment
+			Hashtable shipmentTable = new Hashtable ();
+			shipmentTable.Add ("address_to", toAddressTable);
+			shipmentTable.Add ("address_from", fromAddressTable);
+			shipmentTable.Add ("parcel", parcelTable);
+			shipmentTable.Add ("object_purpose", "PURCHASE");
+			shipmentTable.Add ("async", false);
 
-            // create Shipment object
-            Console.WriteLine ("Creating Shipment object..");
-            Shipment shipment = resource.CreateShipment (shipmentTable);
+			// create Shipment object
+			Console.WriteLine ("Creating Shipment object..");
+			Shipment shipment = resource.CreateShipment (shipmentTable);
 
-            // get shipping rates
-            Console.WriteLine ("Generating rates for shipment " + shipment.ObjectId);
-            ShippoCollection<Rate> rates = resource.GetShippingRatesSync ((String) shipment.ObjectId);
+			// select desired shipping rate according to your business logic
+			// we simply select the first rate in this example
+			Rate rate = shipment.RatesList[0];
 
-            Console.WriteLine (String.Format ("Obtained " + rates.Data.Count + " rates for shipment " + shipment.ObjectId));
-            Rate rate = rates.Data [0];
-
-            Console.WriteLine ("Getting shipping label..");
-            Hashtable transactionParameters = new Hashtable ();
-            transactionParameters.Add ("rate", rate.ObjectId);
-            Transaction transaction = resource.CreateTransactionSync (transactionParameters);
+			Console.WriteLine ("Getting shipping label..");
+			Hashtable transactionParameters = new Hashtable ();
+			transactionParameters.Add ("rate", rate.ObjectId);
+			transactionParameters.Add ("async", false);
+			Transaction transaction = resource.CreateTransaction (transactionParameters);
 
 
-            if (((String) transaction.ObjectStatus).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
-                Console.WriteLine ("Label url : " + transaction.LabelURL);
-                Console.WriteLine ("Tracking number : " + transaction.TrackingNumber);
-            } else {
-                Console.WriteLine ("An Error has occured while generating your label. Messages : " + transaction.Messages);
-            }
+			if (((String) transaction.ObjectStatus).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
+				Console.WriteLine ("Label url : " + transaction.LabelURL);
+				Console.WriteLine ("Tracking number : " + transaction.TrackingNumber);
+			} else {
+				Console.WriteLine ("An Error has occured while generating your label. Messages : " + transaction.Messages);
+			}
         }
     }
 }
