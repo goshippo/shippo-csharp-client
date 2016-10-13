@@ -197,7 +197,6 @@ namespace Shippo {
 
         public ShippoCollection<Parcel> AllParcels (Hashtable parameters)
         {
-          String apiVersion;
             string ep = String.Format ("{0}/parcels?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Parcel>> (ep);
         }
