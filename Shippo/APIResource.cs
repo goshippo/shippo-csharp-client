@@ -36,12 +36,18 @@ namespace Shippo {
         public static readonly int TransactionReqTimeout = 25;
         static readonly Encoding encoding = Encoding.UTF8;
         String accessToken;
+        String apiVersion;
 
         // API Resource Constructor
         public APIResource (string inputToken)
         {
             accessToken = inputToken;
             TimeoutSeconds = 25;
+            apiVersion = null;
+        }
+
+        public virtual void SetApiVersion(version) {
+            apiVersion = version;
         }
 
         #region Shared
@@ -60,6 +66,9 @@ namespace Shippo {
 
             // Disable line below for basic auth
             req.Headers.Add ("Authorization", "ShippoToken " + accessToken);
+            if (apiVersion != null) {
+                req.Headers.Add ("Shippo-API-Version", apiVersion);
+            }
             req.Timeout = TimeoutSeconds * 1000;
             // When Performing POST requests it is important that we set the headers to json
             if (method == "POST" || method == "PUT")
@@ -188,6 +197,7 @@ namespace Shippo {
 
         public ShippoCollection<Parcel> AllParcels (Hashtable parameters)
         {
+          String apiVersion;
             string ep = String.Format ("{0}/parcels?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Parcel>> (ep);
         }
