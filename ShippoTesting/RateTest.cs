@@ -12,7 +12,7 @@ namespace ShippoTesting {
         public void TestValidCreate ()
         {
             ShippoCollection<Rate> testObject = RateTest.getDefaultObject ();
-            Assert.NotNull (testObject.Data);
+            Assert.IsNotNull (testObject.Data);
         }
 
         [Test ()]
