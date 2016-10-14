@@ -46,7 +46,7 @@ namespace Shippo {
             apiVersion = null;
         }
 
-        public virtual void SetApiVersion(version) {
+        public virtual void SetApiVersion(String version) {
             apiVersion = version;
         }
 

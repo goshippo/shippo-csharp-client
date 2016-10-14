@@ -49,6 +49,7 @@
     <Compile Include="RefundTest.cs" />
     <Compile Include="ManifestTest.cs" />
     <Compile Include="ShippoTest.cs" />
+    <Compile Include="APIResourceTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
