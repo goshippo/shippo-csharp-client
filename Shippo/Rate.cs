@@ -46,6 +46,9 @@ namespace Shippo {
         [JsonProperty (PropertyName = "servicelevel_name")]
         public object ServicelevelName { get; set; }
 
+        [JsonProperty(PropertyName = "servicelevel_token")]
+        public object ServicelevelToken { get; set; }
+
         [JsonProperty (PropertyName = "servicelevel_terms")]
         public object ServicelevelTerms { get; set; }
 
