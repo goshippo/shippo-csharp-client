@@ -37,6 +37,9 @@ namespace Shippo {
         [JsonProperty (PropertyName = "label_url")]
         public object LabelURL { get; set; }
 
+	[JsonProperty(PropertyName = "commercial_invoice_url")]
+	public object CommercialInvoiceUrl { get; set; }
+
         [JsonProperty (PropertyName = "messages")]
         public object Messages { get; set; }
 
