@@ -79,5 +79,8 @@ namespace Shippo {
         [JsonProperty (PropertyName = "messages")]
         public object Messages { get; set; }
 
+	[JsonProperty(PropertyName = "zone")]
+	public object Zone { get; set; }
+
     }
 }
