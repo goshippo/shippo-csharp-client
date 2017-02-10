@@ -17,6 +17,16 @@ namespace ShippoTesting
             Assert.AreEqual ("VALIDATING", testBatch.ObjectStatus);
         }
 
+        [Test ()]
+        [ExpectedException(typeof(ShippoException))]
+        public void TestInvalidCreate ()
+        {
+            Hashtable parameters = new Hashtable ();
+            parameters.Add ("default_carrier_account", "invalid_carrier_account");
+            parameters.Add ("default_servicelevel_token", "invalid_servicelevel_token");
+            getAPIResource ().CreateBatch (parameters);
+        }
+
         public static Batch getDefaultObject ()
         {
             // Grab USPS carrier account to get the correct object ID for further testing.
