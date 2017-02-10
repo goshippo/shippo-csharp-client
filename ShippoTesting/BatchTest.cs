@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Newtonsoft.Json.Linq;
 
 using Shippo;
 
@@ -13,7 +14,7 @@ namespace ShippoTesting
         [Test ()]
         public void TestValidCreate ()
         {
-            Batch testBatch = BatchTest.getDefaultObject ();
+            Batch testBatch = getDefaultObject ();
             Assert.AreEqual ("VALIDATING", testBatch.ObjectStatus);
         }
 
@@ -25,6 +26,15 @@ namespace ShippoTesting
             parameters.Add ("default_carrier_account", "invalid_carrier_account");
             parameters.Add ("default_servicelevel_token", "invalid_servicelevel_token");
             getAPIResource ().CreateBatch (parameters);
+        }
+
+        [Test ()]
+        public void TestValidRetrieve ()
+        {
+            Batch batch = getDefaultObject ();
+            Batch batchRetrieved = getAPIResource ().RetrieveBatch (batch.ObjectId);
+            Assert.AreEqual (batch.ObjectId, batchRetrieved.ObjectId);
+            Assert.AreEqual (batch.ObjectCreated, batchRetrieved.ObjectCreated);
         }
 
         public static Batch getDefaultObject ()
