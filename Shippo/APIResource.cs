@@ -462,14 +462,11 @@ namespace Shippo {
             return DoRequest<Batch> (ep, "POST", serialize(parameters));
         }
 
-        public Batch RetrieveBatch (Hashtable parameters)
+        public Batch RetrieveBatch (String id, Hashtable parameters = null)
         {
-            string ep = String.Format ("{0}/batches/{1}", api_endpoint, parameters ["id"]);
-            parameters.Remove ("id");
-            if (parameters.Contains ("page") || parameters.Contains ("object_results"))
-            {
+            string ep = String.Format ("{0}/batches/{1}", api_endpoint, id);
+            if (parameters != null)
                 ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
-            }
             return DoRequest<Batch> (ep, "GET");
         }
 
