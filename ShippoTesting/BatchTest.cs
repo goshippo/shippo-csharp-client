@@ -37,6 +37,13 @@ namespace ShippoTesting
             Assert.AreEqual (batch.ObjectCreated, batchRetrieved.ObjectCreated);
         }
 
+        [Test ()]
+        [ExpectedException(typeof(ShippoException))]
+        public void TestInvalidRetrieve ()
+        {
+            getAPIResource ().RetrieveBatch ("INVALID_ID");
+        }
+
         public static Batch getDefaultObject ()
         {
             // Grab USPS carrier account to get the correct object ID for further testing.
