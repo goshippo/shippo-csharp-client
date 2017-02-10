@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Shippo;
@@ -35,6 +36,30 @@ namespace ShippoTesting
             Batch batchRetrieved = getAPIResource ().RetrieveBatch (batch.ObjectId);
             Assert.AreEqual (batch.ObjectId, batchRetrieved.ObjectId);
             Assert.AreEqual (batch.ObjectCreated, batchRetrieved.ObjectCreated);
+        }
+
+        [Test ()]
+        public void TestValidAddShipmentToBatch ()
+        {
+            Batch batch = getDefaultObject ();
+            Assert.AreEqual (batch.ObjectStatus, "VALIDATING");
+
+            List<String> shipments = new List<String> ();
+            Shipment shipment = ShipmentTest.getDefaultObject ();
+            shipments.Add (shipment.ObjectId);
+
+            // Bad technique for waiting for the batch to become validated
+            // before adding a new shipment This should be replaced in newer
+            // versions of this test.
+            System.Threading.Thread.Sleep (2000);
+            Batch newBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
+
+            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable>(batch.BatchShipments.ToString());
+            Hashtable newBatchTable = JsonConvert.DeserializeObject<Hashtable>(newBatch.BatchShipments.ToString());
+            JArray batchResults = batchTable ["results"] as JArray;
+            JArray newBatchResults = newBatchTable ["results"] as JArray;
+
+            Assert.AreEqual (batchResults.Count + shipments.Count, newBatchResults.Count);
         }
 
         [Test ()]
