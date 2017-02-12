@@ -20,7 +20,7 @@ namespace ShippoTesting
         }
 
         [Test ()]
-        [ExpectedException(typeof(ShippoException))]
+        [ExpectedException (typeof (ShippoException))]
         public void TestInvalidCreate ()
         {
             Hashtable parameters = new Hashtable ();
@@ -39,6 +39,13 @@ namespace ShippoTesting
         }
 
         [Test ()]
+        [ExpectedException (typeof (ShippoException))]
+        public void TestInvalidRetrieve ()
+        {
+            getAPIResource ().RetrieveBatch ("INVALID_ID");
+        }
+
+        [Test ()]
         public void TestValidAddShipmentToBatch ()
         {
             Batch batch = getDefaultObject ();
@@ -54,8 +61,8 @@ namespace ShippoTesting
             System.Threading.Thread.Sleep (2000);
             Batch newBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
 
-            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable>(batch.BatchShipments.ToString());
-            Hashtable newBatchTable = JsonConvert.DeserializeObject<Hashtable>(newBatch.BatchShipments.ToString());
+            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (batch.BatchShipments.ToString ());
+            Hashtable newBatchTable = JsonConvert.DeserializeObject<Hashtable> (newBatch.BatchShipments.ToString ());
             JArray batchResults = batchTable ["results"] as JArray;
             JArray newBatchResults = newBatchTable ["results"] as JArray;
 
@@ -63,18 +70,43 @@ namespace ShippoTesting
         }
 
         [Test ()]
-        [ExpectedException(typeof(ShippoException))]
+        [ExpectedException (typeof (ShippoException))]
         public void TestInvalidAddShipmentToBatch ()
         {
-            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", new List<string>());
+            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", new List<string> ());
         }
 
         [Test ()]
-        [ExpectedException(typeof(ShippoException))]
-        public void TestInvalidRetrieve ()
+        public void TestValidRemoveShipmentsFromBatch ()
         {
-            getAPIResource ().RetrieveBatch ("INVALID_ID");
+            Batch batch = getDefaultObject ();
+            Assert.AreEqual (batch.ObjectStatus, "VALIDATING");
+            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (batch.BatchShipments.ToString ());
+            JArray batchResults = batchTable ["results"] as JArray;
+
+            List<String> shipments = new List<String> ();
+            Shipment shipment = ShipmentTest.getDefaultObject ();
+            shipments.Add (shipment.ObjectId);
+
+            // Bad technique for waiting for the batch to become validated
+            // before adding a new shipment. This should be replaced in newer
+            // versions of this test.
+            System.Threading.Thread.Sleep (2000);
+            Batch addBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
+            Hashtable addBatchTable = JsonConvert.DeserializeObject<Hashtable> (addBatch.BatchShipments.ToString ());
+            JArray addBatchResults = addBatchTable ["results"] as JArray;
+            Assert.AreEqual (batchResults.Count + shipments.Count, addBatchResults.Count);
+
+            string removeId = addBatchResults [0] ["object_id"].ToString();
+            List<String> shipmentsToRemove = new List<String> ();
+            shipmentsToRemove.Add (removeId);
+
+            Batch removeBatch = getAPIResource ().RemoveShipmentsFromBatch (batch.ObjectId, shipmentsToRemove);
+            Hashtable removeBatchTable = JsonConvert.DeserializeObject<Hashtable> (removeBatch.BatchShipments.ToString ());
+            JArray removeBatchResults = removeBatchTable ["results"] as JArray;
+            Assert.AreEqual (batchResults.Count, removeBatchResults.Count);
         }
+
 
         public static Batch getDefaultObject ()
         {
@@ -93,14 +125,14 @@ namespace ShippoTesting
             parameters.Add ("default_servicelevel_token", "usps_priority");
             parameters.Add ("label_filetype", "PDF_4x6");
             parameters.Add ("metadata", "BATCH #170");
-            parameters.Add ("servicelevel_token", "fedex_2_day");
 
-            Hashtable batchShipment = new Hashtable ();
-            batchShipment.Add ("object_purpose", "PURCHASE");
+            Hashtable shipment = new Hashtable ();
+            shipment.Add ("object_purpose", "PURCHASE");
 
             Hashtable addressFrom = new Hashtable ();
             addressFrom.Add ("object_purpose", "PURCHASE");
             addressFrom.Add ("name", "Mr. Hippo");
+            addressFrom.Add ("company", "");
             addressFrom.Add ("street1", "965 Mission St");
             addressFrom.Add ("street2", "Ste 201");
             addressFrom.Add ("city", "San Francisco");
@@ -130,15 +162,17 @@ namespace ShippoTesting
             parcel.Add ("distance_unit", "in");
             parcel.Add ("weight", "2");
             parcel.Add ("mass_unit", "oz");
+            parcel.Add ("template", "");
+            parcel.Add ("metadata", "Parcel 123");
 
-            batchShipment.Add ("address_from", addressFrom);
-            batchShipment.Add ("address_to", addressTo);
-            batchShipment.Add ("parcel", parcel);
+            shipment.Add ("address_from", addressFrom);
+            shipment.Add ("address_to", addressTo);
+            shipment.Add ("parcel", parcel);
 
-            Hashtable batchShipments = new Hashtable ();
-            batchShipments.Add ("shipment", batchShipment);
+            Hashtable batchShipment = new Hashtable ();
+            batchShipment.Add ("shipment", shipment);
             parameters.Add ("batch_shipments", new List<Hashtable> ());
-            (parameters ["batch_shipments"] as List<Hashtable>).Add (batchShipments);
+            (parameters ["batch_shipments"] as List<Hashtable>).Add (batchShipment);
 
             return getAPIResource ().CreateBatch (parameters);
         }
