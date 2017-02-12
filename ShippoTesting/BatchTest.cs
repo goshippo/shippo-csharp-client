@@ -118,6 +118,19 @@ namespace ShippoTesting
             getAPIResource ().RemoveShipmentsFromBatch ("INVALID_ID", shipments);
         }
 
+        [Test ()]
+        public void TestValidPurchase ()
+        {
+            Batch batch = getDefaultObject ();
+
+            // Bad technique for waiting for the batch to become validated
+            // before adding a new shipment. This should be replaced in newer
+            // versions of this test.
+            System.Threading.Thread.Sleep (2000);
+            Batch purchase = getAPIResource ().PurchaseBatch (batch.ObjectId);
+            Assert.AreEqual ("PURCHASING", purchase.ObjectStatus);
+        }
+
         public static Batch getDefaultObject ()
         {
             // Grab USPS carrier account to get the correct object ID for further testing.
