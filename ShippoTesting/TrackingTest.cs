@@ -20,5 +20,12 @@ namespace ShippoTesting
             Assert.IsNotNull (tracking.TrackingNumber);
             Assert.IsNotNull (tracking.TrackingHistory);
         }
+
+        [Test ()]
+        [ExpectedException (typeof (ShippoException))]
+        public void TestInvalidGetStatus ()
+        {
+            getAPIResource ().RetrieveTracking ("usps", "INVALID_ID");
+        }
     }
 }
