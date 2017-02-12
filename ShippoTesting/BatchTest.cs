@@ -49,7 +49,7 @@ namespace ShippoTesting
             shipments.Add (shipment.ObjectId);
 
             // Bad technique for waiting for the batch to become validated
-            // before adding a new shipment This should be replaced in newer
+            // before adding a new shipment. This should be replaced in newer
             // versions of this test.
             System.Threading.Thread.Sleep (2000);
             Batch newBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
@@ -60,6 +60,13 @@ namespace ShippoTesting
             JArray newBatchResults = newBatchTable ["results"] as JArray;
 
             Assert.AreEqual (batchResults.Count + shipments.Count, newBatchResults.Count);
+        }
+
+        [Test ()]
+        [ExpectedException(typeof(ShippoException))]
+        public void TestInvalidAddShipmentToBatch ()
+        {
+            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", new List<string>());
         }
 
         [Test ()]
