@@ -55,13 +55,10 @@ namespace ShippoTesting
             Shipment shipment = ShipmentTest.getDefaultObject ();
             shipments.Add (shipment.ObjectId);
 
-            // Bad technique for waiting for the batch to become validated
-            // before adding a new shipment. This should be replaced in newer
-            // versions of this test.
-            System.Threading.Thread.Sleep (2000);
-            Batch newBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
+            Batch retrieve = getValidBatch (batch.ObjectId);
+            Batch newBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
 
-            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (batch.BatchShipments.ToString ());
+            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (retrieve.BatchShipments.ToString ());
             Hashtable newBatchTable = JsonConvert.DeserializeObject<Hashtable> (newBatch.BatchShipments.ToString ());
             JArray batchResults = batchTable ["results"] as JArray;
             JArray newBatchResults = newBatchTable ["results"] as JArray;
@@ -83,18 +80,16 @@ namespace ShippoTesting
         {
             Batch batch = getDefaultObject ();
             Assert.AreEqual (batch.ObjectStatus, "VALIDATING");
-            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (batch.BatchShipments.ToString ());
-            JArray batchResults = batchTable ["results"] as JArray;
 
             List<String> shipments = new List<String> ();
             Shipment shipment = ShipmentTest.getDefaultObject ();
             shipments.Add (shipment.ObjectId);
 
-            // Bad technique for waiting for the batch to become validated
-            // before adding a new shipment. This should be replaced in newer
-            // versions of this test.
-            System.Threading.Thread.Sleep (2000);
-            Batch addBatch = getAPIResource ().AddShipmentsToBatch (batch.ObjectId, shipments);
+            Batch retrieve = getValidBatch (batch.ObjectId);
+            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (retrieve.BatchShipments.ToString ());
+            JArray batchResults = batchTable ["results"] as JArray;
+
+            Batch addBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
             Hashtable addBatchTable = JsonConvert.DeserializeObject<Hashtable> (addBatch.BatchShipments.ToString ());
             JArray addBatchResults = addBatchTable ["results"] as JArray;
             Assert.AreEqual (batchResults.Count + shipments.Count, addBatchResults.Count);
@@ -122,12 +117,8 @@ namespace ShippoTesting
         public void TestValidPurchase ()
         {
             Batch batch = getDefaultObject ();
-
-            // Bad technique for waiting for the batch to become validated
-            // before adding a new shipment. This should be replaced in newer
-            // versions of this test.
-            System.Threading.Thread.Sleep (2000);
-            Batch purchase = getAPIResource ().PurchaseBatch (batch.ObjectId);
+            Batch retrieve = getValidBatch (batch.ObjectId);
+            Batch purchase = getAPIResource ().PurchaseBatch (retrieve.ObjectId);
             Assert.AreEqual ("PURCHASING", purchase.ObjectStatus);
         }
 
@@ -136,6 +127,23 @@ namespace ShippoTesting
         public void TestInvalidPurchase ()
         {
             getAPIResource ().PurchaseBatch ("INVALID_ID");
+        }
+
+        /**
+         * Retries up to 10 times to retrieve a batch that has been recently 
+         * created until the newly created batch is 'VALID' and not 'VALIDATING'.
+         */
+        public Batch getValidBatch (String id)
+        {
+            Batch batch;
+            int retries = 10;
+            for (; retries > 0; retries--) {
+                batch = getAPIResource ().RetrieveBatch (id);
+                if (batch.ObjectStatus.ToString () == "VALID")
+                    return batch;
+                System.Threading.Thread.Sleep (1000);
+            }
+            throw new ShippoException ("Could not retrieve valid Batch", new TimeoutException());
         }
 
         public static Batch getDefaultObject ()
