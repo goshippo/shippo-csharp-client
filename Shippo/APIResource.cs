@@ -448,7 +448,8 @@ namespace Shippo {
 
         public Tracking RegisterTrackingWebhook (Hashtable parameters)
         {
-            string ep = String.Format ("{0}/tracks", api_endpoint);
+            // For now the trailing '/' is required.
+            string ep = String.Format ("{0}/tracks/", api_endpoint);
             return DoRequest<Tracking> (ep, "POST", serialize(parameters));
         }
 
