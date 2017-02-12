@@ -73,7 +73,9 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidAddShipmentToBatch ()
         {
-            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", new List<string> ());
+            List<String> shipments = new List<String> ();
+            shipments.Add ("123");
+            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", shipments);
         }
 
         [Test ()]
@@ -97,7 +99,7 @@ namespace ShippoTesting
             JArray addBatchResults = addBatchTable ["results"] as JArray;
             Assert.AreEqual (batchResults.Count + shipments.Count, addBatchResults.Count);
 
-            string removeId = addBatchResults [0] ["object_id"].ToString();
+            string removeId = addBatchResults [0] ["object_id"].ToString ();
             List<String> shipmentsToRemove = new List<String> ();
             shipmentsToRemove.Add (removeId);
 
@@ -107,6 +109,14 @@ namespace ShippoTesting
             Assert.AreEqual (batchResults.Count, removeBatchResults.Count);
         }
 
+        [Test ()]
+        [ExpectedException (typeof (ShippoException))]
+        public void TestInvalidRemoveShipmentsFromBatch ()
+        {
+            List<String> shipments = new List<String> ();
+            shipments.Add ("123");
+            getAPIResource ().RemoveShipmentsFromBatch ("INVALID_ID", shipments);
+        }
 
         public static Batch getDefaultObject ()
         {
