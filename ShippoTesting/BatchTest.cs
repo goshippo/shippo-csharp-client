@@ -131,6 +131,13 @@ namespace ShippoTesting
             Assert.AreEqual ("PURCHASING", purchase.ObjectStatus);
         }
 
+        [Test ()]
+        [ExpectedException (typeof (ShippoException))]
+        public void TestInvalidPurchase ()
+        {
+            getAPIResource ().PurchaseBatch ("INVALID_ID");
+        }
+
         public static Batch getDefaultObject ()
         {
             // Grab USPS carrier account to get the correct object ID for further testing.
