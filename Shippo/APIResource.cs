@@ -440,9 +440,9 @@ namespace Shippo {
 
         #region Tracking
 
-        public Tracking RetrieveTracking (Hashtable parameters)
+        public Tracking RetrieveTracking (String carrier, String id)
         {
-            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, parameters ["carrier"], parameters ["id"]);
+            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, carrier, id);
             return DoRequest<Tracking> (ep, "GET");
         }
 
