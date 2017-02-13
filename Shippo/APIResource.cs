@@ -150,6 +150,11 @@ namespace Shippo {
         {
             return JsonConvert.SerializeObject (propertyMap);
         }
+        // Serialize parameters into JSON for POST requests from List
+        public String serializeList<T> (List<T> list)
+        {
+            return JsonConvert.SerializeObject (list);
+        }
 
         #endregion
 
