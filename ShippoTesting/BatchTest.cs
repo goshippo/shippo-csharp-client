@@ -156,7 +156,7 @@ namespace ShippoTesting
         {
             // Grab USPS carrier account to get the correct object ID for further testing.
             // This should be changed to be more generic in future versions of this test. In
-            // otherwise remove the depedence on a USPS carrier account to exist.
+            // other words, remove the depedence on a USPS carrier account to exist.
             ShippoCollection<CarrierAccount> carrierAccounts = getAPIResource ().AllCarrierAccount ();
             string defaultCarrierAccount = "";
             foreach (CarrierAccount account in carrierAccounts) {
