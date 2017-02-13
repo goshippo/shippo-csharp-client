@@ -10,8 +10,9 @@ namespace ShippoTesting {
         public APIResource staticAPIResource;
 
         [SetUp] public void Init ()
-        { 
-			apiResource = new APIResource ("<Shippo Token>");
+        {
+            // Please use your Shippo test API here
+            apiResource = new APIResource ("<Shippo Token>");
         }
 
         public static APIResource getAPIResource ()
