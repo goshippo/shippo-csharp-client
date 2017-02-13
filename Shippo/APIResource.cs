@@ -150,6 +150,11 @@ namespace Shippo {
         {
             return JsonConvert.SerializeObject (propertyMap);
         }
+        // Serialize parameters into JSON for POST requests from List
+        public String serializeList<T> (List<T> list)
+        {
+            return JsonConvert.SerializeObject (list);
+        }
 
         #endregion
 
@@ -381,9 +386,9 @@ namespace Shippo {
             return DoRequest<CarrierAccount> (ep, "GET");
         }
 
-        public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
+        public ShippoCollection<CarrierAccount> AllCarrierAccount ()
         {
-            string ep = String.Format ("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
+            string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
             return DoRequest<ShippoCollection<CarrierAccount>> (ep);
         }
 
@@ -429,6 +434,59 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/manifests?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Manifest>> (ep);
+        }
+
+        #endregion
+
+        #region Track
+
+        public Track RetrieveTracking (String carrier, String id)
+        {
+            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, carrier, id);
+            return DoRequest<Track> (ep, "GET");
+        }
+
+        public Track RegisterTrackingWebhook (Hashtable parameters)
+        {
+            // For now the trailing '/' is required.
+            string ep = String.Format ("{0}/tracks/", api_endpoint);
+            return DoRequest<Track> (ep, "POST", serialize(parameters));
+        }
+
+        #endregion
+
+        #region Batch
+
+        public Batch CreateBatch (Hashtable parameters)
+        {
+            string ep = String.Format ("{0}/batches", api_endpoint);
+            return DoRequest<Batch> (ep, "POST", serialize(parameters));
+        }
+
+        public Batch RetrieveBatch (String id, Hashtable parameters = null)
+        {
+            string ep = String.Format ("{0}/batches/{1}", api_endpoint, id);
+            if (parameters != null)
+                ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
+            return DoRequest<Batch> (ep, "GET");
+        }
+
+        public Batch AddShipmentsToBatch (String id, List<Hashtable> shipments)
+        {
+            string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST", serializeList<Hashtable> (shipments));
+        }
+
+        public Batch RemoveShipmentsFromBatch (String id, List<String> shipments)
+        {
+            string ep = String.Format ("{0}/batches/{1}/remove_shipments", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST", serializeList<String> (shipments));
+        }
+
+        public Batch PurchaseBatch (String id)
+        {
+            string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST");
         }
 
         #endregion

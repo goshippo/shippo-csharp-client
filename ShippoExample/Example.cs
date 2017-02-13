@@ -21,10 +21,86 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Shippo;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ShippoExample {
     class Example {
+
+        private static void RunBatchExample (APIResource resource)
+        {
+            ShippoCollection<CarrierAccount> carrierAccounts = resource.AllCarrierAccount ();
+            string defaultCarrierAccount = "";
+            foreach (CarrierAccount account in carrierAccounts) {
+                if (account.Carrier.ToString () == "usps")
+                    defaultCarrierAccount = account.ObjectId;
+            }
+
+            Hashtable parameters = new Hashtable ();
+            parameters.Add ("default_carrier_account", defaultCarrierAccount);
+            parameters.Add ("default_servicelevel_token", "usps_priority");
+            parameters.Add ("label_filetype", "PDF_4x6");
+            parameters.Add ("metadata", "BATCH #170");
+
+            Hashtable shipment = new Hashtable ();
+            shipment.Add ("object_purpose", "PURCHASE");
+
+            Hashtable addressFrom = new Hashtable ();
+            addressFrom.Add ("object_purpose", "PURCHASE");
+            addressFrom.Add ("name", "Mr. Hippo");
+            addressFrom.Add ("company", "");
+            addressFrom.Add ("street1", "965 Mission St");
+            addressFrom.Add ("street2", "Ste 201");
+            addressFrom.Add ("city", "San Francisco");
+            addressFrom.Add ("state", "CA");
+            addressFrom.Add ("zip", "94103");
+            addressFrom.Add ("country", "US");
+            addressFrom.Add ("phone", "4151234567");
+            addressFrom.Add ("email", "mrhippo@goshippo.com");
+
+            Hashtable addressTo = new Hashtable ();
+            addressTo.Add ("object_purpose", "PURCHASE");
+            addressTo.Add ("name", "Mrs. Hippo");
+            addressTo.Add ("company", "");
+            addressTo.Add ("street1", "Broadway 1");
+            addressTo.Add ("street2", "");
+            addressTo.Add ("city", "New York");
+            addressTo.Add ("state", "NY");
+            addressTo.Add ("zip", "10007");
+            addressTo.Add ("country", "US");
+            addressTo.Add ("phone", "4151234567");
+            addressTo.Add ("email", "mrshippo@goshippo.com");
+
+            Hashtable parcel = new Hashtable ();
+            parcel.Add ("length", "5");
+            parcel.Add ("width", "5");
+            parcel.Add ("height", "5");
+            parcel.Add ("distance_unit", "in");
+            parcel.Add ("weight", "2");
+            parcel.Add ("mass_unit", "oz");
+            parcel.Add ("template", "");
+            parcel.Add ("metadata", "Parcel 123");
+
+            shipment.Add ("address_from", addressFrom);
+            shipment.Add ("address_to", addressTo);
+            shipment.Add ("parcel", parcel);
+
+            Hashtable batchShipment = new Hashtable ();
+            batchShipment.Add ("shipment", shipment);
+            parameters.Add ("batch_shipments", new List<Hashtable> ());
+            (parameters ["batch_shipments"] as List<Hashtable>).Add (batchShipment);
+
+            Batch batch = resource.CreateBatch (parameters);
+            Console.WriteLine ("Batch Status = " + batch.ObjectStatus);
+            Console.WriteLine ("Metadata = " + batch.Metadata);
+        }
+
+        private static void RunTrackingExample (Shipment shipment, APIResource resource)
+        {
+            Track track = resource.RetrieveTracking ("usps", shipment.ObjectId);
+            Console.WriteLine ("Carrier = " + track.Carrier.ToString ().ToUpper ());
+            Console.WriteLine ("Tracking number = " + track.TrackingNumber);
+        }
+
         static void Main (string[] args)
         {
             // replace with your Shippo Token
@@ -96,6 +172,12 @@ namespace ShippoExample {
 			} else {
 				Console.WriteLine ("An Error has occured while generating your label. Messages : " + transaction.Messages);
 			}
+
+            Console.WriteLine ("\nBatch\n");
+            RunBatchExample (resource);
+
+            Console.WriteLine ("\nTrack\n");
+            RunTrackingExample (shipment, resource);
         }
     }
 }
