@@ -67,7 +67,7 @@
     <Compile Include="APIResource.cs" />
     <Compile Include="RequestTimeoutException.cs" />
     <Compile Include="Batch.cs" />
-    <Compile Include="Tracking.cs" />
+    <Compile Include="Track.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

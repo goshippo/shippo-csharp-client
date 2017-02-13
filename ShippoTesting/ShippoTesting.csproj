@@ -51,7 +51,7 @@
     <Compile Include="ShippoTest.cs" />
     <Compile Include="APIResourceTest.cs" />
     <Compile Include="BatchTest.cs" />
-    <Compile Include="TrackingTest.cs" />
+    <Compile Include="TrackTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

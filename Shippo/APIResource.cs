@@ -438,19 +438,19 @@ namespace Shippo {
 
         #endregion
 
-        #region Tracking
+        #region Track
 
-        public Tracking RetrieveTracking (String carrier, String id)
+        public Track RetrieveTracking (String carrier, String id)
         {
             string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, carrier, id);
-            return DoRequest<Tracking> (ep, "GET");
+            return DoRequest<Track> (ep, "GET");
         }
 
-        public Tracking RegisterTrackingWebhook (Hashtable parameters)
+        public Track RegisterTrackingWebhook (Hashtable parameters)
         {
             // For now the trailing '/' is required.
             string ep = String.Format ("{0}/tracks/", api_endpoint);
-            return DoRequest<Tracking> (ep, "POST", serialize(parameters));
+            return DoRequest<Track> (ep, "POST", serialize(parameters));
         }
 
         #endregion

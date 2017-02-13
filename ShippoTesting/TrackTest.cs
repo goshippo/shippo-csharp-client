@@ -10,15 +10,15 @@ using Shippo;
 namespace ShippoTesting
 {
     [TestFixture ()]
-    public class TrackingTest : ShippoTest
+    public class TrackTest : ShippoTest
     {
         [Test ()]
         public void TestValidGetStatus ()
         {
             Shipment shipment = ShipmentTest.getDefaultObject ();
-            Tracking tracking = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
-            Assert.IsNotNull (tracking.TrackingNumber);
-            Assert.IsNotNull (tracking.TrackingHistory);
+            Track track = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
+            Assert.IsNotNull (track.TrackingNumber);
+            Assert.IsNotNull (track.TrackingHistory);
         }
 
         [Test ()]
@@ -32,14 +32,14 @@ namespace ShippoTesting
         public void TestValidRegisterWebhook ()
         {
             Shipment shipment = ShipmentTest.getDefaultObject ();
-            Tracking tracking = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
-            Assert.IsNotNull (tracking.TrackingNumber);
-            Assert.IsNotNull (tracking.TrackingHistory);
+            Track track = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
+            Assert.IsNotNull (track.TrackingNumber);
+            Assert.IsNotNull (track.TrackingHistory);
 
             Hashtable parameters = new Hashtable ();
             parameters.Add ("carrier", "usps");
-            parameters.Add ("tracking_number", tracking.TrackingNumber);
-            Tracking register = getAPIResource ().RegisterTrackingWebhook (parameters);
+            parameters.Add ("tracking_number", track.TrackingNumber);
+            Track register = getAPIResource ().RegisterTrackingWebhook (parameters);
             Assert.IsNotNull (register.TrackingNumber);
             Assert.IsNotNull (register.TrackingHistory);
         }

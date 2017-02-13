@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
-    public class Tracking : ShippoId {
+    public class Track : ShippoId {
         [JsonProperty (PropertyName = "carrier")]
         public object Carrier { get; set; }
 

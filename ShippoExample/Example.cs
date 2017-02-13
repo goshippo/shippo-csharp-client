@@ -96,9 +96,9 @@ namespace ShippoExample {
 
         private static void RunTrackingExample (Shipment shipment, APIResource resource)
         {
-            Tracking tracking = resource.RetrieveTracking ("usps", shipment.ObjectId);
-            Console.WriteLine ("Carrier = " + tracking.Carrier.ToString ().ToUpper ());
-            Console.WriteLine ("Tracking number = " + tracking.TrackingNumber);
+            Track track = resource.RetrieveTracking ("usps", shipment.ObjectId);
+            Console.WriteLine ("Carrier = " + track.Carrier.ToString ().ToUpper ());
+            Console.WriteLine ("Tracking number = " + track.TrackingNumber);
         }
 
         static void Main (string[] args)
@@ -176,7 +176,7 @@ namespace ShippoExample {
             Console.WriteLine ("\nBatch\n");
             RunBatchExample (resource);
 
-            Console.WriteLine ("\nTracking\n");
+            Console.WriteLine ("\nTrack\n");
             RunTrackingExample (shipment, resource);
         }
     }
