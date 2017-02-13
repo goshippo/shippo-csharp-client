@@ -471,10 +471,10 @@ namespace Shippo {
             return DoRequest<Batch> (ep, "GET");
         }
 
-        public Batch AddShipmentsToBatch (String id, List<String> shipments)
+        public Batch AddShipmentsToBatch (String id, List<Hashtable> shipments)
         {
             string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, id);
-            return DoRequest<Batch> (ep, "POST", serializeList<String> (shipments));
+            return DoRequest<Batch> (ep, "POST", serializeList<Hashtable> (shipments));
         }
 
         public Batch RemoveShipmentsFromBatch (String id, List<String> shipments)
