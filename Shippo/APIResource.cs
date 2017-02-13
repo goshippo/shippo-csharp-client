@@ -438,6 +438,42 @@ namespace Shippo {
 
         #endregion
 
+        #region Batch
+
+        public Batch CreateBatch (Hashtable parameters)
+        {
+            string ep = String.Format ("{0}/batches", api_endpoint);
+            return DoRequest<Batch> (ep, "POST", serialize(parameters));
+        }
+
+        public Batch RetrieveBatch (String id, Hashtable parameters = null)
+        {
+            string ep = String.Format ("{0}/batches/{1}", api_endpoint, id);
+            if (parameters != null)
+                ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
+            return DoRequest<Batch> (ep, "GET");
+        }
+
+        public Batch AddShipmentsToBatch (String id, List<Hashtable> shipments)
+        {
+            string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST", serializeList<Hashtable> (shipments));
+        }
+
+        public Batch RemoveShipmentsFromBatch (String id, List<String> shipments)
+        {
+            string ep = String.Format ("{0}/batches/{1}/remove_shipments", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST", serializeList<String> (shipments));
+        }
+
+        public Batch PurchaseBatch (String id)
+        {
+            string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, id);
+            return DoRequest<Batch> (ep, "POST");
+        }
+
+        #endregion
+
         public int TimeoutSeconds { get; set; }
     }
 }
