@@ -94,6 +94,13 @@ namespace ShippoExample {
             Console.WriteLine ("Metadata = " + batch.Metadata);
         }
 
+        private static void RunTrackingExample (Shipment shipment, APIResource resource)
+        {
+            Tracking tracking = resource.RetrieveTracking ("usps", shipment.ObjectId);
+            Console.WriteLine ("Carrier = " + tracking.Carrier.ToString ().ToUpper ());
+            Console.WriteLine ("Tracking number = " + tracking.TrackingNumber);
+        }
+
         static void Main (string[] args)
         {
             // replace with your Shippo Token
@@ -168,6 +175,9 @@ namespace ShippoExample {
 
             Console.WriteLine ("\nBatch\n");
             RunBatchExample (resource);
+
+            Console.WriteLine ("\nTracking\n");
+            RunTrackingExample (shipment, resource);
         }
     }
 }
