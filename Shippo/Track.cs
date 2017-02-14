@@ -28,7 +28,7 @@ namespace Shippo {
         public TrackingStatus TrackingStatus { get; set; }
 
         [JsonProperty (PropertyName = "tracking_history")]
-        public List<Hashtable> TrackingHistory { get; set; }
+        public List<TrackingHistory> TrackingHistory { get; set; }
 
         [JsonProperty (PropertyName = "metadata")]
         public string Metadata { get; set; }
