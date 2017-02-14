@@ -437,7 +437,9 @@ namespace Shippo {
 
         public Track RetrieveTracking (String carrier, String id)
         {
-            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, carrier, id);
+            string encodedCarrier = HttpUtility.HtmlEncode (carrier);
+            string encodedId = HttpUtility.HtmlEncode (id);
+            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, encodedCarrier, encodedId);
             return DoRequest<Track> (ep, "GET");
         }
 
