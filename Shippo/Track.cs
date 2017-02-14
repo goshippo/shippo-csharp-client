@@ -1,34 +1,36 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Track : ShippoId {
         [JsonProperty (PropertyName = "carrier")]
-        public object Carrier { get; set; }
+        public string Carrier { get; set; }
 
         [JsonProperty (PropertyName = "tracking_number")]
-        public object TrackingNumber { get; set; }
+        public string TrackingNumber { get; set; }
 
         [JsonProperty (PropertyName = "address_from")]
-        public object AddressFrom { get; set; }
+        public Hashtable AddressFrom { get; set; }
 
         [JsonProperty (PropertyName = "address_to")]
-        public object AddressTo { get; set; }
+        public Hashtable AddressTo { get; set; }
 
         [JsonProperty (PropertyName = "eta")]
-        public object Eta { get; set; }
+        public string Eta { get; set; }
 
         [JsonProperty (PropertyName = "servicelevel")]
-        public object Servicelevel { get; set; }
+        public Hashtable Servicelevel { get; set; }
 
         [JsonProperty (PropertyName = "tracking_status")]
-        public object TrackingStatus { get; set; }
+        public Hashtable TrackingStatus { get; set; }
 
         [JsonProperty (PropertyName = "tracking_history")]
-        public object TrackingHistory { get; set; }
+        public List<Hashtable> TrackingHistory { get; set; }
 
         [JsonProperty (PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata { get; set; }
     }
 }
