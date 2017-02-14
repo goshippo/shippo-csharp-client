@@ -25,7 +25,7 @@ namespace Shippo {
         public Servicelevel Servicelevel { get; set; }
 
         [JsonProperty (PropertyName = "tracking_status")]
-        public Hashtable TrackingStatus { get; set; }
+        public TrackingStatus TrackingStatus { get; set; }
 
         [JsonProperty (PropertyName = "tracking_history")]
         public List<Hashtable> TrackingHistory { get; set; }
