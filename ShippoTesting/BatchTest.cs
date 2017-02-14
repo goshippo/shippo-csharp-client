@@ -60,12 +60,7 @@ namespace ShippoTesting
             Batch retrieve = getValidBatch (batch.ObjectId);
             Batch newBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
 
-            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (retrieve.BatchShipments.ToString ());
-            Hashtable newBatchTable = JsonConvert.DeserializeObject<Hashtable> (newBatch.BatchShipments.ToString ());
-            JArray batchResults = batchTable ["results"] as JArray;
-            JArray newBatchResults = newBatchTable ["results"] as JArray;
-
-            Assert.AreEqual (batchResults.Count + shipments.Count, newBatchResults.Count);
+            Assert.AreEqual (retrieve.BatchShipments.Count + shipments.Count, newBatch.BatchShipments.Count);
         }
 
         [Test ()]
@@ -92,22 +87,14 @@ namespace ShippoTesting
             shipments.Add (shipmentTable);
 
             Batch retrieve = getValidBatch (batch.ObjectId);
-            Hashtable batchTable = JsonConvert.DeserializeObject<Hashtable> (retrieve.BatchShipments.ToString ());
-            JArray batchResults = batchTable ["results"] as JArray;
-
             Batch addBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
-            Hashtable addBatchTable = JsonConvert.DeserializeObject<Hashtable> (addBatch.BatchShipments.ToString ());
-            JArray addBatchResults = addBatchTable ["results"] as JArray;
-            Assert.AreEqual (batchResults.Count + shipments.Count, addBatchResults.Count);
 
-            string removeId = addBatchResults [0] ["object_id"].ToString ();
+            string removeId = addBatch.BatchShipments.Results [0].ObjectId;
             List<String> shipmentsToRemove = new List<String> ();
             shipmentsToRemove.Add (removeId);
 
             Batch removeBatch = getAPIResource ().RemoveShipmentsFromBatch (batch.ObjectId, shipmentsToRemove);
-            Hashtable removeBatchTable = JsonConvert.DeserializeObject<Hashtable> (removeBatch.BatchShipments.ToString ());
-            JArray removeBatchResults = removeBatchTable ["results"] as JArray;
-            Assert.AreEqual (batchResults.Count, removeBatchResults.Count);
+            Assert.AreEqual (retrieve.BatchShipments.Count, removeBatch.BatchShipments.Count);
         }
 
         [Test ()]
