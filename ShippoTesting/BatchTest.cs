@@ -33,9 +33,9 @@ namespace ShippoTesting
         public void TestValidRetrieve ()
         {
             Batch batch = getDefaultObject ();
-            Batch batchRetrieved = getAPIResource ().RetrieveBatch (batch.ObjectId);
-            Assert.AreEqual (batch.ObjectId, batchRetrieved.ObjectId);
-            Assert.AreEqual (batch.ObjectCreated, batchRetrieved.ObjectCreated);
+            Batch retrieve = getAPIResource ().RetrieveBatch (batch.ObjectId);
+            Assert.AreEqual (batch.ObjectId, retrieve.ObjectId);
+            Assert.AreEqual (batch.ObjectCreated, retrieve.ObjectCreated);
         }
 
         [Test ()]

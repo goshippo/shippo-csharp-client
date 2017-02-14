@@ -18,5 +18,11 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "results")]
         public List<BatchShipment> Results { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[BatchShipments: Count={0}, Next={1}, Previous={2}, Results={3}]",
+                                  Count, Next, Previous, Results);
+        }
     }
 }

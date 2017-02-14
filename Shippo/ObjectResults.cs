@@ -17,5 +17,12 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "creation_succeeded")]
         public int CreationSucceeded { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[ObjectResults: PurchaseSucceeded={0}, PurchaseFailed={1}, CreationFailed={2}," +
+                                  "CreationSucceeded={3}]", PurchaseSucceeded, PurchaseFailed, CreationFailed,
+                                  CreationSucceeded);
+        }
     }
 }

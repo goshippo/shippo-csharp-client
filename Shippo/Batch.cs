@@ -37,5 +37,14 @@ namespace Shippo {
 
         [JsonProperty (PropertyName = "object_results")]
         public ObjectResults ObjectResults { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[Batch: ObjectStatus={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +
+                                  "DefaultCarrierAccount={4}, DefaultServicelevelToken={5}, LabelFiletype={6}, Metadata={7}, " +
+                                  "BatchShipments={8}, LabelUrl={9}, ObjectResults={10}]", ObjectStatus, ObjectCreated,
+                                  ObjectUpdated, ObjectOwner, DefaultCarrierAccount, DefaultServicelevelToken,
+                                  LabelFiletype, Metadata, BatchShipments, LabelUrl, ObjectResults);
+        }
     }
 }

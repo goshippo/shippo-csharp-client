@@ -27,5 +27,12 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "metadata")]
         public string Metadata { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[BatchShipment: ObjectStatus={0}, CarrierAccount={1}, ServicelevelToken={2}, " +
+                                  "Shipment={3}, Transaction={4}, Messages={5}, Metadata={6}]", ObjectStatus,
+                                  CarrierAccount, ServicelevelToken, Shipment, Transaction, Messages, Metadata);
+        }
     }
 }
