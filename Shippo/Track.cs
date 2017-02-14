@@ -13,10 +13,10 @@ namespace Shippo {
         public string TrackingNumber { get; set; }
 
         [JsonProperty (PropertyName = "address_from")]
-        public Hashtable AddressFrom { get; set; }
+        public ShortAddress AddressFrom { get; set; }
 
         [JsonProperty (PropertyName = "address_to")]
-        public Hashtable AddressTo { get; set; }
+        public ShortAddress AddressTo { get; set; }
 
         [JsonProperty (PropertyName = "eta")]
         public string Eta { get; set; }
