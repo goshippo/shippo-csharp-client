@@ -35,6 +35,6 @@ namespace Shippo {
         public string LabelUrl { get; set; }
 
         [JsonProperty (PropertyName = "object_results")]
-        public object ObjectResults { get; set; }
+        public ObjectResults ObjectResults { get; set; }
     }
 }
