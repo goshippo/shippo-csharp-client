@@ -9,10 +9,10 @@ namespace Shippo {
         public string ObjectStatus { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
-        public string ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty (PropertyName = "object_updated")]
-        public string ObjectUpdated { get; set; }
+        public DateTime ObjectUpdated { get; set; }
 
         [JsonProperty (PropertyName = "object_owner")]
         public string ObjectOwner { get; set; }
