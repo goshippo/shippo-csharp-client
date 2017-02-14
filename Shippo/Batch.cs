@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
@@ -32,7 +33,7 @@ namespace Shippo {
         public object BatchShipments { get; set; }
 
         [JsonProperty (PropertyName = "label_url")]
-        public string LabelUrl { get; set; }
+        public List<String> LabelUrl { get; set; }
 
         [JsonProperty (PropertyName = "object_results")]
         public ObjectResults ObjectResults { get; set; }
