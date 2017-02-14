@@ -12,12 +12,15 @@ namespace ShippoTesting
     [TestFixture ()]
     public class TrackTest : ShippoTest
     {
+        private const String TRACKING_NO = "9205590164917337534322";
+        private const String CARRIER = "usps";
+
         [Test ()]
         public void TestValidGetStatus ()
         {
-            Shipment shipment = ShipmentTest.getDefaultObject ();
-            Track track = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
-            Assert.IsNotNull (track.TrackingNumber);
+            Track track = getAPIResource ().RetrieveTracking (CARRIER, TRACKING_NO);
+            Assert.AreEqual (TRACKING_NO, track.TrackingNumber.ToString());
+            Assert.IsNotNull (track.TrackingStatus);
             Assert.IsNotNull (track.TrackingHistory);
         }
 
@@ -25,19 +28,19 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidGetStatus ()
         {
-            getAPIResource ().RetrieveTracking ("usps", "INVALID_ID");
+            getAPIResource ().RetrieveTracking (CARRIER, "INVALID_ID");
         }
 
         [Test ()]
         public void TestValidRegisterWebhook ()
         {
             Shipment shipment = ShipmentTest.getDefaultObject ();
-            Track track = getAPIResource ().RetrieveTracking ("usps", shipment.ObjectId);
+            Track track = getAPIResource ().RetrieveTracking (CARRIER, shipment.ObjectId);
             Assert.IsNotNull (track.TrackingNumber);
             Assert.IsNotNull (track.TrackingHistory);
 
             Hashtable parameters = new Hashtable ();
-            parameters.Add ("carrier", "usps");
+            parameters.Add ("carrier", CARRIER);
             parameters.Add ("tracking_number", track.TrackingNumber);
             Track register = getAPIResource ().RegisterTrackingWebhook (parameters);
             Assert.IsNotNull (register.TrackingNumber);
@@ -49,7 +52,7 @@ namespace ShippoTesting
         public void TestInvalidRegisterWebhook ()
         {
             Hashtable parameters = new Hashtable ();
-            parameters.Add ("carrier", "usps");
+            parameters.Add ("carrier", CARRIER);
             parameters.Add ("tracking_number", "INVALID_ID");
             getAPIResource ().RegisterTrackingWebhook (parameters);
         }
