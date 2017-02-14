@@ -12,14 +12,14 @@ namespace ShippoTesting
     [TestFixture ()]
     public class TrackTest : ShippoTest
     {
-        private const String TRACKING_NO = "9205590164917337534322";
-        private const String CARRIER = "usps";
+        private static readonly String TRACKING_NO = "9205590164917337534322";
+        private static readonly String CARRIER = "usps";
 
         [Test ()]
         public void TestValidGetStatus ()
         {
             Track track = getAPIResource ().RetrieveTracking (CARRIER, TRACKING_NO);
-            Assert.AreEqual (TRACKING_NO, track.TrackingNumber.ToString());
+            Assert.AreEqual (TRACKING_NO, track.TrackingNumber);
             Assert.IsNotNull (track.TrackingStatus);
             Assert.IsNotNull (track.TrackingHistory);
         }
@@ -34,10 +34,7 @@ namespace ShippoTesting
         [Test ()]
         public void TestValidRegisterWebhook ()
         {
-            Shipment shipment = ShipmentTest.getDefaultObject ();
-            Track track = getAPIResource ().RetrieveTracking (CARRIER, shipment.ObjectId);
-            Assert.IsNotNull (track.TrackingNumber);
-            Assert.IsNotNull (track.TrackingHistory);
+            Track track = getAPIResource ().RetrieveTracking (CARRIER, TRACKING_NO);
 
             Hashtable parameters = new Hashtable ();
             parameters.Add ("carrier", CARRIER);
