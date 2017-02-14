@@ -30,7 +30,7 @@ namespace Shippo {
         public string Metadata { get; set; }
 
         [JsonProperty (PropertyName = "batch_shipments")]
-        public object BatchShipments { get; set; }
+        public BatchShipments BatchShipments { get; set; }
 
         [JsonProperty (PropertyName = "label_url")]
         public List<String> LabelUrl { get; set; }
