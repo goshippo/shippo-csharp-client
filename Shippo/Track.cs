@@ -22,7 +22,7 @@ namespace Shippo {
         public string Eta { get; set; }
 
         [JsonProperty (PropertyName = "servicelevel")]
-        public Hashtable Servicelevel { get; set; }
+        public Servicelevel Servicelevel { get; set; }
 
         [JsonProperty (PropertyName = "tracking_status")]
         public Hashtable TrackingStatus { get; set; }
