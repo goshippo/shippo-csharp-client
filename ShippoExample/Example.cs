@@ -29,7 +29,7 @@ namespace ShippoExample {
         private static void RunTrackingExample (Shipment shipment, APIResource resource)
         {
             Track track = resource.RetrieveTracking ("usps", shipment.ObjectId);
-            Console.WriteLine ("Carrier = " + track.Carrier.ToString ().ToUpper ());
+            Console.WriteLine ("Carrier = " + track.Carrier.ToUpper ());
             Console.WriteLine ("Tracking number = " + track.TrackingNumber);
         }
 
