@@ -19,7 +19,7 @@ namespace Shippo {
         public ShortAddress AddressTo { get; set; }
 
         [JsonProperty (PropertyName = "eta")]
-        public string Eta { get; set; }
+        public DateTime? Eta { get; set; }
 
         [JsonProperty (PropertyName = "servicelevel")]
         public Servicelevel Servicelevel { get; set; }

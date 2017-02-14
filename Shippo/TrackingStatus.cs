@@ -7,10 +7,10 @@ namespace Shippo
     public class TrackingStatus : ShippoId
     {
         [JsonProperty (PropertyName = "object_created")]
-        public string ObjectCreated { get; set; }
+        public DateTime? ObjectCreated { get; set; }
 
         [JsonProperty (PropertyName = "object_updated")]
-        public string ObjectUpdated { get; set; }
+        public DateTime? ObjectUpdated { get; set; }
 
         [JsonProperty (PropertyName = "status")]
         public string Status { get; set; }
@@ -19,7 +19,7 @@ namespace Shippo
         public string StatusDetails { get; set; }
 
         [JsonProperty (PropertyName = "status_date")]
-        public string StatusDate { get; set; }
+        public DateTime? StatusDate { get; set; }
 
         [JsonProperty (PropertyName = "location")]
         public ShortAddress location { get; set; }
