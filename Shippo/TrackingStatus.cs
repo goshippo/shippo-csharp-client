@@ -23,5 +23,12 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "location")]
         public ShortAddress location { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[TrackingStatus: ObjectCreated={0}, ObjectUpdated={1}, Status={2}, StatusDetails={3}," +
+                                  "StatusDate={4}, location={5}]", ObjectCreated, ObjectUpdated, Status, StatusDetails,
+                                  StatusDate, location);
+        }
     }
 }

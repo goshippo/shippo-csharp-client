@@ -11,5 +11,10 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "name")]
         public string Name { get; set; }
+
+        public override string ToString ()
+        {
+            return string.Format ("[Servicelevel: Token={0}, Name={1}]", Token, Name);
+        }
     }
 }
