@@ -5,33 +5,34 @@ using Newtonsoft.Json;
 
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
-    public class Track : ShippoId {
+    public class Track : ShippoId
+    {
         [JsonProperty (PropertyName = "carrier")]
-        public string Carrier { get; set; }
+        private string Carrier;
 
         [JsonProperty (PropertyName = "tracking_number")]
-        public string TrackingNumber { get; set; }
+        public string TrackingNumber;
 
         [JsonProperty (PropertyName = "address_from")]
-        public ShortAddress AddressFrom { get; set; }
+        public ShortAddress AddressFrom;
 
         [JsonProperty (PropertyName = "address_to")]
-        public ShortAddress AddressTo { get; set; }
+        public ShortAddress AddressTo;
 
         [JsonProperty (PropertyName = "eta")]
-        public DateTime? Eta { get; set; }
+        public DateTime? Eta;
 
         [JsonProperty (PropertyName = "servicelevel")]
-        public Servicelevel Servicelevel { get; set; }
+        public Servicelevel Servicelevel;
 
         [JsonProperty (PropertyName = "tracking_status")]
-        public TrackingStatus TrackingStatus { get; set; }
+        public TrackingStatus TrackingStatus;
 
         [JsonProperty (PropertyName = "tracking_history")]
-        public List<TrackingHistory> TrackingHistory { get; set; }
+        public List<TrackingHistory> TrackingHistory;
 
         [JsonProperty (PropertyName = "metadata")]
-        public string Metadata { get; set; }
+        public string Metadata;
 
         public override string ToString ()
         {
