@@ -8,7 +8,7 @@ namespace Shippo {
     public class Track : ShippoId
     {
         [JsonProperty (PropertyName = "carrier")]
-        private string Carrier;
+        public string Carrier;
 
         [JsonProperty (PropertyName = "tracking_number")]
         public string TrackingNumber;
