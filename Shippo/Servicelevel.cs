@@ -7,10 +7,10 @@ namespace Shippo
     public class Servicelevel
     {
         [JsonProperty (PropertyName = "token")]
-        public string Token { get; set; }
+        public string Token;
 
         [JsonProperty (PropertyName = "name")]
-        public string Name { get; set; }
+        public string Name;
 
         public override string ToString ()
         {

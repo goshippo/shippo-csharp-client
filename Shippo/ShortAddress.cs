@@ -7,15 +7,15 @@ namespace Shippo
     public class ShortAddress
     {
         [JsonProperty (PropertyName = "city")]
-        public string City { get; set; }
+        public string City;
 
         [JsonProperty (PropertyName = "state")]
-        public string State { get; set; }
+        public string State;
 
         [JsonProperty (PropertyName = "Zip")]
-        public string Zip { get; set; }
+        public string Zip;
 
         [JsonProperty (PropertyName = "Country")]
-        public string Country { get; set; }
+        public string Country;
     }
 }

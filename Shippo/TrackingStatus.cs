@@ -7,28 +7,28 @@ namespace Shippo
     public class TrackingStatus : ShippoId
     {
         [JsonProperty (PropertyName = "object_created")]
-        public DateTime? ObjectCreated { get; set; }
+        public DateTime? ObjectCreated;
 
         [JsonProperty (PropertyName = "object_updated")]
-        public DateTime? ObjectUpdated { get; set; }
+        public DateTime? ObjectUpdated;
 
         [JsonProperty (PropertyName = "status")]
-        public string Status { get; set; }
+        public string Status;
 
         [JsonProperty (PropertyName = "status_details")]
-        public string StatusDetails { get; set; }
+        public string StatusDetails;
 
         [JsonProperty (PropertyName = "status_date")]
-        public DateTime? StatusDate { get; set; }
+        public DateTime? StatusDate;
 
         [JsonProperty (PropertyName = "location")]
-        public ShortAddress location { get; set; }
+        public ShortAddress Location;
 
         public override string ToString ()
         {
             return string.Format ("[TrackingStatus: ObjectCreated={0}, ObjectUpdated={1}, Status={2}, StatusDetails={3}," +
                                   "StatusDate={4}, location={5}]", ObjectCreated, ObjectUpdated, Status, StatusDetails,
-                                  StatusDate, location);
+                                  StatusDate, Location);
         }
     }
 }
