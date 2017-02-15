@@ -26,9 +26,11 @@ using Newtonsoft.Json.Linq;
 namespace ShippoExample {
     class Example {
 
-        private static void RunTrackingExample (Shipment shipment, APIResource resource)
+        static readonly string TRACKING_NO = "9205590164917312751089";
+
+        private static void RunTrackingExample (APIResource resource)
         {
-            Track track = resource.RetrieveTracking ("usps", shipment.ObjectId);
+            Track track = resource.RetrieveTracking ("usps", TRACKING_NO);
             Console.WriteLine ("Carrier = " + track.Carrier.ToUpper ());
             Console.WriteLine ("Tracking number = " + track.TrackingNumber);
         }
@@ -106,7 +108,7 @@ namespace ShippoExample {
 			}
 
             Console.WriteLine ("\nTrack\n");
-            RunTrackingExample (shipment, resource);
+            RunTrackingExample (resource);
         }
     }
 }
