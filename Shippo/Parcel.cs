@@ -47,18 +47,5 @@ namespace Shippo
 
         [JsonProperty (PropertyName = "test")]
         public bool Test;
-
-        public static Parcel createForShipment (double length, double width, double height,String distance_unit,
-                                                double weight, string massUnit)
-        {
-            Parcel p = new Parcel ();
-            p.Length = length;
-            p.Width = width;
-            p.Height = height;
-            p.DistanceUnit = distance_unit;
-            p.Weight = weight;
-            p.MassUnit = massUnit;
-            return p;
-        }
     }
 }

@@ -129,6 +129,41 @@ namespace Shippo {
             }
         }
 
+        public class Parcel
+        {
+            [JsonProperty (PropertyName = "length")]
+            public double Length;
+
+            [JsonProperty (PropertyName = "width")]
+            public double Width;
+
+            [JsonProperty (PropertyName = "height")]
+            public double Height;
+
+            [JsonProperty (PropertyName = "distance_unit")]
+            public string DistanceUnit;
+
+            [JsonProperty (PropertyName = "weight")]
+            public double Weight;
+
+            [JsonProperty (PropertyName = "mass_unit")]
+            public string MassUnit;
+
+            public static Parcel createForShipment (double length, double width, double height, String distance_unit,
+                                                    double weight, string massUnit)
+            {
+                Parcel p = new Parcel ();
+                p.Length = length;
+                p.Width = width;
+                p.Height = height;
+                p.DistanceUnit = distance_unit;
+                p.Weight = weight;
+                p.MassUnit = massUnit;
+                return p;
+
+            }
+        }
+
         public override string ToString ()
         {
             return string.Format ("[Batch: ObjectStatus={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +
