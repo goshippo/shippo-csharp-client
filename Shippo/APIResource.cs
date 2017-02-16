@@ -470,6 +470,9 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, HttpUtility.HtmlEncode (id));
             return DoRequest<Batch> (ep, "POST");
+        }
+
+        #endregion
 
         #region Track
 
