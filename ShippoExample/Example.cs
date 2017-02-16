@@ -21,10 +21,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Shippo;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ShippoExample {
     class Example {
+
+        static readonly string TRACKING_NO = "9205590164917312751089";
+
+        private static void RunTrackingExample (APIResource resource)
+        {
+            Track track = resource.RetrieveTracking ("usps", TRACKING_NO);
+            Console.WriteLine ("Carrier = " + track.Carrier.ToUpper ());
+            Console.WriteLine ("Tracking number = " + track.TrackingNumber);
+        }
+
         static void Main (string[] args)
         {
             // replace with your Shippo Token
@@ -96,6 +106,9 @@ namespace ShippoExample {
 			} else {
 				Console.WriteLine ("An Error has occured while generating your label. Messages : " + transaction.Messages);
 			}
+
+            Console.WriteLine ("\nTrack\n");
+            RunTrackingExample (resource);
         }
     }
 }
