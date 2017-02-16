@@ -38,6 +38,31 @@ namespace Shippo {
         [JsonProperty (PropertyName = "object_results")]
         public ObjectResults ObjectResults;
 
+        public class Shipment
+        {
+            [JsonProperty (PropertyName = "object_purpose")]
+            public string ObjectPurpose;
+
+            [JsonProperty (PropertyName = "address_from")]
+            public Address AddressFrom;
+
+            [JsonProperty (PropertyName = "address_to")]
+            public Address AddressTo;
+
+            [JsonProperty (PropertyName = "parcel")]
+            public Parcel Parcel;
+
+            public static Shipment createForBatch (String purpose, Address addressFrom, Address addressTo, Parcel parcel)
+            {
+                Shipment s = new Shipment ();
+                s.ObjectPurpose = purpose;
+                s.AddressFrom = addressFrom;
+                s.AddressTo = addressTo;
+                s.Parcel = parcel;
+                return s;
+            }
+        }
+
         public override string ToString ()
         {
             return string.Format ("[Batch: ObjectStatus={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +

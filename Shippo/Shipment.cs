@@ -46,7 +46,7 @@ namespace Shippo {
         public string CustomsDeclaration;
 
         [JsonProperty (PropertyName = "insurance_amount")]
-        public float InsuranceAmount;
+        public double InsuranceAmount;
 
         [JsonProperty (PropertyName = "insurance_currency")]
         public string InsuranceCurrency;
