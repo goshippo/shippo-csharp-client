@@ -73,5 +73,22 @@ namespace Shippo {
 
         [JsonProperty (PropertyName = "messages")]
         public List<string> Messages;
+
+        public static Address createForPurchase (String purpose, String name, String street1, String street2, String city,
+                                                 String state, String zip, String country, String phone, String email)
+        {
+            Address a = new Address ();
+            a.ObjectPurpose = purpose;
+            a.Name = name;
+            a.Street1 = street1;
+            a.Street2 = street2;
+            a.City = city;
+            a.State = state;
+            a.Zip = zip;
+            a.Country = country;
+            a.Phone = phone;
+            a.Email = email;
+            return a;
+        }
     }
 }
