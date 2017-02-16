@@ -8,16 +8,16 @@ namespace Shippo
     public class BatchShipments
     {
         [JsonProperty (PropertyName = "count")]
-        public int Count { get; set; }
+        public int Count;
 
         [JsonProperty (PropertyName = "next")]
-        public string Next { get; set; }
+        public string Next;
 
         [JsonProperty (PropertyName = "previous")]
-        public string Previous { get; set; }
+        public string Previous;
 
         [JsonProperty (PropertyName = "results")]
-        public List<BatchShipment> Results { get; set; }
+        public List<BatchShipment> Results;
 
         public override string ToString ()
         {

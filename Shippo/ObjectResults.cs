@@ -7,16 +7,16 @@ namespace Shippo
     public class ObjectResults
     {
         [JsonProperty (PropertyName = "purchase_succeeded")]
-        public int PurchaseSucceeded { get; set; }
+        public int PurchaseSucceeded;
 
         [JsonProperty (PropertyName = "purchase_failed")]
-        public int PurchaseFailed { get; set; }
+        public int PurchaseFailed;
 
         [JsonProperty (PropertyName = "creation_failed")]
-        public int CreationFailed { get; set; }
+        public int CreationFailed;
 
         [JsonProperty (PropertyName = "creation_succeeded")]
-        public int CreationSucceeded { get; set; }
+        public int CreationSucceeded;
 
         public override string ToString ()
         {

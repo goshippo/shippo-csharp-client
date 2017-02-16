@@ -6,37 +6,37 @@ namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Batch : ShippoId {
         [JsonProperty (PropertyName = "object_status")]
-        public string ObjectStatus { get; set; }
+        public string ObjectStatus;
 
         [JsonProperty (PropertyName = "object_created")]
-        public DateTime? ObjectCreated { get; set; }
+        public DateTime? ObjectCreated;
 
         [JsonProperty (PropertyName = "object_updated")]
-        public DateTime? ObjectUpdated { get; set; }
+        public DateTime? ObjectUpdated;
 
         [JsonProperty (PropertyName = "object_owner")]
-        public string ObjectOwner { get; set; }
+        public string ObjectOwner;
 
         [JsonProperty (PropertyName = "default_carrier_account")]
-        public string DefaultCarrierAccount { get; set; }
+        public string DefaultCarrierAccount;
 
         [JsonProperty (PropertyName = "default_servicelevel_token")]
-        public string DefaultServicelevelToken { get; set; }
+        public string DefaultServicelevelToken;
 
         [JsonProperty (PropertyName = "label_filetype")]
-        public string LabelFiletype { get; set; }
+        public string LabelFiletype;
 
         [JsonProperty (PropertyName = "metadata")]
-        public string Metadata { get; set; }
+        public string Metadata;
 
         [JsonProperty (PropertyName = "batch_shipments")]
-        public BatchShipments BatchShipments { get; set; }
+        public BatchShipments BatchShipments;
 
         [JsonProperty (PropertyName = "label_url")]
-        public List<String> LabelUrl { get; set; }
+        public List<String> LabelUrl;
 
         [JsonProperty (PropertyName = "object_results")]
-        public ObjectResults ObjectResults { get; set; }
+        public ObjectResults ObjectResults;
 
         public override string ToString ()
         {
