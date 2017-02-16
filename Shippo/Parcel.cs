@@ -5,36 +5,45 @@ namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Parcel : ShippoId {
         [JsonProperty (PropertyName = "object_state")]
-        public object ObjectState { get; set; }
+        public string ObjectState;
 
         [JsonProperty (PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime? ObjectCreated;
 
         [JsonProperty (PropertyName = "object_updated")]
-        public object ObjectUpdaed { get; set; }
+        public DateTime? ObjectUpdaed;
 
         [JsonProperty (PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner;
 
         [JsonProperty (PropertyName = "length")]
-        public object Length { get; set; }
+        public float Length;
 
         [JsonProperty (PropertyName = "width")]
-        public object Width { get; set; }
+        public float Width;
 
         [JsonProperty (PropertyName = "height")]
-        public object Height { get; set; }
+        public float Height;
 
         [JsonProperty (PropertyName = "distance_unit")]
-        public object DistanceUnit { get; set; }
+        public string DistanceUnit;
 
         [JsonProperty (PropertyName = "weight")]
-        public object Weight { get; set; }
+        public float Weight;
 
         [JsonProperty (PropertyName = "mass_unit")]
-        public object MassUnit { get; set; }
+        public string MassUnit;
+
+        [JsonProperty (PropertyName = "template")]
+        public string Template;
 
         [JsonProperty (PropertyName = "metadata")]
-        public object Metadata{ get; set; }
+        public string Metadata;
+
+        [JsonProperty (PropertyName = "extra")]
+        public Object Extra;
+
+        [JsonProperty (PropertyName = "test")]
+        public bool Test;
     }
 }
