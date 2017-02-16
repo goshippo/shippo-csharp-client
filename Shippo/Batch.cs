@@ -38,6 +38,19 @@ namespace Shippo {
         [JsonProperty (PropertyName = "object_results")]
         public ObjectResults ObjectResults;
 
+        public class BatchShipment
+        {
+            [JsonProperty (PropertyName = "shipment")]
+            public Shipment Shipment;
+
+            public static BatchShipment createForBatchShipments (Shipment shipment)
+            {
+                BatchShipment bs = new BatchShipment ();
+                bs.Shipment = shipment;
+                return bs;
+            }
+        }
+
         public class Shipment
         {
             [JsonProperty (PropertyName = "object_purpose")]
