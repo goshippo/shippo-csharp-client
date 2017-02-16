@@ -470,6 +470,22 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, HttpUtility.HtmlEncode (id));
             return DoRequest<Batch> (ep, "POST");
+
+        #region Track
+
+        public Track RetrieveTracking (String carrier, String id)
+        {
+            string encodedCarrier = HttpUtility.HtmlEncode (carrier);
+            string encodedId = HttpUtility.HtmlEncode (id);
+            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, encodedCarrier, encodedId);
+            return DoRequest<Track> (ep, "GET");
+        }
+
+        public Track RegisterTrackingWebhook (Hashtable parameters)
+        {
+            // For now the trailing '/' is required.
+            string ep = String.Format ("{0}/tracks/", api_endpoint);
+            return DoRequest<Track> (ep, "POST", serialize(parameters));
         }
 
         #endregion
