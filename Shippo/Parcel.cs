@@ -41,7 +41,7 @@ namespace Shippo {
         public string Metadata;
 
         [JsonProperty (PropertyName = "extra")]
-        public Object Extra;
+        public object Extra;
 
         [JsonProperty (PropertyName = "test")]
         public bool Test;

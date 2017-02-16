@@ -1,75 +1,82 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Shipment : ShippoId {
-        [JsonProperty (PropertyName = "object_state")]
-        public object ObjectState { get; set; }
 
         [JsonProperty (PropertyName = "object_status")]
-        public object ObjectStatus { get; set; }
+        public string ObjectStatus;
 
         [JsonProperty (PropertyName = "object_purpose")]
-        public object ObjectPurpose { get; set; }
+        public string ObjectPurpose;
+
+        [JsonProperty (PropertyName = "object_state")]
+        public string ObjectState;
 
         [JsonProperty (PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime? ObjectCreated;
 
         [JsonProperty (PropertyName = "object_updated")]
-        public object ObjectUpdated { get; set; }
+        public DateTime? ObjectUpdated;
 
         [JsonProperty (PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner;
 
         [JsonProperty (PropertyName = "address_from")]
-        public object AddressFrom { get; set; }
+        public string AddressFrom;
 
         [JsonProperty (PropertyName = "address_to")]
-        public object AddressTo { get; set; }
-
-        [JsonProperty (PropertyName = "address_return")]
-        public object AddressReturn { get; set; }
+        public string AddressTo;
 
         [JsonProperty (PropertyName = "parcel")]
-        public object Parcel { get; set; }
+        public string Parcel;
 
-        [JsonProperty (PropertyName = "submission_type")]
-        public object SubmissionType { get; set; }
+        [JsonProperty (PropertyName = "return_of")]
+        public string ReturnOf;
 
         [JsonProperty (PropertyName = "submission_date")]
-        public object SubmissionDate { get; set; }
+        public DateTime? SubmissionDate;
 
-        [JsonProperty (PropertyName = "insurance_amount")]
-        public object InsuranceAmount { get; set; }
-
-        [JsonProperty (PropertyName = "insurance_currency")]
-        public object InsuranceCurrency { get; set; }
-
-        [JsonProperty (PropertyName = "extra")]
-        public object Extra { get; set; }
+        [JsonProperty (PropertyName = "address_return")]
+        public string AddressReturn;
 
         [JsonProperty (PropertyName = "customs_declaration")]
-        public object CustomsDeclaration { get; set; }
+        public string CustomsDeclaration;
+
+        [JsonProperty (PropertyName = "insurance_amount")]
+        public float InsuranceAmount;
+
+        [JsonProperty (PropertyName = "insurance_currency")]
+        public string InsuranceCurrency;
 
         [JsonProperty (PropertyName = "reference_1")]
-        public object Reference1 { get; set; }
+        public string Reference1;
 
         [JsonProperty (PropertyName = "reference_2")]
-        public object Reference2 { get; set; }
+        public string Reference2;
 
-        [JsonProperty (PropertyName = "rates_url")]
-        public object RatesUrl { get; set; }
-
-	[JsonProperty (PropertyName = "rates_list")]
-	public Rate[] RatesList { get; set; }
+        [JsonProperty (PropertyName = "carrier_accounts")]
+        public List<string> CarrierAccounts;
 
         [JsonProperty (PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata;
+
+        [JsonProperty (PropertyName = "extra")]
+        public object Extra;
+
+        [JsonProperty (PropertyName = "rates_url")]
+        public string RatesUrl;
+
+        [JsonProperty (PropertyName = "rates_list")]
+        public List<Rate> RatesList;
 
         [JsonProperty (PropertyName = "messages")]
-        public object Messages { get; set; }
+        public List<string> Messages;
 
+        [JsonProperty (PropertyName = "test")]
+        public bool Test;
     }
 }
 
