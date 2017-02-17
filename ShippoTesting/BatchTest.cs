@@ -23,10 +23,8 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidCreate ()
         {
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("default_carrier_account", "invalid_carrier_account");
-            parameters.Add ("default_servicelevel_token", "invalid_servicelevel_token");
-            getAPIResource ().CreateBatch (parameters);
+            getAPIResource ().CreateBatch ("invalid_carrier_account", "invalid_servicelevel_token", "", "",
+                                           new List<Batch.BatchShipment>());
         }
 
         [Test ()]
@@ -151,61 +149,19 @@ namespace ShippoTesting
                     defaultCarrierAccount = account.ObjectId;
             }
 
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("default_carrier_account", defaultCarrierAccount);
-            parameters.Add ("default_servicelevel_token", "usps_priority");
-            parameters.Add ("label_filetype", "PDF_4x6");
-            parameters.Add ("metadata", "BATCH #170");
+            Batch.Address addressFrom = Batch.Address.createForPurchase ("PURCHASE", "Mr. Hippo", "965 Mission St.", "Ste 201",
+                                                             "SF", "CA", "94103", "US", "4151234567", "ship@gmail.com");
+            Batch.Address addressTo = Batch.Address.createForPurchase ("PURCHASE", "Mrs. Hippo", "965 Missions St.", "Ste 201",
+                                                           "SF", "CA", "94103", "US", "4151234568", "msship@gmail.com");
+            Batch.Parcel parcel = Batch.Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
+            Batch.Shipment shipment = Batch.Shipment.createForBatch ("PURCHASE", addressFrom, addressTo, parcel);
+            Batch.BatchShipment batchShipment = Batch.BatchShipment.createForBatchShipments (shipment);
 
-            Hashtable shipment = new Hashtable ();
-            shipment.Add ("object_purpose", "PURCHASE");
+            List<Batch.BatchShipment> batchShipments = new List<Batch.BatchShipment> ();
+            batchShipments.Add (batchShipment);
 
-            Hashtable addressFrom = new Hashtable ();
-            addressFrom.Add ("object_purpose", "PURCHASE");
-            addressFrom.Add ("name", "Mr. Hippo");
-            addressFrom.Add ("company", "");
-            addressFrom.Add ("street1", "965 Mission St");
-            addressFrom.Add ("street2", "Ste 201");
-            addressFrom.Add ("city", "San Francisco");
-            addressFrom.Add ("state", "CA");
-            addressFrom.Add ("zip", "94103");
-            addressFrom.Add ("country", "US");
-            addressFrom.Add ("phone", "4151234567");
-            addressFrom.Add ("email", "mrhippo@goshippo.com");
-
-            Hashtable addressTo = new Hashtable ();
-            addressTo.Add ("object_purpose", "PURCHASE");
-            addressTo.Add ("name", "Mrs. Hippo");
-            addressTo.Add ("company", "");
-            addressTo.Add ("street1", "Broadway 1");
-            addressTo.Add ("street2", "");
-            addressTo.Add ("city", "New York");
-            addressTo.Add ("state", "NY");
-            addressTo.Add ("zip", "10007");
-            addressTo.Add ("country", "US");
-            addressTo.Add ("phone", "4151234567");
-            addressTo.Add ("email", "mrshippo@goshippo.com");
-
-            Hashtable parcel = new Hashtable ();
-            parcel.Add ("length", "5");
-            parcel.Add ("width", "5");
-            parcel.Add ("height", "5");
-            parcel.Add ("distance_unit", "in");
-            parcel.Add ("weight", "2");
-            parcel.Add ("mass_unit", "oz");
-            parcel.Add ("template", "");
-            parcel.Add ("metadata", "Parcel 123");
-
-            shipment.Add ("address_from", addressFrom);
-            shipment.Add ("address_to", addressTo);
-            shipment.Add ("parcel", parcel);
-
-            Hashtable batchShipment = new Hashtable ();
-            batchShipment.Add ("shipment", shipment);
-            parameters.Add ("batch_shipments", new List<Hashtable> ());
-            (parameters ["batch_shipments"] as List<Hashtable>).Add (batchShipment);
-
-            return getAPIResource ().CreateBatch (parameters);
+            return getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
+                                                  batchShipments);
         }
     }
 }
