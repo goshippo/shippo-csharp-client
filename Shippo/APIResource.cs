@@ -386,6 +386,11 @@ namespace Shippo {
             return DoRequest<CarrierAccount> (ep, "GET");
         }
 
+        public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
+        {
+            return AllCarrierAccount ();
+        }
+
         public ShippoCollection<CarrierAccount> AllCarrierAccount ()
         {
             string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
