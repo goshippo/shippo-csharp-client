@@ -445,14 +445,15 @@ namespace Shippo {
 
         #region Batch
 
-        public Batch CreateBatch (String carrierAccount, String servicelevelToken, String labelFiletype,
+        public Batch CreateBatch (String carrierAccount, String servicelevelToken, ShippoEnums.LabelFiletypes labelFiletype,
                                   String metadata, List<Batch.BatchShipment> batchShipments)
         {
             string ep = String.Format ("{0}/batches", api_endpoint);
             Hashtable parameters = new Hashtable ();
             parameters.Add ("default_carrier_account", carrierAccount);
             parameters.Add ("default_servicelevel_token", servicelevelToken);
-            parameters.Add ("label_filetype", labelFiletype);
+            if (labelFiletype != ShippoEnums.LabelFiletypes.NONE)
+                parameters.Add ("label_filetype", labelFiletype.ToString());
             parameters.Add ("metadata", metadata);
             parameters.Add ("batch_shipments", batchShipments);
             return DoRequest<Batch> (ep, "POST", serialize(parameters));
@@ -464,8 +465,8 @@ namespace Shippo {
             Hashtable parameters = new Hashtable ();
             if (page > 0)
                 parameters.Add ("page", page);
-            if (objectResults != ShippoEnums.ObjectResults.ANY)
-                parameters.Add ("object_results", objectResults);
+            if (objectResults != ShippoEnums.ObjectResults.none)
+                parameters.Add ("object_results", objectResults.ToString());
             if (parameters.Count != 0)
                 ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
             return DoRequest<Batch> (ep, "GET");

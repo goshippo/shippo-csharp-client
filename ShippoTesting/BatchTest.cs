@@ -23,15 +23,15 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidCreate ()
         {
-            getAPIResource ().CreateBatch ("invalid_carrier_account", "invalid_servicelevel_token", "", "",
-                                           new List<Batch.BatchShipment>());
+            getAPIResource ().CreateBatch ("invalid_carrier_account", "invalid_servicelevel_token",
+                                           ShippoEnums.LabelFiletypes.NONE, "", new List<Batch.BatchShipment>());
         }
 
         [Test ()]
         public void TestValidRetrieve ()
         {
             Batch batch = getDefaultObject ();
-            Batch retrieve = getAPIResource ().RetrieveBatch (batch.ObjectId, 0, ShippoEnums.ObjectResults.ANY);
+            Batch retrieve = getAPIResource ().RetrieveBatch (batch.ObjectId, 0, ShippoEnums.ObjectResults.none);
             Assert.AreEqual (batch.ObjectId, retrieve.ObjectId);
             Assert.AreEqual (batch.ObjectCreated, retrieve.ObjectCreated);
         }
@@ -40,7 +40,7 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidRetrieve ()
         {
-            getAPIResource ().RetrieveBatch ("INVALID_ID", 0, ShippoEnums.ObjectResults.ANY);
+            getAPIResource ().RetrieveBatch ("INVALID_ID", 0, ShippoEnums.ObjectResults.none);
         }
 
         [Test ()]
@@ -129,7 +129,7 @@ namespace ShippoTesting
             Batch batch;
             int retries = 10;
             for (; retries > 0; retries--) {
-                batch = getAPIResource ().RetrieveBatch (id, 0, ShippoEnums.ObjectResults.ANY);
+                batch = getAPIResource ().RetrieveBatch (id, 0, ShippoEnums.ObjectResults.none);
                 if (batch.ObjectStatus == ShippoEnums.ObjectStatuses.VALID)
                     return batch;
                 System.Threading.Thread.Sleep (1000);
@@ -160,8 +160,8 @@ namespace ShippoTesting
             List<Batch.BatchShipment> batchShipments = new List<Batch.BatchShipment> ();
             batchShipments.Add (batchShipment);
 
-            Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
-                                                  batchShipments);
+            Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", ShippoEnums.LabelFiletypes.PDF_4x6,
+                                                         "BATCH #170", batchShipments);
             Assert.AreEqual (ShippoEnums.ObjectStatuses.VALIDATING, batch.ObjectStatus);
             return batch;
         }
