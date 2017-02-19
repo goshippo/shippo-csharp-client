@@ -75,6 +75,7 @@
     <Compile Include="ShortAddress.cs" />
     <Compile Include="TrackingHistory.cs" />
     <Compile Include="TrackingStatus.cs" />
+    <Compile Include="ShippoEnums.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
