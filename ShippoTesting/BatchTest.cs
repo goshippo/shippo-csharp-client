@@ -160,8 +160,10 @@ namespace ShippoTesting
             List<Batch.BatchShipment> batchShipments = new List<Batch.BatchShipment> ();
             batchShipments.Add (batchShipment);
 
-            return getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
+            Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
                                                   batchShipments);
+            Assert.AreEqual ("VALIDATING", batch.ObjectStatus);
+            return batch;
         }
     }
 }
