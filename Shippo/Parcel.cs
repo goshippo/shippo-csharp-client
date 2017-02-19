@@ -7,45 +7,45 @@ namespace Shippo
     public class Parcel : ShippoId
     {
         [JsonProperty (PropertyName = "object_state")]
-        public string ObjectState;
+        public object ObjectState { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
-        public DateTime? ObjectCreated;
+        public object ObjectCreated { get; set; }
 
         [JsonProperty (PropertyName = "object_updated")]
-        public DateTime? ObjectUpdaed;
+        public object ObjectUpdaed { get; set; }
 
         [JsonProperty (PropertyName = "object_owner")]
-        public string ObjectOwner;
+        public object ObjectOwner { get; set; }
 
         [JsonProperty (PropertyName = "length")]
-        public double Length;
+        public object Length { get; set; }
 
         [JsonProperty (PropertyName = "width")]
-        public double Width;
+        public object Width { get; set; }
 
         [JsonProperty (PropertyName = "height")]
-        public double Height;
+        public object Height { get; set; }
 
         [JsonProperty (PropertyName = "distance_unit")]
-        public string DistanceUnit;
+        public object DistanceUnit { get; set; }
 
         [JsonProperty (PropertyName = "weight")]
-        public double Weight;
+        public object Weight { get; set; }
 
         [JsonProperty (PropertyName = "mass_unit")]
-        public string MassUnit;
+        public object MassUnit { get; set; }
 
         [JsonProperty (PropertyName = "template")]
         public string Template;
 
         [JsonProperty (PropertyName = "metadata")]
-        public string Metadata;
+        public object Metadata { get; set; }
 
         [JsonProperty (PropertyName = "extra")]
         public object Extra;
 
         [JsonProperty (PropertyName = "test")]
-        public bool Test;
+        public bool? Test;
     }
 }
