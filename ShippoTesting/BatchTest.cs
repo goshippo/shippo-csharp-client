@@ -155,7 +155,7 @@ namespace ShippoTesting
                                                            "SF", "CA", "94103", "US", "4151234568", "msship@gmail.com");
             Batch.Parcel parcel = Batch.Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
             Batch.Shipment shipment = Batch.Shipment.createForBatch ("PURCHASE", addressFrom, addressTo, parcel);
-            Batch.BatchShipment batchShipment = Batch.BatchShipment.createForBatchShipments (shipment);
+            Batch.BatchShipment batchShipment = Batch.BatchShipment.createForBatchShipments (defaultCarrierAccount, "usps_priority", shipment);
 
             List<Batch.BatchShipment> batchShipments = new List<Batch.BatchShipment> ();
             batchShipments.Add (batchShipment);

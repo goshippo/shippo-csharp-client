@@ -93,12 +93,20 @@ namespace Shippo {
 
         public class BatchShipment
         {
+            [JsonProperty (PropertyName = "carrier_account")]
+            public string CarrierAccount;
+
+            [JsonProperty (PropertyName = "servicelevel_token")]
+            public string ServicelevelToken;
+
             [JsonProperty (PropertyName = "shipment")]
             public Shipment Shipment;
 
-            public static BatchShipment createForBatchShipments (Shipment shipment)
+            public static BatchShipment createForBatchShipments (String carrierAccount, string servicelevelToken, Shipment shipment)
             {
                 BatchShipment bs = new BatchShipment ();
+                bs.CarrierAccount = carrierAccount;
+                bs.ServicelevelToken = servicelevelToken;
                 bs.Shipment = shipment;
                 return bs;
             }
