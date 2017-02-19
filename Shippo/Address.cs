@@ -6,72 +6,75 @@ namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Address : ShippoId {
         [JsonProperty (PropertyName = "object_state")]
-        public string ObjectState;
+        public object ObjectState { get; set; }
 
         [JsonProperty (PropertyName = "object_purpose")]
-        public string ObjectPurpose;
+        public object ObjectPurpose { get; set; }
 
         [JsonProperty (PropertyName = "object_source")]
-        public string ObjectSource;
+        public object ObjectSource { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
-        public DateTime? ObjectCreated;
+        public object ObjectCreated { get; set; }
 
         [JsonProperty (PropertyName = "object_updated")]
-        public DateTime? ObjectUpdated;
+        public object ObjectUpdated { get; set; }
 
         [JsonProperty (PropertyName = "object_owner")]
-        public string ObjectOwner;
+        public object ObjectOwner { get; set; }
 
         [JsonProperty (PropertyName = "name")]
-        public string Name;
+        public object Name { get; set; }
 
         [JsonProperty (PropertyName = "company")]
-        public string Company;
+        public object Company { get; set; }
 
         [JsonProperty (PropertyName = "street1")]
-        public string Street1;
+        public object Street1 { get; set; }
 
         [JsonProperty (PropertyName = "street_no")]
-        public string StreetNo;
+        public object StreetNo { get; set; }
 
         [JsonProperty (PropertyName = "street2")]
-        public string Street2;
+        public object Street2 { get; set; }
 
         [JsonProperty (PropertyName = "street3")]
         public string Street3;
 
         [JsonProperty (PropertyName = "city")]
-        public string City;
+        public object City { get; set; }
 
         [JsonProperty (PropertyName = "state")]
-        public string State;
+        public object State { get; set; }
 
         [JsonProperty (PropertyName = "zip")]
-        public string Zip;
+        public object Zip { get; set; }
 
         [JsonProperty (PropertyName = "country")]
-        public string Country;
+        public object Country { get; set; }
 
         [JsonProperty (PropertyName = "phone")]
-        public string Phone;
+        public object Phone { get; set; }
 
         [JsonProperty (PropertyName = "email")]
-        public string Email;
+        public object Email { get; set; }
 
         [JsonProperty (PropertyName = "is_residential")]
-        public bool? IsResidential;
+        public object IsResidential { get; set; }
+
+        [JsonProperty (PropertyName = "ip")]
+        public object IP { get; set; }
 
         [JsonProperty (PropertyName = "validate")]
-        public bool? Validate;
+        public bool? Validate { get; set; }
 
         [JsonProperty (PropertyName = "metadata")]
-        public string Metadata;
+        public object Metadata { get; set; }
 
         [JsonProperty (PropertyName = "test")]
-        public bool Test;
+        public bool? Test;
 
         [JsonProperty (PropertyName = "messages")]
-        public List<string> Messages;
+        public object Messages { get; set; }
     }
 }
