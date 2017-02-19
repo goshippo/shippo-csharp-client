@@ -16,7 +16,7 @@ namespace ShippoTesting
         public void TestValidCreate ()
         {
             Batch testBatch = getDefaultObject ();
-            Assert.AreEqual ("VALIDATING", testBatch.ObjectStatus);
+            Assert.AreEqual (Batch.ObjectStatuses.VALIDATING, testBatch.ObjectStatus);
         }
 
         [Test ()]
@@ -47,7 +47,7 @@ namespace ShippoTesting
         public void TestValidAddShipmentToBatch ()
         {
             Batch batch = getDefaultObject ();
-            Assert.AreEqual (batch.ObjectStatus, "VALIDATING");
+            Assert.AreEqual (batch.ObjectStatus, Batch.ObjectStatuses.VALIDATING);
 
             List<Hashtable> shipments = new List<Hashtable> ();
             Hashtable shipmentTable = new Hashtable ();
@@ -76,7 +76,7 @@ namespace ShippoTesting
         public void TestValidRemoveShipmentsFromBatch ()
         {
             Batch batch = getDefaultObject ();
-            Assert.AreEqual (batch.ObjectStatus, "VALIDATING");
+            Assert.AreEqual (batch.ObjectStatus, Batch.ObjectStatuses.VALIDATING);
 
             List<Hashtable> shipments = new List<Hashtable> ();
             Hashtable shipmentTable = new Hashtable ();
@@ -110,7 +110,7 @@ namespace ShippoTesting
             Batch batch = getDefaultObject ();
             Batch retrieve = getValidBatch (batch.ObjectId);
             Batch purchase = getAPIResource ().PurchaseBatch (retrieve.ObjectId);
-            Assert.AreEqual ("PURCHASING", purchase.ObjectStatus);
+            Assert.AreEqual (Batch.ObjectStatuses.PURCHASING, purchase.ObjectStatus);
         }
 
         [Test ()]
@@ -130,7 +130,7 @@ namespace ShippoTesting
             int retries = 10;
             for (; retries > 0; retries--) {
                 batch = getAPIResource ().RetrieveBatch (id);
-                if (batch.ObjectStatus.ToString () == "VALID")
+                if (batch.ObjectStatus == Batch.ObjectStatuses.VALID)
                     return batch;
                 System.Threading.Thread.Sleep (1000);
             }
@@ -162,7 +162,7 @@ namespace ShippoTesting
 
             Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
                                                   batchShipments);
-            Assert.AreEqual ("VALIDATING", batch.ObjectStatus);
+            Assert.AreEqual (Batch.ObjectStatuses.VALIDATING, batch.ObjectStatus);
             return batch;
         }
     }

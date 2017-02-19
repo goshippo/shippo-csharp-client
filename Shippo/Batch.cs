@@ -5,8 +5,10 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Batch : ShippoId {
+        public enum ObjectStatuses { VALIDATING, VALID, INVALID, PURCHASING, PURCHASED }
+
         [JsonProperty (PropertyName = "object_status")]
-        public string ObjectStatus;
+        public ObjectStatuses ObjectStatus;
 
         [JsonProperty (PropertyName = "object_created")]
         public DateTime? ObjectCreated;
