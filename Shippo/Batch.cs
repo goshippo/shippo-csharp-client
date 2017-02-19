@@ -5,10 +5,8 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Batch : ShippoId {
-        public enum ObjectStatuses { VALIDATING, VALID, INVALID, PURCHASING, PURCHASED }
-
         [JsonProperty (PropertyName = "object_status")]
-        public ObjectStatuses ObjectStatus;
+        public ShippoEnums.ObjectStatuses ObjectStatus;
 
         [JsonProperty (PropertyName = "object_created")]
         public DateTime? ObjectCreated;
@@ -26,7 +24,7 @@ namespace Shippo {
         public string DefaultServicelevelToken;
 
         [JsonProperty (PropertyName = "label_filetype")]
-        public string LabelFiletype;
+        public ShippoEnums.LabelFiletypes LabelFiletype;
 
         [JsonProperty (PropertyName = "metadata")]
         public string Metadata;

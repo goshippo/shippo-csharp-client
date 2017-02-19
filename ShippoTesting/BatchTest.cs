@@ -16,7 +16,7 @@ namespace ShippoTesting
         public void TestValidCreate ()
         {
             Batch testBatch = getDefaultObject ();
-            Assert.AreEqual (Batch.ObjectStatuses.VALIDATING, testBatch.ObjectStatus);
+            Assert.AreEqual (ShippoEnums.ObjectStatuses.VALIDATING, testBatch.ObjectStatus);
         }
 
         [Test ()]
@@ -31,7 +31,7 @@ namespace ShippoTesting
         public void TestValidRetrieve ()
         {
             Batch batch = getDefaultObject ();
-            Batch retrieve = getAPIResource ().RetrieveBatch (batch.ObjectId);
+            Batch retrieve = getAPIResource ().RetrieveBatch (batch.ObjectId, 0, ShippoEnums.ObjectResults.ANY);
             Assert.AreEqual (batch.ObjectId, retrieve.ObjectId);
             Assert.AreEqual (batch.ObjectCreated, retrieve.ObjectCreated);
         }
@@ -40,14 +40,14 @@ namespace ShippoTesting
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidRetrieve ()
         {
-            getAPIResource ().RetrieveBatch ("INVALID_ID");
+            getAPIResource ().RetrieveBatch ("INVALID_ID", 0, ShippoEnums.ObjectResults.ANY);
         }
 
         [Test ()]
         public void TestValidAddShipmentToBatch ()
         {
             Batch batch = getDefaultObject ();
-            Assert.AreEqual (batch.ObjectStatus, Batch.ObjectStatuses.VALIDATING);
+            Assert.AreEqual (batch.ObjectStatus, ShippoEnums.ObjectStatuses.VALIDATING);
 
             List<Hashtable> shipments = new List<Hashtable> ();
             Hashtable shipmentTable = new Hashtable ();
@@ -76,7 +76,7 @@ namespace ShippoTesting
         public void TestValidRemoveShipmentsFromBatch ()
         {
             Batch batch = getDefaultObject ();
-            Assert.AreEqual (batch.ObjectStatus, Batch.ObjectStatuses.VALIDATING);
+            Assert.AreEqual (batch.ObjectStatus, ShippoEnums.ObjectStatuses.VALIDATING);
 
             List<Hashtable> shipments = new List<Hashtable> ();
             Hashtable shipmentTable = new Hashtable ();
@@ -110,7 +110,7 @@ namespace ShippoTesting
             Batch batch = getDefaultObject ();
             Batch retrieve = getValidBatch (batch.ObjectId);
             Batch purchase = getAPIResource ().PurchaseBatch (retrieve.ObjectId);
-            Assert.AreEqual (Batch.ObjectStatuses.PURCHASING, purchase.ObjectStatus);
+            Assert.AreEqual (ShippoEnums.ObjectStatuses.PURCHASING, purchase.ObjectStatus);
         }
 
         [Test ()]
@@ -129,8 +129,8 @@ namespace ShippoTesting
             Batch batch;
             int retries = 10;
             for (; retries > 0; retries--) {
-                batch = getAPIResource ().RetrieveBatch (id);
-                if (batch.ObjectStatus == Batch.ObjectStatuses.VALID)
+                batch = getAPIResource ().RetrieveBatch (id, 0, ShippoEnums.ObjectResults.ANY);
+                if (batch.ObjectStatus == ShippoEnums.ObjectStatuses.VALID)
                     return batch;
                 System.Threading.Thread.Sleep (1000);
             }
@@ -162,7 +162,7 @@ namespace ShippoTesting
 
             Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", "PDF_4x6", "BATCH #170",
                                                   batchShipments);
-            Assert.AreEqual (Batch.ObjectStatuses.VALIDATING, batch.ObjectStatus);
+            Assert.AreEqual (ShippoEnums.ObjectStatuses.VALIDATING, batch.ObjectStatus);
             return batch;
         }
     }

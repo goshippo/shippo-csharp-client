@@ -458,10 +458,15 @@ namespace Shippo {
             return DoRequest<Batch> (ep, "POST", serialize(parameters));
         }
 
-        public Batch RetrieveBatch (String id, Hashtable parameters = null)
+        public Batch RetrieveBatch (String id, uint page, ShippoEnums.ObjectResults objectResults)
         {
             string ep = String.Format ("{0}/batches/{1}", api_endpoint, HttpUtility.HtmlEncode(id));
-            if (parameters != null)
+            Hashtable parameters = new Hashtable ();
+            if (page > 0)
+                parameters.Add ("page", page);
+            if (objectResults != ShippoEnums.ObjectResults.ANY)
+                parameters.Add ("object_results", objectResults);
+            if (parameters.Count != 0)
                 ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
             return DoRequest<Batch> (ep, "GET");
         }
