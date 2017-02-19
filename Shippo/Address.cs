@@ -66,7 +66,7 @@ namespace Shippo {
         public object IP { get; set; }
 
         [JsonProperty (PropertyName = "validate")]
-        public bool? Validate { get; set; }
+        public bool? Validate;
 
         [JsonProperty (PropertyName = "metadata")]
         public object Metadata { get; set; }
@@ -75,6 +75,6 @@ namespace Shippo {
         public bool? Test;
 
         [JsonProperty (PropertyName = "messages")]
-        public object Messages { get; set; }
+        public object Messages;
     }
 }
