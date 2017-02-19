@@ -33,6 +33,9 @@ namespace Shippo {
         [JsonProperty (PropertyName = "parcel")]
         public object Parcel { get; set; }
 
+        [JsonProperty (PropertyName = "submission_type")]
+        public object SubmissionType { get; set; }
+
         [JsonProperty (PropertyName = "return_of")]
         public string ReturnOf;
 
