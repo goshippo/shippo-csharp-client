@@ -13,7 +13,7 @@ namespace Shippo
         public DateTime? ObjectUpdated;
 
         [JsonProperty (PropertyName = "status")]
-        public string Status;
+        public ShippoEnums.TrackingStatus Status;
 
         [JsonProperty (PropertyName = "status_details")]
         public string StatusDetails;
@@ -27,8 +27,8 @@ namespace Shippo
         public override string ToString ()
         {
             return string.Format ("[TrackingStatus: ObjectCreated={0}, ObjectUpdated={1}, Status={2}, StatusDetails={3}," +
-                                  "StatusDate={4}, location={5}]", ObjectCreated, ObjectUpdated, Status, StatusDetails,
-                                  StatusDate, Location);
+                                  "StatusDate={4}, location={5}]", ObjectCreated, ObjectUpdated, Status.ToString (),
+                                  StatusDetails, StatusDate, Location);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Shippo {
         public class Address
         {
             [JsonProperty (PropertyName = "object_purpose")]
-            public string ObjectPurpose;
+            public ShippoEnums.ObjectPurposes ObjectPurpose;
 
             [JsonProperty (PropertyName = "name")]
             public string Name;
@@ -73,8 +73,9 @@ namespace Shippo {
             [JsonProperty (PropertyName = "email")]
             public string Email;
 
-            public static Address createForPurchase (String purpose, String name, String street1, String street2, String city,
-                                                     String state, String zip, String country, String phone, String email)
+            public static Address createForPurchase (ShippoEnums.ObjectPurposes purpose, String name, String street1,
+                                                     String street2, String city, String state, String zip,
+                                                     String country, String phone, String email)
             {
                 Address a = new Address ();
                 a.ObjectPurpose = purpose;
@@ -115,7 +116,7 @@ namespace Shippo {
         public class Shipment
         {
             [JsonProperty (PropertyName = "object_purpose")]
-            public string ObjectPurpose;
+            public ShippoEnums.ObjectPurposes ObjectPurpose;
 
             [JsonProperty (PropertyName = "address_from")]
             public Address AddressFrom;
@@ -126,7 +127,8 @@ namespace Shippo {
             [JsonProperty (PropertyName = "parcel")]
             public Parcel Parcel;
 
-            public static Shipment createForBatch (String purpose, Address addressFrom, Address addressTo, Parcel parcel)
+            public static Shipment createForBatch (ShippoEnums.ObjectPurposes purpose, Address addressFrom,
+                                                   Address addressTo, Parcel parcel)
             {
                 Shipment s = new Shipment ();
                 s.ObjectPurpose = purpose;
@@ -176,7 +178,7 @@ namespace Shippo {
         {
             return string.Format ("[Batch: ObjectStatus={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +
                                   "DefaultCarrierAccount={4}, DefaultServicelevelToken={5}, LabelFiletype={6}, Metadata={7}, " +
-                                  "BatchShipments={8}, LabelUrl={9}, ObjectResults={10}]", ObjectStatus, ObjectCreated,
+                                  "BatchShipments={8}, LabelUrl={9}, ObjectResults={10}]", ObjectStatus.ToString(), ObjectCreated,
                                   ObjectUpdated, ObjectOwner, DefaultCarrierAccount, DefaultServicelevelToken,
                                   LabelFiletype, Metadata, BatchShipments, LabelUrl, ObjectResults);
         }

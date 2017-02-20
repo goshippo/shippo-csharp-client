@@ -148,12 +148,12 @@ namespace Shippo {
         // Serialize parameters into JSON for POST requests
         public String serialize (Hashtable propertyMap)
         {
-            return JsonConvert.SerializeObject (propertyMap);
+            return JsonConvert.SerializeObject (propertyMap, new Newtonsoft.Json.Converters.StringEnumConverter ());
         }
         // Serialize parameters into JSON for POST requests from List
         public String serializeList<T> (List<T> list)
         {
-            return JsonConvert.SerializeObject (list);
+            return JsonConvert.SerializeObject (list, new Newtonsoft.Json.Converters.StringEnumConverter ());
         }
 
         #endregion
@@ -453,7 +453,7 @@ namespace Shippo {
             parameters.Add ("default_carrier_account", carrierAccount);
             parameters.Add ("default_servicelevel_token", servicelevelToken);
             if (labelFiletype != ShippoEnums.LabelFiletypes.NONE)
-                parameters.Add ("label_filetype", labelFiletype.ToString());
+                parameters.Add ("label_filetype", labelFiletype);
             parameters.Add ("metadata", metadata);
             parameters.Add ("batch_shipments", batchShipments);
             return DoRequest<Batch> (ep, "POST", serialize(parameters));
@@ -466,7 +466,7 @@ namespace Shippo {
             if (page > 0)
                 parameters.Add ("page", page);
             if (objectResults != ShippoEnums.ObjectResults.none)
-                parameters.Add ("object_results", objectResults.ToString());
+                parameters.Add ("object_results", objectResults);
             if (parameters.Count != 0)
                 ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
             return DoRequest<Batch> (ep, "GET");
