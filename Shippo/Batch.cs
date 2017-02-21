@@ -92,6 +92,13 @@ namespace Shippo {
             }
         }
 
+        /**
+         * This class is used primarily for Batch creation.
+         *
+         *
+         * ***NOTE: This is different from the <see cref="Shippo.BatchShipment"/> class
+         * used for Batch retrieval.
+         */
         public class BatchShipment
         {
             [JsonProperty (PropertyName = "carrier_account")]
