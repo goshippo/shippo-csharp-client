@@ -28,6 +28,34 @@ namespace ShippoExample {
 
         static readonly string TRACKING_NO = "9205590164917312751089";
 
+        private static void RunBatchExample (APIResource resource)
+        {
+            ShippoCollection<CarrierAccount> carrierAccounts = resource.AllCarrierAccount ();
+            string defaultCarrierAccount = "";
+            foreach (CarrierAccount account in carrierAccounts) {
+                if (account.Carrier.ToString () == "usps")
+                    defaultCarrierAccount = account.ObjectId;
+            }
+
+            Address addressFrom = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mr. Hippo",
+                                                                         "965 Mission St.", "Ste 201", "SF", "CA", "94103",
+                                                                         "US", "4151234567", "ship@gmail.com");
+            Address addressTo = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mrs. Hippo",
+                                                                       "965 Missions St.", "Ste 202", "SF", "CA", "94103",
+                                                                       "US", "4151234568", "msship@gmail.com");
+            Parcel parcel = Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
+            Shipment shipment = Shipment.createForBatch (ShippoEnums.ObjectPurposes.PURCHASE, addressFrom, addressTo, parcel);
+            BatchShipment batchShipment = BatchShipment.createForBatchShipments (defaultCarrierAccount, "usps_priority", shipment);
+
+            List<BatchShipment> batchShipments = new List<BatchShipment> ();
+            batchShipments.Add (batchShipment);
+
+            Batch batch = resource.CreateBatch (defaultCarrierAccount, "usps_priority", ShippoEnums.LabelFiletypes.PDF_4x6,
+                                                         "BATCH #170", batchShipments);
+            Console.WriteLine ("Batch Status = " + batch.ObjectStatus);
+            Console.WriteLine ("Metadata = " + batch.Metadata);
+        }
+
         private static void RunTrackingExample (APIResource resource)
         {
             Track track = resource.RetrieveTracking ("usps", TRACKING_NO);
@@ -106,6 +134,9 @@ namespace ShippoExample {
 			} else {
 				Console.WriteLine ("An Error has occured while generating your label. Messages : " + transaction.Messages);
 			}
+
+            Console.WriteLine ("\nBatch\n");
+            RunBatchExample (resource);
 
             Console.WriteLine ("\nTrack\n");
             RunTrackingExample (resource);

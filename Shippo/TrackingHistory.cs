@@ -10,7 +10,7 @@ namespace Shippo
         public DateTime? ObjectCreated;
 
         [JsonProperty (PropertyName = "status")]
-        public string Status;
+        public ShippoEnums.TrackingStatus Status;
 
         [JsonProperty (PropertyName = "status_details")]
         public string StatusDetails;
@@ -24,7 +24,7 @@ namespace Shippo
         public override string ToString ()
         {
             return string.Format ("[TrackingHistory: ObjectCreated={0}, Status={1}, StatusDetails={2}, StatusDate={3}," +
-                                  "location={4}]", ObjectCreated, Status, StatusDetails, StatusDate, Location);
+                                  "location={4}]", ObjectCreated, Status.ToString (), StatusDetails, StatusDate, Location);
         }
     }
 }

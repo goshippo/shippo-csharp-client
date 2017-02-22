@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
@@ -37,6 +38,9 @@ namespace Shippo {
         [JsonProperty (PropertyName = "street2")]
         public object Street2 { get; set; }
 
+        [JsonProperty (PropertyName = "street3")]
+        public string Street3;
+
         [JsonProperty (PropertyName = "city")]
         public object City { get; set; }
 
@@ -55,13 +59,40 @@ namespace Shippo {
         [JsonProperty (PropertyName = "email")]
         public object Email { get; set; }
 
+        [JsonProperty (PropertyName = "is_residential")]
+        public object IsResidential { get; set; }
+
         [JsonProperty (PropertyName = "ip")]
         public object IP { get; set; }
+
+        [JsonProperty (PropertyName = "validate")]
+        public bool? Validate;
 
         [JsonProperty (PropertyName = "metadata")]
         public object Metadata { get; set; }
 
-	[JsonProperty (PropertyName = "is_residential")]
-	public object IsResidential { get; set; }
+        [JsonProperty (PropertyName = "test")]
+        public bool? Test;
+
+        [JsonProperty (PropertyName = "messages")]
+        public object Messages;
+
+        public static Address createForPurchase (ShippoEnums.ObjectPurposes purpose, String name, String street1,
+                                                     String street2, String city, String state, String zip,
+                                                     String country, String phone, String email)
+        {
+            Address a = new Address ();
+            a.ObjectPurpose = purpose;
+            a.Name = name;
+            a.Street1 = street1;
+            a.Street2 = street2;
+            a.City = city;
+            a.State = state;
+            a.Zip = zip;
+            a.Country = country;
+            a.Phone = phone;
+            a.Email = email;
+            return a;
+        }
     }
 }

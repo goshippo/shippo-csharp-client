@@ -1,9 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Shippo {
+namespace Shippo
+{
     [JsonObject (MemberSerialization.OptIn)]
-    public class Parcel : ShippoId {
+    public class Parcel : ShippoId
+    {
         [JsonProperty (PropertyName = "object_state")]
         public object ObjectState { get; set; }
 
@@ -34,7 +36,30 @@ namespace Shippo {
         [JsonProperty (PropertyName = "mass_unit")]
         public object MassUnit { get; set; }
 
+        [JsonProperty (PropertyName = "template")]
+        public string Template;
+
         [JsonProperty (PropertyName = "metadata")]
-        public object Metadata{ get; set; }
+        public object Metadata { get; set; }
+
+        [JsonProperty (PropertyName = "extra")]
+        public object Extra;
+
+        [JsonProperty (PropertyName = "test")]
+        public bool? Test;
+
+        public static Parcel createForShipment (double length, double width, double height, String distance_unit,
+                                                    double weight, string massUnit)
+        {
+            Parcel p = new Parcel ();
+            p.Length = length;
+            p.Width = width;
+            p.Height = height;
+            p.DistanceUnit = distance_unit;
+            p.Weight = weight;
+            p.MassUnit = massUnit;
+            return p;
+
+        }
     }
 }

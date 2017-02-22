@@ -146,9 +146,12 @@ namespace Shippo {
             return str.ToString ();
         }
         // Serialize parameters into JSON for POST requests
-        public String serialize (Hashtable propertyMap)
+        public String serialize<T> (T data)
         {
-            return JsonConvert.SerializeObject (propertyMap);
+            JsonSerializerSettings settings = new JsonSerializerSettings ();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.Converters.Add (new Newtonsoft.Json.Converters.StringEnumConverter ());
+            return JsonConvert.SerializeObject (data, settings);
         }
 
         #endregion
@@ -383,7 +386,12 @@ namespace Shippo {
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
         {
-            string ep = String.Format ("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
+            return AllCarrierAccount ();
+        }
+
+        public ShippoCollection<CarrierAccount> AllCarrierAccount ()
+        {
+            string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
             return DoRequest<ShippoCollection<CarrierAccount>> (ep);
         }
 
@@ -429,6 +437,63 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/manifests?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Manifest>> (ep);
+        }
+
+        #endregion
+
+        #region Batch
+
+        public Batch CreateBatch (String carrierAccount, String servicelevelToken, ShippoEnums.LabelFiletypes labelFiletype,
+                                  String metadata, List<BatchShipment> batchShipments)
+        {
+            string ep = String.Format ("{0}/batches", api_endpoint);
+            Hashtable parameters = new Hashtable ();
+            parameters.Add ("default_carrier_account", carrierAccount);
+            parameters.Add ("default_servicelevel_token", servicelevelToken);
+            if (labelFiletype != ShippoEnums.LabelFiletypes.NONE)
+                parameters.Add ("label_filetype", labelFiletype);
+            parameters.Add ("metadata", metadata);
+            parameters.Add ("batch_shipments", batchShipments);
+            return DoRequest<Batch> (ep, "POST", serialize(parameters));
+        }
+
+        public Batch RetrieveBatch (String id, uint page, ShippoEnums.ObjectResults objectResults)
+        {
+            string ep = String.Format ("{0}/batches/{1}", api_endpoint, HttpUtility.HtmlEncode(id));
+            Hashtable parameters = new Hashtable ();
+            if (page > 0)
+                parameters.Add ("page", page);
+            if (objectResults != ShippoEnums.ObjectResults.none)
+                parameters.Add ("object_results", objectResults);
+            if (parameters.Count != 0)
+                ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
+            return DoRequest<Batch> (ep, "GET");
+        }
+
+        public Batch AddShipmentsToBatch (String id, List<String> shipmentIds)
+        {
+            string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
+            List<Hashtable> shipments = new List<Hashtable> ();
+            foreach (String shipmentId in shipmentIds)
+            {
+                Hashtable shipmentTable = new Hashtable ();
+                shipmentTable.Add ("shipment", shipmentId);
+                shipments.Add (shipmentTable);
+            }
+
+            return DoRequest<Batch> (ep, "POST", serialize (shipments));
+        }
+
+        public Batch RemoveShipmentsFromBatch (String id, List<String> shipmentIds)
+        {
+            string ep = String.Format ("{0}/batches/{1}/remove_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
+            return DoRequest<Batch> (ep, "POST", serialize (shipmentIds));
+        }
+
+        public Batch PurchaseBatch (String id)
+        {
+            string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, HttpUtility.HtmlEncode (id));
+            return DoRequest<Batch> (ep, "POST");
         }
 
         #endregion
