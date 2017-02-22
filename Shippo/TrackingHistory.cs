@@ -6,19 +6,19 @@ namespace Shippo
     [JsonObject (MemberSerialization.OptIn)]
     public class TrackingHistory : ShippoId
     {
-        [JsonProperty (PropertyName = "object_created", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_created")]
         public DateTime? ObjectCreated;
 
-        [JsonProperty (PropertyName = "status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "status")]
         public ShippoEnums.TrackingStatus Status;
 
-        [JsonProperty (PropertyName = "status_details", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "status_details")]
         public string StatusDetails;
 
-        [JsonProperty (PropertyName = "status_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "status_date")]
         public DateTime? StatusDate;
 
-        [JsonProperty (PropertyName = "location", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "location")]
         public ShortAddress Location;
 
         public override string ToString ()

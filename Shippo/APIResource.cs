@@ -146,14 +146,12 @@ namespace Shippo {
             return str.ToString ();
         }
         // Serialize parameters into JSON for POST requests
-        public String serialize (Hashtable propertyMap)
+        public String serialize<T> (T data)
         {
-            return JsonConvert.SerializeObject (propertyMap, new Newtonsoft.Json.Converters.StringEnumConverter ());
-        }
-        // Serialize parameters into JSON for POST requests from List
-        public String serializeList<T> (List<T> list)
-        {
-            return JsonConvert.SerializeObject (list, new Newtonsoft.Json.Converters.StringEnumConverter ());
+            JsonSerializerSettings settings = new JsonSerializerSettings ();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.Converters.Add (new Newtonsoft.Json.Converters.StringEnumConverter ());
+            return JsonConvert.SerializeObject (data, settings);
         }
 
         #endregion
@@ -483,13 +481,13 @@ namespace Shippo {
                 shipments.Add (shipmentTable);
             }
 
-            return DoRequest<Batch> (ep, "POST", serializeList<Hashtable> (shipments));
+            return DoRequest<Batch> (ep, "POST", serialize (shipments));
         }
 
         public Batch RemoveShipmentsFromBatch (String id, List<String> shipmentIds)
         {
             string ep = String.Format ("{0}/batches/{1}/remove_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
-            return DoRequest<Batch> (ep, "POST", serializeList<String> (shipmentIds));
+            return DoRequest<Batch> (ep, "POST", serialize (shipmentIds));
         }
 
         public Batch PurchaseBatch (String id)

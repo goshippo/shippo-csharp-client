@@ -7,25 +7,25 @@ namespace Shippo
     [JsonObject (MemberSerialization.OptIn)]
     public class BatchShipment : ShippoId
     {
-        [JsonProperty (PropertyName = "object_status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_status")]
         public string ObjectStatus;
 
-        [JsonProperty (PropertyName = "carrier_account", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "carrier_account")]
         public string CarrierAccount;
 
-        [JsonProperty (PropertyName = "servicelevel_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "servicelevel_token")]
         public string ServicelevelToken;
 
-        [JsonProperty (PropertyName = "shipment", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "shipment")]
         public Object Shipment;
 
-        [JsonProperty (PropertyName = "transaction", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "transaction")]
         public string Transaction;
 
-        [JsonProperty (PropertyName = "messages", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "messages")]
         public object Messages;
 
-        [JsonProperty (PropertyName = "metadata", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "metadata")]
         public string Metadata;
 
         public static BatchShipment createForBatchShipments (String carrierAccount, string servicelevelToken, Shipment shipment)

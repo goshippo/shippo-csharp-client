@@ -5,76 +5,76 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Address : ShippoId {
-        [JsonProperty (PropertyName = "object_state", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_state")]
         public object ObjectState { get; set; }
 
-        [JsonProperty (PropertyName = "object_purpose", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_purpose")]
         public object ObjectPurpose { get; set; }
 
-        [JsonProperty (PropertyName = "object_source", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_source")]
         public object ObjectSource { get; set; }
 
-        [JsonProperty (PropertyName = "object_created", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
 
-        [JsonProperty (PropertyName = "object_updated", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_updated")]
         public object ObjectUpdated { get; set; }
 
-        [JsonProperty (PropertyName = "object_owner", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
-        [JsonProperty (PropertyName = "name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "name")]
         public object Name { get; set; }
 
-        [JsonProperty (PropertyName = "company", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "company")]
         public object Company { get; set; }
 
-        [JsonProperty (PropertyName = "street1", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "street1")]
         public object Street1 { get; set; }
 
-        [JsonProperty (PropertyName = "street_no", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "street_no")]
         public object StreetNo { get; set; }
 
-        [JsonProperty (PropertyName = "street2", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "street2")]
         public object Street2 { get; set; }
 
-        [JsonProperty (PropertyName = "street3", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "street3")]
         public string Street3;
 
-        [JsonProperty (PropertyName = "city", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "city")]
         public object City { get; set; }
 
-        [JsonProperty (PropertyName = "state", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "state")]
         public object State { get; set; }
 
-        [JsonProperty (PropertyName = "zip", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "zip")]
         public object Zip { get; set; }
 
-        [JsonProperty (PropertyName = "country", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "country")]
         public object Country { get; set; }
 
-        [JsonProperty (PropertyName = "phone", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "phone")]
         public object Phone { get; set; }
 
-        [JsonProperty (PropertyName = "email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "email")]
         public object Email { get; set; }
 
-        [JsonProperty (PropertyName = "is_residential", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "is_residential")]
         public object IsResidential { get; set; }
 
-        [JsonProperty (PropertyName = "ip", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "ip")]
         public object IP { get; set; }
 
-        [JsonProperty (PropertyName = "validate", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "validate")]
         public bool? Validate;
 
-        [JsonProperty (PropertyName = "metadata", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "metadata")]
         public object Metadata { get; set; }
 
-        [JsonProperty (PropertyName = "test", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "test")]
         public bool? Test;
 
-        [JsonProperty (PropertyName = "messages", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty (PropertyName = "messages")]
         public object Messages;
 
         public static Address createForPurchase (ShippoEnums.ObjectPurposes purpose, String name, String street1,
