@@ -7,31 +7,31 @@ namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Track : ShippoId
     {
-        [JsonProperty (PropertyName = "carrier")]
+        [JsonProperty (PropertyName = "carrier", NullValueHandling = NullValueHandling.Ignore)]
         public string Carrier;
 
-        [JsonProperty (PropertyName = "tracking_number")]
+        [JsonProperty (PropertyName = "tracking_number", NullValueHandling = NullValueHandling.Ignore)]
         public string TrackingNumber;
 
-        [JsonProperty (PropertyName = "address_from")]
+        [JsonProperty (PropertyName = "address_from", NullValueHandling = NullValueHandling.Ignore)]
         public ShortAddress AddressFrom;
 
-        [JsonProperty (PropertyName = "address_to")]
+        [JsonProperty (PropertyName = "address_to", NullValueHandling = NullValueHandling.Ignore)]
         public ShortAddress AddressTo;
 
-        [JsonProperty (PropertyName = "eta")]
+        [JsonProperty (PropertyName = "eta", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? Eta;
 
-        [JsonProperty (PropertyName = "servicelevel")]
+        [JsonProperty (PropertyName = "servicelevel", NullValueHandling = NullValueHandling.Ignore)]
         public Servicelevel Servicelevel;
 
-        [JsonProperty (PropertyName = "tracking_status")]
+        [JsonProperty (PropertyName = "tracking_status", NullValueHandling = NullValueHandling.Ignore)]
         public TrackingStatus TrackingStatus;
 
-        [JsonProperty (PropertyName = "tracking_history")]
+        [JsonProperty (PropertyName = "tracking_history", NullValueHandling = NullValueHandling.Ignore)]
         public List<TrackingHistory> TrackingHistory;
 
-        [JsonProperty (PropertyName = "metadata")]
+        [JsonProperty (PropertyName = "metadata", NullValueHandling = NullValueHandling.Ignore)]
         public string Metadata;
 
         public override string ToString ()

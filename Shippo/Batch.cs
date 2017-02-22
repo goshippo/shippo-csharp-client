@@ -5,181 +5,38 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Batch : ShippoId {
-        [JsonProperty (PropertyName = "object_status")]
+        [JsonProperty (PropertyName = "object_status", NullValueHandling = NullValueHandling.Ignore)]
         public ShippoEnums.ObjectStatuses ObjectStatus;
 
-        [JsonProperty (PropertyName = "object_created")]
+        [JsonProperty (PropertyName = "object_created", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? ObjectCreated;
 
-        [JsonProperty (PropertyName = "object_updated")]
+        [JsonProperty (PropertyName = "object_updated", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime? ObjectUpdated;
 
-        [JsonProperty (PropertyName = "object_owner")]
+        [JsonProperty (PropertyName = "object_owner", NullValueHandling = NullValueHandling.Ignore)]
         public string ObjectOwner;
 
-        [JsonProperty (PropertyName = "default_carrier_account")]
+        [JsonProperty (PropertyName = "default_carrier_account", NullValueHandling = NullValueHandling.Ignore)]
         public string DefaultCarrierAccount;
 
-        [JsonProperty (PropertyName = "default_servicelevel_token")]
+        [JsonProperty (PropertyName = "default_servicelevel_token", NullValueHandling = NullValueHandling.Ignore)]
         public string DefaultServicelevelToken;
 
-        [JsonProperty (PropertyName = "label_filetype")]
+        [JsonProperty (PropertyName = "label_filetype", NullValueHandling = NullValueHandling.Ignore)]
         public ShippoEnums.LabelFiletypes LabelFiletype;
 
-        [JsonProperty (PropertyName = "metadata")]
+        [JsonProperty (PropertyName = "metadata", NullValueHandling = NullValueHandling.Ignore)]
         public string Metadata;
 
-        [JsonProperty (PropertyName = "batch_shipments")]
+        [JsonProperty (PropertyName = "batch_shipments", NullValueHandling = NullValueHandling.Ignore)]
         public BatchShipments BatchShipments;
 
-        [JsonProperty (PropertyName = "label_url")]
+        [JsonProperty (PropertyName = "label_url", NullValueHandling = NullValueHandling.Ignore)]
         public List<String> LabelUrl;
 
-        [JsonProperty (PropertyName = "object_results")]
+        [JsonProperty (PropertyName = "object_results", NullValueHandling = NullValueHandling.Ignore)]
         public ObjectResults ObjectResults;
-
-        public class Address
-        {
-            [JsonProperty (PropertyName = "object_purpose")]
-            public ShippoEnums.ObjectPurposes ObjectPurpose;
-
-            [JsonProperty (PropertyName = "name")]
-            public string Name;
-
-            [JsonProperty (PropertyName = "company")]
-            public string Company;
-
-            [JsonProperty (PropertyName = "street1")]
-            public string Street1;
-
-            [JsonProperty (PropertyName = "street2")]
-            public string Street2;
-
-            [JsonProperty (PropertyName = "city")]
-            public string City;
-
-            [JsonProperty (PropertyName = "state")]
-            public string State;
-
-            [JsonProperty (PropertyName = "zip")]
-            public string Zip;
-
-            [JsonProperty (PropertyName = "country")]
-            public string Country;
-
-            [JsonProperty (PropertyName = "phone")]
-            public string Phone;
-
-            [JsonProperty (PropertyName = "email")]
-            public string Email;
-
-            public static Address createForPurchase (ShippoEnums.ObjectPurposes purpose, String name, String street1,
-                                                     String street2, String city, String state, String zip,
-                                                     String country, String phone, String email)
-            {
-                Address a = new Address ();
-                a.ObjectPurpose = purpose;
-                a.Name = name;
-                a.Street1 = street1;
-                a.Street2 = street2;
-                a.City = city;
-                a.State = state;
-                a.Zip = zip;
-                a.Country = country;
-                a.Phone = phone;
-                a.Email = email;
-                return a;
-            }
-        }
-
-        /**
-         * This class is used primarily for Batch creation.
-         *
-         *
-         * ***NOTE: This is different from the <see cref="Shippo.BatchShipment"/> class
-         * used for Batch retrieval.
-         */
-        public class BatchShipment
-        {
-            [JsonProperty (PropertyName = "carrier_account")]
-            public string CarrierAccount;
-
-            [JsonProperty (PropertyName = "servicelevel_token")]
-            public string ServicelevelToken;
-
-            [JsonProperty (PropertyName = "shipment")]
-            public Shipment Shipment;
-
-            public static BatchShipment createForBatchShipments (String carrierAccount, string servicelevelToken, Shipment shipment)
-            {
-                BatchShipment bs = new BatchShipment ();
-                bs.CarrierAccount = carrierAccount;
-                bs.ServicelevelToken = servicelevelToken;
-                bs.Shipment = shipment;
-                return bs;
-            }
-        }
-
-        public class Shipment
-        {
-            [JsonProperty (PropertyName = "object_purpose")]
-            public ShippoEnums.ObjectPurposes ObjectPurpose;
-
-            [JsonProperty (PropertyName = "address_from")]
-            public Address AddressFrom;
-
-            [JsonProperty (PropertyName = "address_to")]
-            public Address AddressTo;
-
-            [JsonProperty (PropertyName = "parcel")]
-            public Parcel Parcel;
-
-            public static Shipment createForBatch (ShippoEnums.ObjectPurposes purpose, Address addressFrom,
-                                                   Address addressTo, Parcel parcel)
-            {
-                Shipment s = new Shipment ();
-                s.ObjectPurpose = purpose;
-                s.AddressFrom = addressFrom;
-                s.AddressTo = addressTo;
-                s.Parcel = parcel;
-                return s;
-            }
-        }
-
-        public class Parcel
-        {
-            [JsonProperty (PropertyName = "length")]
-            public double Length;
-
-            [JsonProperty (PropertyName = "width")]
-            public double Width;
-
-            [JsonProperty (PropertyName = "height")]
-            public double Height;
-
-            [JsonProperty (PropertyName = "distance_unit")]
-            public string DistanceUnit;
-
-            [JsonProperty (PropertyName = "weight")]
-            public double Weight;
-
-            [JsonProperty (PropertyName = "mass_unit")]
-            public string MassUnit;
-
-            public static Parcel createForShipment (double length, double width, double height, String distance_unit,
-                                                    double weight, string massUnit)
-            {
-                Parcel p = new Parcel ();
-                p.Length = length;
-                p.Width = width;
-                p.Height = height;
-                p.DistanceUnit = distance_unit;
-                p.Weight = weight;
-                p.MassUnit = massUnit;
-                return p;
-
-            }
-        }
 
         public override string ToString ()
         {

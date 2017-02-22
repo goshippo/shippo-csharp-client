@@ -7,16 +7,16 @@ namespace Shippo
     [JsonObject (MemberSerialization.OptIn)]
     public class BatchShipments
     {
-        [JsonProperty (PropertyName = "count")]
+        [JsonProperty (PropertyName = "count", NullValueHandling = NullValueHandling.Ignore)]
         public int Count;
 
-        [JsonProperty (PropertyName = "next")]
+        [JsonProperty (PropertyName = "next", NullValueHandling = NullValueHandling.Ignore)]
         public string Next;
 
-        [JsonProperty (PropertyName = "previous")]
+        [JsonProperty (PropertyName = "previous", NullValueHandling = NullValueHandling.Ignore)]
         public string Previous;
 
-        [JsonProperty (PropertyName = "results")]
+        [JsonProperty (PropertyName = "results", NullValueHandling = NullValueHandling.Ignore)]
         public List<BatchShipment> Results;
 
         public override string ToString ()

@@ -446,7 +446,7 @@ namespace Shippo {
         #region Batch
 
         public Batch CreateBatch (String carrierAccount, String servicelevelToken, ShippoEnums.LabelFiletypes labelFiletype,
-                                  String metadata, List<Batch.BatchShipment> batchShipments)
+                                  String metadata, List<BatchShipment> batchShipments)
         {
             string ep = String.Format ("{0}/batches", api_endpoint);
             Hashtable parameters = new Hashtable ();

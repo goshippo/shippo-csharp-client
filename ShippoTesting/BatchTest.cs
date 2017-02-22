@@ -24,7 +24,7 @@ namespace ShippoTesting
         public void TestInvalidCreate ()
         {
             getAPIResource ().CreateBatch ("invalid_carrier_account", "invalid_servicelevel_token",
-                                           ShippoEnums.LabelFiletypes.NONE, "", new List<Batch.BatchShipment>());
+                                           ShippoEnums.LabelFiletypes.NONE, "", new List<BatchShipment>());
         }
 
         [Test ()]
@@ -143,17 +143,17 @@ namespace ShippoTesting
                     defaultCarrierAccount = account.ObjectId;
             }
 
-            Batch.Address addressFrom = Batch.Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mr. Hippo",
+            Address addressFrom = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mr. Hippo",
                                                                          "965 Mission St.", "Ste 201", "SF", "CA", "94103",
                                                                          "US", "4151234567", "ship@gmail.com");
-            Batch.Address addressTo = Batch.Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mrs. Hippo",
+            Address addressTo = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mrs. Hippo",
                                                                        "965 Missions St.", "Ste 202", "SF", "CA", "94103",
                                                                        "US", "4151234568", "msship@gmail.com");
-            Batch.Parcel parcel = Batch.Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
-            Batch.Shipment shipment = Batch.Shipment.createForBatch (ShippoEnums.ObjectPurposes.PURCHASE, addressFrom, addressTo, parcel);
-            Batch.BatchShipment batchShipment = Batch.BatchShipment.createForBatchShipments (defaultCarrierAccount, "usps_priority", shipment);
+            Parcel parcel = Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
+            Shipment shipment = Shipment.createForBatch (ShippoEnums.ObjectPurposes.PURCHASE, addressFrom, addressTo, parcel);
+            BatchShipment batchShipment = BatchShipment.createForBatchShipments (defaultCarrierAccount, "usps_priority", shipment);
 
-            List<Batch.BatchShipment> batchShipments = new List<Batch.BatchShipment> ();
+            List<BatchShipment> batchShipments = new List<BatchShipment> ();
             batchShipments.Add (batchShipment);
 
             Batch batch = getAPIResource ().CreateBatch (defaultCarrierAccount, "usps_priority", ShippoEnums.LabelFiletypes.PDF_4x6,
