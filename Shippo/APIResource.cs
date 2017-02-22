@@ -472,9 +472,17 @@ namespace Shippo {
             return DoRequest<Batch> (ep, "GET");
         }
 
-        public Batch AddShipmentsToBatch (String id, List<Hashtable> shipments)
+        public Batch AddShipmentsToBatch (String id, List<String> shipmentIds)
         {
             string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
+            List<Hashtable> shipments = new List<Hashtable> ();
+            foreach (String shipmentId in shipmentIds)
+            {
+                Hashtable shipmentTable = new Hashtable ();
+                shipmentTable.Add ("shipment", shipmentId);
+                shipments.Add (shipmentTable);
+            }
+
             return DoRequest<Batch> (ep, "POST", serializeList<Hashtable> (shipments));
         }
 

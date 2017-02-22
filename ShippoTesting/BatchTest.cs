@@ -49,27 +49,23 @@ namespace ShippoTesting
             Batch batch = getDefaultObject ();
             Assert.AreEqual (batch.ObjectStatus, ShippoEnums.ObjectStatuses.VALIDATING);
 
-            List<Hashtable> shipments = new List<Hashtable> ();
-            Hashtable shipmentTable = new Hashtable ();
+            List<String> shipmentIds = new List<String> ();
             Shipment shipment = ShipmentTest.getDefaultObject ();
-            shipmentTable.Add ("shipment", shipment.ObjectId);
-            shipments.Add (shipmentTable);
+            shipmentIds.Add (shipment.ObjectId);
 
             Batch retrieve = getValidBatch (batch.ObjectId);
-            Batch newBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
+            Batch newBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipmentIds);
 
-            Assert.AreEqual (retrieve.BatchShipments.Count + shipments.Count, newBatch.BatchShipments.Count);
+            Assert.AreEqual (retrieve.BatchShipments.Count + shipmentIds.Count, newBatch.BatchShipments.Count);
         }
 
         [Test ()]
         [ExpectedException (typeof (ShippoException))]
         public void TestInvalidAddShipmentToBatch ()
         {
-            List<Hashtable> shipments = new List<Hashtable> ();
-            Hashtable shipmentTable = new Hashtable ();
-            shipmentTable.Add ("shipment", "123");
-            shipments.Add (shipmentTable);
-            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", shipments);
+            List<String> shipmentIds = new List<String> ();
+            shipmentIds.Add ("123");
+            getAPIResource ().AddShipmentsToBatch ("INVALID_ID", shipmentIds);
         }
 
         [Test ()]
@@ -78,14 +74,12 @@ namespace ShippoTesting
             Batch batch = getDefaultObject ();
             Assert.AreEqual (batch.ObjectStatus, ShippoEnums.ObjectStatuses.VALIDATING);
 
-            List<Hashtable> shipments = new List<Hashtable> ();
-            Hashtable shipmentTable = new Hashtable ();
+            List<String> shipmentIds = new List<String> ();
             Shipment shipment = ShipmentTest.getDefaultObject ();
-            shipmentTable.Add ("shipment", shipment.ObjectId);
-            shipments.Add (shipmentTable);
+            shipmentIds.Add (shipment.ObjectId);
 
             Batch retrieve = getValidBatch (batch.ObjectId);
-            Batch addBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipments);
+            Batch addBatch = getAPIResource ().AddShipmentsToBatch (retrieve.ObjectId, shipmentIds);
 
             string removeId = addBatch.BatchShipments.Results [0].ObjectId;
             List<String> shipmentsToRemove = new List<String> ();
