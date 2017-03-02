@@ -4,7 +4,7 @@ Shippo is a shipping API that connects you with [multiple shipping carriers](htt
 
 Print a shipping label in 10 mins using our default USPS and DHL Express accounts. No need to register for a carrier account to get started.
 
-You will need to [register for a Shippo account](https://goshippo.com/) to use the Shippo API. It's free to sign up, free to use the API. Only pay to print a live label, test labels are free. 
+You will need to [register for a Shippo account](https://goshippo.com/) to use the Shippo API. It's free to sign up, free to use the API. Only pay to print a live label, test labels are free.
 
 Install Manually
 ----------------
@@ -29,8 +29,7 @@ Example code can be found in the ShippoExample project, in the file Example.cs.
 A Brief Example
 ---------------
 For convenience, a brief example to create, get, and list all parcels can be found below (substitute your own Shippo token):
-
-
+```csharp
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -42,7 +41,7 @@ For convenience, a brief example to create, get, and list all parcels can be fou
             static void Main (string [] args)
             {
                 APIResource resource = new APIResource (“<Your Shippo Token>“);
-    
+
                 // Hash table of properties
                 Hashtable parameters = new Hashtable ();
                 parameters.Add("length", "5");
@@ -53,41 +52,41 @@ For convenience, a brief example to create, get, and list all parcels can be fou
                 parameters.Add("mass_unit", "lb");
                 parameters.Add("template", "");
                 parameters.Add("metadata", "Customer ID 123456");
-    
+
                 // Create Parcel
                 Parcel parcel = resource.CreateParcel (parameters);
                 Console.WriteLine (parcel.Length);
-    
+
                 // Get Parcel
                 Parcel parcelRetrieved = resource.RetrieveParcel ((string) parcel.ObjectId);
                 Console.WriteLine (parcelRetrieved.DistanceUnit);
-    
+
                 // All Parcels
                 parameters = new Hashtable ();
                 parameters.Add ("results", "2");
                 parameters.Add ("page", "1");
-    
+
                 var parcels = resource.AllParcels(parameters);
                 Console.WriteLine (parcels.Data.Count);
-    
+
             }
         }
     }
-
+```
 Wrapper Functionality Available
 ---------------------------
 To see all the possible methods and objects look in the project Shippo. In this project you'll see the definitions for every type
 of object you can create through the API.
 
-A particularly important file is APIResource.cs, this file contains the code responsible for making requests. Also contained
+A particularly important file is [APIResource.cs](/Shippo/APIResource.cs), this file contains the code responsible for making requests. Also contained
 within this file are all the methods for generating different type of API objects. Each object's methods are contained within
-a region tag for convenient navigation. For example, the Parcel's methods are contained within: 
-        
+a region tag for convenient navigation. For example, the Parcel's methods are contained within:
+```csharp        
         #region Parcel
         /* Parcel Code */
         #endregion
-        
-Outside of APIResource.cs, the other code relevant to Parcels is contained within Parcel.cs. This includes directives for JSON encoding parameters, and getters and setters necessary for deserialization. This paradigm is consistent for every API object throughout.
+```
+Outside of [APIResource.cs](/Shippo/APIResource.cs), the other code relevant to Parcels is contained within [Parcel.cs](/Shippo/Parcel.cs). This includes directives for JSON encoding parameters, and getters and setters necessary for deserialization. This paradigm is consistent for every API object throughout.
 
 ## Documentation
 
@@ -114,5 +113,3 @@ The Shippo API provides in depth support of carrier and shipping functionalities
 	* UPS Mail Innovations
 	* FedEx Smartpost
 * Additional services: cash-on-delivery, certified mail, delivery confirmation, and more.
-
-
