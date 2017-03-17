@@ -8,6 +8,9 @@ You will need to [register for a Shippo account](https://goshippo.com/) to use t
 
 Install Manually
 ----------------
+
+In Visual Studio's Package Mangager Console, run `Install-Package Shippo`.
+
 To manually include the code in a project of your own, just add the project to your solution, and then link it in the compiler.
 Shippo get's its packages via NuGet. The required packages are json.NET, and NUnit for testing.
 
