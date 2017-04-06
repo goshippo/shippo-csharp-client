@@ -46,9 +46,6 @@ namespace ShippoTesting {
             Rate[] rateArray = rateList.ToArray ();
 
             parameters.Add ("rate", rateArray [0].ObjectId);
-            parameters.Add ("notification_email_from", "true");
-            parameters.Add ("notification_email_to", "false");
-            parameters.Add ("notification_email_other", "max@goshippo.com");
             parameters.Add ("metadata", "Customer ID 123456");
 
             return getAPIResource ().CreateTransactionSync (parameters);

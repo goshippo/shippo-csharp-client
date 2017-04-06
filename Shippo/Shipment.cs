@@ -6,14 +6,8 @@ namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Shipment : ShippoId {
 
-        [JsonProperty (PropertyName = "object_status")]
-        public object ObjectStatus { get; set; }
-
-        [JsonProperty (PropertyName = "object_purpose")]
-        public object ObjectPurpose { get; set; }
-
-        [JsonProperty (PropertyName = "object_state")]
-        public object ObjectState { get; set; }
+        [JsonProperty (PropertyName = "status")]
+        public object Status { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
@@ -30,35 +24,17 @@ namespace Shippo {
         [JsonProperty (PropertyName = "address_to")]
         public object AddressTo { get; set; }
 
-        [JsonProperty (PropertyName = "parcel")]
-        public object Parcel { get; set; }
+        [JsonProperty (PropertyName = "parcels")]
+        public object[] Parcels { get; set; }
 
-        [JsonProperty (PropertyName = "submission_type")]
-        public object SubmissionType { get; set; }
-
-        [JsonProperty (PropertyName = "return_of")]
-        public string ReturnOf;
-
-        [JsonProperty (PropertyName = "submission_date")]
-        public object SubmissionDate { get; set; }
+        [JsonProperty (PropertyName = "shipment_date")]
+        public object ShipmentDate { get; set; }
 
         [JsonProperty (PropertyName = "address_return")]
         public object AddressReturn { get; set; }
 
         [JsonProperty (PropertyName = "customs_declaration")]
         public object CustomsDeclaration { get; set; }
-
-        [JsonProperty (PropertyName = "insurance_amount")]
-        public object InsuranceAmount { get; set; }
-
-        [JsonProperty (PropertyName = "insurance_currency")]
-        public object InsuranceCurrency { get; set; }
-
-        [JsonProperty (PropertyName = "reference_1")]
-        public object Reference1 { get; set; }
-
-        [JsonProperty (PropertyName = "reference_2")]
-        public object Reference2 { get; set; }
 
         [JsonProperty (PropertyName = "carrier_accounts")]
         public List<string> CarrierAccounts;
@@ -69,11 +45,8 @@ namespace Shippo {
         [JsonProperty (PropertyName = "extra")]
         public object Extra { get; set; }
 
-        [JsonProperty (PropertyName = "rates_url")]
-        public object RatesUrl { get; set; }
-
-        [JsonProperty (PropertyName = "rates_list")]
-        public Rate[] RatesList { get; set; }
+        [JsonProperty (PropertyName = "rates")]
+        public Rate[] Rates { get; set; }
 
         [JsonProperty (PropertyName = "messages")]
         public object Messages { get; set; }
@@ -81,14 +54,13 @@ namespace Shippo {
         [JsonProperty (PropertyName = "test")]
         public bool? Test;
 
-        public static Shipment createForBatch (ShippoEnums.ObjectPurposes purpose, Address addressFrom,
-                                               Address addressTo, Parcel parcel)
+        public static Shipment createForBatch (Address addressFrom,
+                                               Address addressTo, Parcel[] parcels)
         {
             Shipment s = new Shipment ();
-            s.ObjectPurpose = purpose;
             s.AddressFrom = addressFrom;
             s.AddressTo = addressTo;
-            s.Parcel = parcel;
+            s.Parcels = parcels;
             return s;
         }
     }

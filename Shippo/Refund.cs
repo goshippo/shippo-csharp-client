@@ -13,8 +13,8 @@ namespace Shippo {
         [JsonProperty (PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
-        [JsonProperty (PropertyName = "object_status")]
-        public object ObjectStatus { get; set; }
+        [JsonProperty (PropertyName = "status")]
+        public object Status { get; set; }
 
         [JsonProperty (PropertyName = "transaction")]
         public object Transaction { get; set; }

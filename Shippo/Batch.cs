@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Batch : ShippoId {
-        [JsonProperty (PropertyName = "object_status")]
-        public ShippoEnums.ObjectStatuses ObjectStatus;
+        [JsonProperty (PropertyName = "status")]
+        public ShippoEnums.Statuses Status;
 
         [JsonProperty (PropertyName = "object_created")]
         public DateTime? ObjectCreated;
@@ -40,9 +40,9 @@ namespace Shippo {
 
         public override string ToString ()
         {
-            return string.Format ("[Batch: ObjectStatus={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +
+            return string.Format ("[Batch: Status={0}, ObjectCreated={1}, ObjectUpdated={2}, ObjectOwner={3}, " +
                                   "DefaultCarrierAccount={4}, DefaultServicelevelToken={5}, LabelFiletype={6}, Metadata={7}, " +
-                                  "BatchShipments={8}, LabelUrl={9}, ObjectResults={10}]", ObjectStatus.ToString(), ObjectCreated,
+                                  "BatchShipments={8}, LabelUrl={9}, ObjectResults={10}]", Status.ToString(), ObjectCreated,
                                   ObjectUpdated, ObjectOwner, DefaultCarrierAccount, DefaultServicelevelToken,
                                   LabelFiletype, Metadata, BatchShipments, LabelUrl, ObjectResults);
         }

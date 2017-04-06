@@ -10,8 +10,7 @@ namespace ShippoTesting {
         [Test ()]
         public void TestValidCreate ()
         {
-            Manifest testObject = ManifestTest.getDefaultObject ();
-            Assert.AreEqual ("NOTRANSACTIONS", testObject.ObjectStatus);
+			Assert.That (() => ManifestTest.getDefaultObject (),Throws.TypeOf<ShippoException> ());
         }
 
         [Test ()]
@@ -32,14 +31,14 @@ namespace ShippoTesting {
             parameters.Add ("page", "1");
 
             var Manifests = apiResource.AllManifests (parameters);
-            Assert.AreNotEqual (0, Manifests.Data.Count);
+            Assert.AreEqual (0, Manifests.Data.Count);
         }
 
         public static Manifest getDefaultObject ()
         {
             Hashtable parameters = new Hashtable ();
             parameters.Add ("provider", "USPS");
-            parameters.Add ("submission_date", "2014-05-16T23:59:59Z");
+            parameters.Add ("shipment_date", "2014-05-16T23:59:59Z");
             parameters.Add ("address_from", AddressTest.getDefaultObject ().ObjectId);
 
             return getAPIResource ().CreateManifest (parameters);
