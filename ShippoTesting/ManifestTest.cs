@@ -8,7 +8,7 @@ namespace ShippoTesting {
     public class ManifestTest : ShippoTest {
 
         [Test ()]
-        public void TestValidCreate ()
+        public void TestInvalidCreate ()
         {
 			Assert.That (() => ManifestTest.getDefaultObject (),Throws.TypeOf<ShippoException> ());
         }
