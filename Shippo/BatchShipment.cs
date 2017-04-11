@@ -7,8 +7,8 @@ namespace Shippo
     [JsonObject (MemberSerialization.OptIn)]
     public class BatchShipment : ShippoId
     {
-        [JsonProperty (PropertyName = "object_status")]
-        public string ObjectStatus;
+        [JsonProperty (PropertyName = "status")]
+        public string Status;
 
         [JsonProperty (PropertyName = "carrier_account")]
         public string CarrierAccount;
@@ -39,8 +39,8 @@ namespace Shippo
 
         public override string ToString ()
         {
-            return string.Format ("[BatchShipment: ObjectStatus={0}, CarrierAccount={1}, ServicelevelToken={2}, " +
-                                  "Shipment={3}, Transaction={4}, Messages={5}, Metadata={6}]", ObjectStatus,
+            return string.Format ("[BatchShipment: Status={0}, CarrierAccount={1}, ServicelevelToken={2}, " +
+                                  "Shipment={3}, Transaction={4}, Messages={5}, Metadata={6}]", Status,
                                   CarrierAccount, ServicelevelToken, Shipment, Transaction, Messages, Metadata);
         }
     }

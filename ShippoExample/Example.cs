@@ -37,14 +37,12 @@ namespace ShippoExample {
                     defaultCarrierAccount = account.ObjectId;
             }
 
-            Address addressFrom = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mr. Hippo",
-                                                                         "965 Mission St.", "Ste 201", "SF", "CA", "94103",
-                                                                         "US", "4151234567", "ship@gmail.com");
-            Address addressTo = Address.createForPurchase (ShippoEnums.ObjectPurposes.PURCHASE, "Mrs. Hippo",
-                                                                       "965 Missions St.", "Ste 202", "SF", "CA", "94103",
-                                                                       "US", "4151234568", "msship@gmail.com");
-            Parcel parcel = Parcel.createForShipment (5, 5, 5, "in", 2, "oz");
-            Shipment shipment = Shipment.createForBatch (ShippoEnums.ObjectPurposes.PURCHASE, addressFrom, addressTo, parcel);
+            Address addressFrom = Address.createForPurchase ("Mr. Hippo", "965 Mission St.", "Ste 201", "SF",
+                                                             "CA", "94103", "US", "4151234567", "ship@gmail.com");
+            Address addressTo = Address.createForPurchase ("Mrs. Hippo", "965 Missions St.", "Ste 202", "SF",
+                                                           "CA", "94103", "US", "4151234568", "msship@gmail.com");
+            Parcel[] parcels = { Parcel.createForShipment (5, 5, 5, "in", 2, "oz") };
+            Shipment shipment = Shipment.createForBatch (addressFrom, addressTo, parcels);
             BatchShipment batchShipment = BatchShipment.createForBatchShipments (defaultCarrierAccount, "usps_priority", shipment);
 
             List<BatchShipment> batchShipments = new List<BatchShipment> ();
@@ -52,7 +50,7 @@ namespace ShippoExample {
 
             Batch batch = resource.CreateBatch (defaultCarrierAccount, "usps_priority", ShippoEnums.LabelFiletypes.PDF_4x6,
                                                          "BATCH #170", batchShipments);
-            Console.WriteLine ("Batch Status = " + batch.ObjectStatus);
+            Console.WriteLine ("Batch Status = " + batch.Status);
             Console.WriteLine ("Metadata = " + batch.Metadata);
         }
 
@@ -72,7 +70,6 @@ namespace ShippoExample {
 
 			// to address
 			Hashtable toAddressTable = new Hashtable ();
-			toAddressTable.Add ("object_purpose", "PURCHASE");
 			toAddressTable.Add ("name", "Mr. Hippo");
 			toAddressTable.Add ("company", "Shippo");
 			toAddressTable.Add ("street1", "215 Clayton St.");
@@ -85,7 +82,6 @@ namespace ShippoExample {
 
 			// from address
 			Hashtable fromAddressTable = new Hashtable ();
-			fromAddressTable.Add ("object_purpose", "PURCHASE");
 			fromAddressTable.Add ("name", "Ms Hippo");
 			fromAddressTable.Add ("company", "San Diego Zoo");
 			fromAddressTable.Add ("street1", "2920 Zoo Drive");
@@ -120,7 +116,7 @@ namespace ShippoExample {
 
 			// select desired shipping rate according to your business logic
 			// we simply select the first rate in this example
-			Rate rate = shipment.RatesList[0];
+            Rate rate = shipment.Rates[0];
 
 			Console.WriteLine ("Getting shipping label..");
 			Hashtable transactionParameters = new Hashtable ();
@@ -128,7 +124,7 @@ namespace ShippoExample {
 			transactionParameters.Add ("async", false);
 			Transaction transaction = resource.CreateTransaction (transactionParameters);
 
-			if (((String) transaction.ObjectStatus).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
+			if (((String) transaction.Status).Equals ("SUCCESS", StringComparison.OrdinalIgnoreCase)) {
 				Console.WriteLine ("Label url : " + transaction.LabelURL);
 				Console.WriteLine ("Tracking number : " + transaction.TrackingNumber);
 			} else {

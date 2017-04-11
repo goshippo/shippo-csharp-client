@@ -11,7 +11,7 @@ namespace ShippoTesting {
         public void TestValidCreate ()
         {
             Shipment testObject = ShipmentTest.getDefaultObject ();
-            Assert.AreEqual ("VALID", testObject.ObjectState);
+            Assert.AreEqual ("SUCCESS", testObject.Status);
         }
 
         [Test ()]
@@ -39,21 +39,18 @@ namespace ShippoTesting {
         {
             Hashtable parameters = new Hashtable ();
             Address addressFrom = AddressTest.getDefaultObject ();
-            Address addressTo = AddressTest.getDefaultObject ();
+            Address addressTo = AddressTest.getDefaultObject_2 ();
             Parcel parcel = ParcelTest.getDefaultObject ();
-            parameters.Add ("object_purpose", "QUOTE");
             parameters.Add ("address_from", addressFrom.ObjectId);
             parameters.Add ("address_to", addressTo.ObjectId);
-            parameters.Add ("parcel", parcel.ObjectId);
-            parameters.Add ("submission_type", "PICKUP");
-            parameters.Add ("submission_date", "2013-12-03T12:00:00.000Z");
+            parameters.Add ("parcels", new String[]{ parcel.ObjectId});
+            parameters.Add ("shipment_date", "2013-12-03T12:00:00.000Z");
             parameters.Add ("insurance_amount", "30");
             parameters.Add ("insurance_currency", "USD");
             parameters.Add ("extra", "{signature_confirmation: true}");
             parameters.Add ("customs_declaration", "");
-            parameters.Add ("reference_1", "");
-            parameters.Add ("reference_2", "");
             parameters.Add ("metadata", "Customer ID 123456");
+            parameters.Add ("async", false);
 
             return getAPIResource ().CreateShipment (parameters);
         }

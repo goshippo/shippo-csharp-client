@@ -25,10 +25,10 @@ namespace ShippoTesting
         }
 
         [Test ()]
-        [ExpectedException (typeof (ShippoException))]
         public void TestInvalidGetStatus ()
         {
-            getAPIResource ().RetrieveTracking (CARRIER, "INVALID_ID");
+            Assert.That (() => getAPIResource ().RetrieveTracking (CARRIER, "INVALID_ID"),
+                        Throws.TypeOf<ShippoException> ());
         }
 
         [Test ()]
@@ -45,13 +45,13 @@ namespace ShippoTesting
         }
 
         [Test ()]
-        [ExpectedException (typeof (ShippoException))]
         public void TestInvalidRegisterWebhook ()
         {
             Hashtable parameters = new Hashtable ();
             parameters.Add ("carrier", CARRIER);
             parameters.Add ("tracking_number", "INVALID_ID");
-            getAPIResource ().RegisterTrackingWebhook (parameters);
+            Assert.That (() => getAPIResource ().RegisterTrackingWebhook (parameters),
+                         Throws.TypeOf<ShippoException> ());
         }
     }
 }

@@ -15,17 +15,6 @@ namespace ShippoTesting {
             Assert.IsNotNull (testObject.Data);
         }
 
-        [Test ()]
-        public void testListAll ()
-        {
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("results", "1");
-            parameters.Add ("page", "1");
-
-            var parcels = apiResource.AllRates (parameters);
-            Assert.AreNotEqual (0, parcels.Data.Count);
-        }
-
         public static ShippoCollection<Rate> getDefaultObject ()
         {
             Shipment testObject = ShipmentTest.getDefaultObject ();

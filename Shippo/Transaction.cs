@@ -7,8 +7,8 @@ namespace Shippo {
         [JsonProperty (PropertyName = "object_state")]
         public object ObjectState { get; set; }
 
-        [JsonProperty (PropertyName = "object_status")]
-        public object ObjectStatus { get; set; }
+        [JsonProperty (PropertyName = "status")]
+        public object Status { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
@@ -37,8 +37,8 @@ namespace Shippo {
         [JsonProperty (PropertyName = "label_url")]
         public object LabelURL { get; set; }
 
-	[JsonProperty(PropertyName = "commercial_invoice_url")]
-	public object CommercialInvoiceUrl { get; set; }
+    	[JsonProperty(PropertyName = "commercial_invoice_url")]
+    	public object CommercialInvoiceUrl { get; set; }
 
         [JsonProperty (PropertyName = "messages")]
         public object Messages { get; set; }

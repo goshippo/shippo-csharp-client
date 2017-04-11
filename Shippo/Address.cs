@@ -5,14 +5,8 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject (MemberSerialization.OptIn)]
     public class Address : ShippoId {
-        [JsonProperty (PropertyName = "object_state")]
-        public object ObjectState { get; set; }
-
-        [JsonProperty (PropertyName = "object_purpose")]
-        public object ObjectPurpose { get; set; }
-
-        [JsonProperty (PropertyName = "object_source")]
-        public object ObjectSource { get; set; }
+        [JsonProperty (PropertyName = "is_complete")]
+        public object IsComplete { get; set; }
 
         [JsonProperty (PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
@@ -74,15 +68,14 @@ namespace Shippo {
         [JsonProperty (PropertyName = "test")]
         public bool? Test;
 
-        [JsonProperty (PropertyName = "messages")]
-        public object Messages;
+        [JsonProperty (PropertyName = "validation_results")]
+        public object ValidationResults;
 
-        public static Address createForPurchase (ShippoEnums.ObjectPurposes purpose, String name, String street1,
-                                                     String street2, String city, String state, String zip,
-                                                     String country, String phone, String email)
+        public static Address createForPurchase (String name, String street1,
+                                                 String street2, String city, String state, String zip,
+                                                 String country, String phone, String email)
         {
             Address a = new Address ();
-            a.ObjectPurpose = purpose;
             a.Name = name;
             a.Street1 = street1;
             a.Street2 = street2;

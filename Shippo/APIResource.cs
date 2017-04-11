@@ -249,7 +249,7 @@ namespace Shippo {
 
             String object_id = (String) parameters ["id"];
             Shipment shipment = RetrieveShipment (object_id);
-            String object_status = (String) shipment.ObjectStatus;
+            String object_status = (String) shipment.Status;
             long startTime = DateTimeExtensions.UnixTimeNow ();
 
             while (object_status.Equals ("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals ("WAITING", StringComparison.OrdinalIgnoreCase)) {
@@ -258,7 +258,7 @@ namespace Shippo {
                         "A timeout has occured while waiting for your rates to generate. Try retreiving the Shipment object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
                 shipment = RetrieveShipment (object_id);
-                object_status = (String) shipment.ObjectStatus;
+                object_status = (String) shipment.Status;
             }
 
             return CreateRate(parameters);
@@ -268,12 +268,6 @@ namespace Shippo {
         {
             string ep = String.Format ("{0}/rates/{1}", api_endpoint, id);
             return DoRequest<Rate> (ep, "GET");
-        }
-
-        public ShippoCollection<Rate> AllRates (Hashtable parameters)
-        {
-            string ep = String.Format ("{0}/rates?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Rate>> (ep);
         }
 
         #endregion
@@ -291,7 +285,7 @@ namespace Shippo {
             string ep = String.Format ("{0}/transactions", api_endpoint);
             Transaction transaction = DoRequest<Transaction> (ep, "POST", serialize (parameters));
             String object_id = (String) transaction.ObjectId;
-            String object_status = (String) transaction.ObjectStatus;
+            String object_status = (String) transaction.Status;
             long startTime = DateTimeExtensions.UnixTimeNow ();
 
             while (object_status.Equals ("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals ("WAITING", StringComparison.OrdinalIgnoreCase)) {
@@ -300,7 +294,7 @@ namespace Shippo {
                         "A timeout has occured while waiting for your label to generate. Try retreiving the Transaction object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
                 transaction = RetrieveTransaction (object_id);
-                object_status = (String) transaction.ObjectStatus;
+                object_status = (String) transaction.Status;
             }
 
             return transaction;
