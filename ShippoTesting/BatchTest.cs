@@ -47,7 +47,6 @@ namespace ShippoTesting
         {
             Assert.That(() => getAPIResource ().RetrieveBatch ("INVALID_ID", 0, ShippoEnums.ObjectResults.none),
                          Throws.TypeOf<ShippoException> ());
-
         }
 
         [Test ()]
@@ -116,12 +115,12 @@ namespace ShippoTesting
             Assert.AreEqual (ShippoEnums.Statuses.PURCHASING, purchase.Status);
         }
 
-        //[Test ()]
-        //[ExpectedException (typeof (ShippoException))]
-        //public void TestInvalidPurchase ()
-        //{
-        //    getAPIResource ().PurchaseBatch ("INVALID_ID");
-        //}
+        [Test ()]
+        public void TestInvalidPurchase ()
+        {
+            Assert.That (() => getAPIResource ().PurchaseBatch ("INVALID_ID"),
+                        Throws.TypeOf<ShippoException> ());
+        }
 
         /**
          * Retries up to 10 times to retrieve a batch that has been recently
