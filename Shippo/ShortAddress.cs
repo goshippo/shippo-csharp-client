@@ -3,19 +3,19 @@ using Newtonsoft.Json;
 
 namespace Shippo
 {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ShortAddress
     {
-        [JsonProperty (PropertyName = "city")]
+        [JsonProperty(PropertyName = "city")]
         public string City;
 
-        [JsonProperty (PropertyName = "state")]
+        [JsonProperty(PropertyName = "state")]
         public string State;
 
-        [JsonProperty (PropertyName = "Zip")]
+        [JsonProperty(PropertyName = "Zip")]
         public string Zip;
 
-        [JsonProperty (PropertyName = "Country")]
+        [JsonProperty(PropertyName = "Country")]
         public string Country;
     }
 }

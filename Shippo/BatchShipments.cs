@@ -4,25 +4,25 @@ using Newtonsoft.Json;
 
 namespace Shippo
 {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class BatchShipments
     {
-        [JsonProperty (PropertyName = "count")]
+        [JsonProperty(PropertyName = "count")]
         public int Count;
 
-        [JsonProperty (PropertyName = "next")]
+        [JsonProperty(PropertyName = "next")]
         public string Next;
 
-        [JsonProperty (PropertyName = "previous")]
+        [JsonProperty(PropertyName = "previous")]
         public string Previous;
 
-        [JsonProperty (PropertyName = "results")]
+        [JsonProperty(PropertyName = "results")]
         public List<BatchShipment> Results;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("[BatchShipments: Count={0}, Next={1}, Previous={2}, Results={3}]",
-                                  Count, Next, Previous, Results);
+            return string.Format("[BatchShipments: Count={0}, Next={1}, Previous={2}, Results={3}]",
+                                 Count, Next, Previous, Results);
         }
     }
 }

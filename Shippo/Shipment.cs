@@ -3,61 +3,61 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Shipment : ShippoId {
 
-        [JsonProperty (PropertyName = "status")]
+        [JsonProperty(PropertyName = "status")]
         public object Status { get; set; }
 
-        [JsonProperty (PropertyName = "object_created")]
+        [JsonProperty(PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
 
-        [JsonProperty (PropertyName = "object_updated")]
+        [JsonProperty(PropertyName = "object_updated")]
         public object ObjectUpdated { get; set; }
 
-        [JsonProperty (PropertyName = "object_owner")]
+        [JsonProperty(PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
-        [JsonProperty (PropertyName = "address_from")]
+        [JsonProperty(PropertyName = "address_from")]
         public object AddressFrom { get; set; }
 
-        [JsonProperty (PropertyName = "address_to")]
+        [JsonProperty(PropertyName = "address_to")]
         public object AddressTo { get; set; }
 
-        [JsonProperty (PropertyName = "parcels")]
+        [JsonProperty(PropertyName = "parcels")]
         public object[] Parcels { get; set; }
 
-        [JsonProperty (PropertyName = "shipment_date")]
+        [JsonProperty(PropertyName = "shipment_date")]
         public object ShipmentDate { get; set; }
 
-        [JsonProperty (PropertyName = "address_return")]
+        [JsonProperty(PropertyName = "address_return")]
         public object AddressReturn { get; set; }
 
-        [JsonProperty (PropertyName = "customs_declaration")]
+        [JsonProperty(PropertyName = "customs_declaration")]
         public object CustomsDeclaration { get; set; }
 
-        [JsonProperty (PropertyName = "carrier_accounts")]
+        [JsonProperty(PropertyName = "carrier_accounts")]
         public List<string> CarrierAccounts;
 
-        [JsonProperty (PropertyName = "metadata")]
+        [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
 
-        [JsonProperty (PropertyName = "extra")]
+        [JsonProperty(PropertyName = "extra")]
         public object Extra { get; set; }
 
-        [JsonProperty (PropertyName = "rates")]
+        [JsonProperty(PropertyName = "rates")]
         public Rate[] Rates { get; set; }
 
-        [JsonProperty (PropertyName = "messages")]
+        [JsonProperty(PropertyName = "messages")]
         public object Messages { get; set; }
 
-        [JsonProperty (PropertyName = "test")]
+        [JsonProperty(PropertyName = "test")]
         public bool? Test;
 
-        public static Shipment createForBatch (Address addressFrom,
-                                               Address addressTo, Parcel[] parcels)
+        public static Shipment createForBatch(Address addressFrom,
+                                              Address addressTo, Parcel[] parcels)
         {
-            Shipment s = new Shipment ();
+            Shipment s = new Shipment();
             s.AddressFrom = addressFrom;
             s.AddressTo = addressTo;
             s.Parcels = parcels;

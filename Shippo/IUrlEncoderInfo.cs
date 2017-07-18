@@ -21,6 +21,6 @@ using System.Text;
 
 namespace Shippo {
     public interface IUrlEncoderInfo {
-        void UrlEncode (StringBuilder sb);
+        void UrlEncode(StringBuilder sb);
     }
 }

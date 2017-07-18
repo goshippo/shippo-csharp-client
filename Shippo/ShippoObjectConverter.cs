@@ -24,37 +24,37 @@ namespace Shippo {
     public class ShippoObjectConverter : JsonConverter {
         public override bool CanWrite { get { return false; } }
 
-        public override bool CanConvert (Type objectType)
+        public override bool CanConvert(Type objectType)
         {
-            return typeof(ShippoObject).IsAssignableFrom (objectType);
+            return typeof(ShippoObject).IsAssignableFrom(objectType);
         }
 
-        ShippoObject FindType (JObject jobj)
+        ShippoObject FindType(JObject jobj)
         {
             // Theoretical code illustrating potential improvements
-            //            var type = (string) jobj.Property ("object");
+            //            var type = (string) jobj.Property("object");
             //            switch (type) {
             //            case "account":
-            //                return new ShippoAccount ();
+            //                return new ShippoAccount();
             //            }
-            return new ShippoObject ();
+            return new ShippoObject();
         }
 
-        public override object ReadJson (JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var jobj = JObject.Load (reader);
+            var jobj = JObject.Load(reader);
 
-            var target = FindType (jobj);
+            var target = FindType(jobj);
 
-            serializer.Populate (jobj.CreateReader (), target);
+            serializer.Populate(jobj.CreateReader(), target);
 
             return target;
         }
 
-        public override void WriteJson (JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var obj = JObject.FromObject (value);
-            obj.WriteTo (writer);
+            var obj = JObject.FromObject(value);
+            obj.WriteTo(writer);
         }
     }
 }

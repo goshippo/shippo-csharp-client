@@ -26,39 +26,39 @@ namespace Shippo {
     public class ShippoEnumConverter<T> : JsonConverter where T : struct, IConvertible {
         Dictionary<string, string> values;
 
-        public ShippoEnumConverter ()
+        public ShippoEnumConverter()
         {
-            values = new Dictionary<string, string> ();
+            values = new Dictionary<string, string>();
             if (!typeof(T).IsEnum)
-                throw new InvalidCastException ("Specified type T must be an enum");
+                throw new InvalidCastException("Specified type T must be an enum");
         }
 
-        public override bool CanConvert (Type objectType)
+        public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(T);
         }
 
-        public override object ReadJson (JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null)
                 return null;
 
             var name = reader.Value as string;
-            name = name.Replace ("_", "");
+            name = name.Replace("_", "");
             
-            return Enum.Parse (typeof(T), name, true);
+            return Enum.Parse(typeof(T), name, true);
         }
 
-        public override void WriteJson (JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            string key = value.ToString ();
+            string key = value.ToString();
             string result;
 
-            if (!values.TryGetValue (key, out result)) {
-                result = Regex.Replace (key, @"(?<!^|_|[A-Z])([A-Z])", "_$1").ToLowerInvariant ();
+            if (!values.TryGetValue(key, out result)) {
+                result = Regex.Replace(key, @"(?<!^|_|[A-Z])([A-Z])", "_$1").ToLowerInvariant();
                 values [key] = result;
             }
-            writer.WriteValue (result);
+            writer.WriteValue(result);
         }
     }
 }

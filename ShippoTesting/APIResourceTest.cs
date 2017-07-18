@@ -1,23 +1,23 @@
 ﻿using NUnit.Framework;
 using System;
-using Shippo;
 using System.Net;
 
+using Shippo;
+
+
 namespace ShippoTesting {
-	[TestFixture()]
+	[TestFixture]
 	public class APIResourceTest : ShippoTest {
 		public class MockAPIResource : APIResource
 		{
-			public MockAPIResource(string inputToken) : base(inputToken)
-			{
-			}
+			public MockAPIResource(string inputToken) : base(inputToken) {}
 			public WebRequest SetupRequestTest(String method, String url)
 			{
 				return SetupRequest(method, url);
 			}
 		}
 
-		[Test()]
+		[Test]
 		public void TestValidHeader() {
 			String dummyMethod = "post";
 			String dummyUrl = "http://example.com";

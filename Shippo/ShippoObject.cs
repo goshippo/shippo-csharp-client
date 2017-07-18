@@ -24,18 +24,18 @@ using Newtonsoft.Json.Converters;
 
 namespace Shippo {
     public class ShippoObject {
-        [JsonProperty (PropertyName = "object")]
+        [JsonProperty(PropertyName = "object")]
         public ShippoObjectType Object { get; set; }
 
     }
 
 
     public class ShippoId : ShippoObject {
-        [JsonProperty (PropertyName = "object_id")]
+        [JsonProperty(PropertyName = "object_id")]
         public string ObjectId { get; set; }
     }
 
-    [JsonConverter (typeof(ShippoEnumConverter<ShippoObjectType>))]
+    [JsonConverter(typeof(ShippoEnumConverter<ShippoObjectType>))]
     public enum ShippoObjectType
     {
         Unknown,
