@@ -59,6 +59,12 @@ namespace Shippo {
         [JsonProperty(PropertyName = "ip")]
         public object IP { get; set; }
 
+        [JsonProperty(PropertyName = "latitude")]
+        public string Latitude { get; set; }
+
+        [JsonProperty(PropertyName = "longitude")]
+        public string Longitude { get; set; }
+
         [JsonProperty(PropertyName = "validate")]
         public bool? Validate;
 

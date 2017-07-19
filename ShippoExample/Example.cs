@@ -88,6 +88,8 @@ namespace ShippoExample {
 	                Console.Out.WriteLine();
                 }
             }
+            Console.Out.WriteLine("Address Latitude: " + address.Latitude);
+            Console.Out.WriteLine("Address Longitude: " + address.Longitude);
         }
 
         static void Main(string[] args)
