@@ -143,9 +143,9 @@ namespace ShippoTesting
             }
 
             Address addressFrom = Address.createForPurchase("Mr. Hippo", "965 Mission St.", "Ste 201", "SF",
-                                                             "CA", "94103", "US", "4151234567", "ship@gmail.com");
+                                                            "CA", "94103", "US", "4151234567", "ship@gmail.com");
             Address addressTo = Address.createForPurchase("Mrs. Hippo", "965 Missions St.", "Ste 202", "SF",
-                                                           "CA", "94103", "US", "4151234568", "msship@gmail.com");
+                                                          "CA", "94103", "US", "4151234568", "msship@gmail.com");
             Parcel[] parcels = {Parcel.createForShipment(5, 5, 5, "in", 2, "oz")};
             Shipment shipment = Shipment.createForBatch(addressFrom, addressTo, parcels);
             BatchShipment batchShipment = BatchShipment.createForBatchShipments(defaultCarrierAccount, "usps_priority", shipment);
@@ -154,7 +154,7 @@ namespace ShippoTesting
             batchShipments.Add(batchShipment);
 
             Batch batch = getAPIResource().CreateBatch(defaultCarrierAccount, "usps_priority", ShippoEnums.LabelFiletypes.PDF_4x6,
-                                                         "BATCH #170", batchShipments);
+                                                       "BATCH #170", batchShipments);
             Assert.AreEqual(ShippoEnums.Statuses.VALIDATING, batch.Status);
             return batch;
         }
