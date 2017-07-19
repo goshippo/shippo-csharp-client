@@ -29,8 +29,8 @@ namespace ShippoTesting {
             Hashtable parameters = new Hashtable();
             parameters.Add("name", "Undefault New Wu");
             parameters.Add("company", "Shippo");
-            parameters.Add("street1", "Bob St.");
-            parameters.Add("street_no", "123");
+            parameters.Add("street_no", "215");
+            parameters.Add("street1", "Clayton St.");
             parameters.Add("street2", null);
             parameters.Add("city", "San Francisco");
             parameters.Add("state", "CA");
