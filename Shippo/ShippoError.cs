@@ -19,18 +19,18 @@
 using Newtonsoft.Json;
 
 namespace Shippo {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ShippoError {
-        [JsonProperty (PropertyName = "code")]
+        [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
-        [JsonProperty (PropertyName = "param")]
+        [JsonProperty(PropertyName = "param")]
         public string Parameter { get; set; }
 
-        [JsonProperty (PropertyName = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string ErrorType { get; set; }
 
-        [JsonProperty (PropertyName = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
     }
 }

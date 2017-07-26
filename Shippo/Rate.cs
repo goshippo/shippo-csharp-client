@@ -2,48 +2,48 @@
 using Newtonsoft.Json;
 
 namespace Shippo {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Rate : ShippoId {
-        [JsonProperty (PropertyName = "object_created")]
+        [JsonProperty(PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
 
-        [JsonProperty (PropertyName = "object_owner")]
+        [JsonProperty(PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
-        [JsonProperty (PropertyName = "attributes")]
+        [JsonProperty(PropertyName = "attributes")]
         public object Attributes { get; set; }
 
-        [JsonProperty (PropertyName = "amount_local")]
+        [JsonProperty(PropertyName = "amount_local")]
         public object AmountLocal { get; set; }
 
-        [JsonProperty (PropertyName = "currency_local")]
+        [JsonProperty(PropertyName = "currency_local")]
         public object CurrencyLocal { get; set; }
 
-        [JsonProperty (PropertyName = "amount")]
+        [JsonProperty(PropertyName = "amount")]
         public object Amount { get; set; }
 
-        [JsonProperty (PropertyName = "currency")]
+        [JsonProperty(PropertyName = "currency")]
         public object Currency { get; set; }
 
-        [JsonProperty (PropertyName = "provider")]
+        [JsonProperty(PropertyName = "provider")]
         public object Provider { get; set; }
 
-        [JsonProperty (PropertyName = "provider_image_75")]
+        [JsonProperty(PropertyName = "provider_image_75")]
         public object ProviderImage75 { get; set; }
 
-        [JsonProperty (PropertyName = "provider_image_200")]
+        [JsonProperty(PropertyName = "provider_image_200")]
         public object ProviderImage200 { get; set; }
 
-        [JsonProperty (PropertyName = "servicelevel")]
+        [JsonProperty(PropertyName = "servicelevel")]
         public object Servicelevel { get; set; }
 
-        [JsonProperty (PropertyName = "days")]
+        [JsonProperty(PropertyName = "days")]
         public object Days { get; set; }
 
-        [JsonProperty (PropertyName = "duration_terms")]
+        [JsonProperty(PropertyName = "duration_terms")]
         public object DurationTerms { get; set; }
 
-        [JsonProperty (PropertyName = "messages")]
+        [JsonProperty(PropertyName = "messages")]
         public object Messages { get; set; }
 
         [JsonProperty(PropertyName = "zone")]

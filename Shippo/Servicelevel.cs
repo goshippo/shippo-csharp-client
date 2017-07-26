@@ -3,18 +3,18 @@ using Newtonsoft.Json;
 
 namespace Shippo
 {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Servicelevel
     {
-        [JsonProperty (PropertyName = "token")]
+        [JsonProperty(PropertyName = "token")]
         public string Token;
 
-        [JsonProperty (PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("[Servicelevel: Token={0}, Name={1}]", Token, Name);
+            return string.Format("[Servicelevel: Token={0}, Name={1}]", Token, Name);
         }
     }
 }

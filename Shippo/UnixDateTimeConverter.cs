@@ -23,38 +23,38 @@ using Newtonsoft.Json.Converters;
 
 namespace Shippo {
     public class UnixDateTimeConverter : DateTimeConverterBase {
-        static bool IsNullable (Type type)
+        static bool IsNullable(Type type)
         {
             if (!type.IsValueType)
                 return true; // ref-type
-            if (Nullable.GetUnderlyingType (type) != null)
+            if (Nullable.GetUnderlyingType(type) != null)
                 return true; // Nullable<T>
             return false; // value-type
         }
 
-        public override object ReadJson (JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            bool nullable = IsNullable (objectType);
-            Type t = (nullable) ? Nullable.GetUnderlyingType (objectType) : objectType;
+            bool nullable = IsNullable(objectType);
+            Type t = (nullable) ? Nullable.GetUnderlyingType(objectType) : objectType;
             if (reader.TokenType == JsonToken.Null) {
                 if (!nullable)
-                    throw new Exception (String.Format ("Cannot convert null value to {0}.", objectType));
+                    throw new Exception(String.Format("Cannot convert null value to {0}.", objectType));
                 return null;
             }
 
             if (reader.TokenType != JsonToken.Integer)
-                throw new Exception (String.Format ("Unexpected token parsing date. Expected Integer, got {0}.", reader.TokenType));
+                throw new Exception(String.Format("Unexpected token parsing date. Expected Integer, got {0}.", reader.TokenType));
 
-            return ((long) reader.Value).FromUnixEpoch ();
+            return ((long) reader.Value).FromUnixEpoch();
         }
 
-        public override void WriteJson (JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             if (!(value is DateTime))
-                throw new Exception ("Invalid value");
+                throw new Exception("Invalid value");
 
             DateTime dt = (DateTime) value;
-            writer.WriteValue (dt.ToUnixEpoch ());
+            writer.WriteValue(dt.ToUnixEpoch());
         }
     }
 }

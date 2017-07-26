@@ -20,27 +20,27 @@ using System;
 
 namespace Shippo {
     public static class DateTimeExtensions {
-        static DateTime epoch = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        static DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public static DateTime FromUnixEpoch (this int utc_unix)
+        public static DateTime FromUnixEpoch(this int utc_unix)
         {
-            return epoch.AddSeconds (utc_unix);
+            return epoch.AddSeconds(utc_unix);
         }
 
-        public static DateTime FromUnixEpoch (this long utc_unix)
+        public static DateTime FromUnixEpoch(this long utc_unix)
         {
-            return epoch.AddSeconds (utc_unix);
+            return epoch.AddSeconds(utc_unix);
         }
 
-        public static long ToUnixEpoch (this DateTime dt)
+        public static long ToUnixEpoch(this DateTime dt)
         {
-            dt = dt.ToUniversalTime ();
-            return Convert.ToInt64 ((dt - epoch).TotalSeconds);
+            dt = dt.ToUniversalTime();
+            return Convert.ToInt64((dt - epoch).TotalSeconds);
         }
 
-        public static long UnixTimeNow ()
+        public static long UnixTimeNow()
         {
-            var timeSpan = (DateTime.UtcNow - new DateTime (1970, 1, 1, 0, 0, 0));
+            var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
             return (long) timeSpan.TotalSeconds;
         }
     }

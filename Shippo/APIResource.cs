@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * Copyright 2011 - 2012 Xamarin, Inc., 2011 - 2012 Joe Dluzen
  *
  * Author(s):
@@ -28,6 +28,7 @@ using System.Web;
 
 using Newtonsoft.Json;
 
+
 namespace Shippo {
     public class APIResource {
         public static readonly string api_endpoint = "https://api.goshippo.com/v1";
@@ -39,7 +40,7 @@ namespace Shippo {
         String apiVersion;
 
         // API Resource Constructor
-        public APIResource (string inputToken)
+        public APIResource(string inputToken)
         {
             accessToken = inputToken;
             TimeoutSeconds = 25;
@@ -52,9 +53,9 @@ namespace Shippo {
 
         #region Shared
         // Setup Request handles headers, credentials etc for WebRequests
-        protected virtual WebRequest SetupRequest (string method, string url)
+        protected virtual WebRequest SetupRequest(string method, string url)
         {
-            WebRequest req = (WebRequest) WebRequest.Create (url);
+            WebRequest req = (WebRequest) WebRequest.Create(url);
             req.Method = method;
             if (req is HttpWebRequest) {
                 ((HttpWebRequest) req).UserAgent = user_agent;
@@ -65,9 +66,9 @@ namespace Shippo {
             req.PreAuthenticate = true; */
 
             // Disable line below for basic auth
-            req.Headers.Add ("Authorization", "ShippoToken " + accessToken);
+            req.Headers.Add("Authorization", "ShippoToken " + accessToken);
             if (apiVersion != null) {
-                req.Headers.Add ("Shippo-API-Version", apiVersion);
+                req.Headers.Add("Shippo-API-Version", apiVersion);
             }
             req.Timeout = TimeoutSeconds * 1000;
             // When Performing POST requests it is important that we set the headers to json
@@ -76,43 +77,43 @@ namespace Shippo {
             return req;
         }
         // Return response as String
-        static string GetResponseAsString (WebResponse response)
+        static string GetResponseAsString(WebResponse response)
         {
-            using (StreamReader sr = new StreamReader (response.GetResponseStream (), encoding)) {
-                return sr.ReadToEnd ();
+            using (StreamReader sr = new StreamReader(response.GetResponseStream(), encoding)) {
+                return sr.ReadToEnd();
             }
         }
         // GET Requests
-        public virtual T DoRequest<T> (string endpoint, string method = "GET", string body = null)
+        public virtual T DoRequest<T>(string endpoint, string method = "GET", string body = null)
         {
-            var json = DoRequest (endpoint, method, body);
-            return JsonConvert.DeserializeObject<T> (json);
+            var json = DoRequest(endpoint, method, body);
+            return JsonConvert.DeserializeObject<T>(json);
         }
         // GET Requests Helper
-        public virtual string DoRequest (string endpoint)
+        public virtual string DoRequest(string endpoint)
         {
-            return DoRequest (endpoint, "GET", null);
+            return DoRequest(endpoint, "GET", null);
         }
         // Requests Main Function
-        public virtual string DoRequest (string endpoint, string method, string body)
+        public virtual string DoRequest(string endpoint, string method, string body)
         {
             string result = null;
-            WebRequest req = SetupRequest (method, endpoint);
+            WebRequest req = SetupRequest(method, endpoint);
             if (body != null) {
-                byte[] bytes = encoding.GetBytes (body.ToString ());
+                byte[] bytes = encoding.GetBytes(body.ToString());
                 req.ContentLength = bytes.Length;
-                using (Stream st = req.GetRequestStream ()) {
-                    st.Write (bytes, 0, bytes.Length);
+                using (Stream st = req.GetRequestStream()) {
+                    st.Write(bytes, 0, bytes.Length);
                 }
             }
 
             try {
-                using (WebResponse resp = (WebResponse) req.GetResponse ()) {
-                    result = GetResponseAsString (resp);
+                using (WebResponse resp = (WebResponse) req.GetResponse()) {
+                    result = GetResponseAsString(resp);
                 }
             } catch (WebException wexc) {
                 if (wexc.Response != null) {
-                    string json_error = GetResponseAsString (wexc.Response);
+                    string json_error = GetResponseAsString(wexc.Response);
                     HttpStatusCode status_code = HttpStatusCode.BadRequest;
                     HttpWebResponse resp = wexc.Response as HttpWebResponse;
                     if (resp != null)
@@ -126,387 +127,387 @@ namespace Shippo {
             return result;
         }
 
-        protected virtual StringBuilder UrlEncode (IUrlEncoderInfo infoInstance)
+        protected virtual StringBuilder UrlEncode(IUrlEncoderInfo infoInstance)
         {
-            StringBuilder str = new StringBuilder ();
-            infoInstance.UrlEncode (str);
+            StringBuilder str = new StringBuilder();
+            infoInstance.UrlEncode(str);
             if (str.Length > 0)
                 str.Length--;
             return str;
         }
         // Generate URL Encoded parameters for GET requests
-        public String generateURLEncodedFromHashmap (Hashtable propertyMap)
+        public String generateURLEncodedFromHashmap(Hashtable propertyMap)
         {
-            StringBuilder str = new StringBuilder ();
+            StringBuilder str = new StringBuilder();
             foreach (DictionaryEntry pair in propertyMap) {
-                str.AppendFormat ("{0}={1}&", pair.Key, pair.Value);
+                str.AppendFormat("{0}={1}&", pair.Key, pair.Value);
             }
             str.Length--;
 
-            return str.ToString ();
+            return str.ToString();
         }
         // Serialize parameters into JSON for POST requests
-        public String serialize<T> (T data)
+        public String serialize<T>(T data)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings ();
+            JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.Converters.Add (new Newtonsoft.Json.Converters.StringEnumConverter ());
-            return JsonConvert.SerializeObject (data, settings);
+            settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            return JsonConvert.SerializeObject(data, settings);
         }
 
         #endregion
 
         #region Address
 
-        public Address CreateAddress (Hashtable parameters)
+        public Address CreateAddress(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/addresses", api_endpoint);
-            return DoRequest<Address> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/addresses", api_endpoint);
+            return DoRequest<Address>(ep, "POST", serialize(parameters));
         }
 
-        public Address RetrieveAddress (String id)
+        public Address RetrieveAddress(String id)
         {
-            string ep = String.Format ("{0}/addresses/{1}", api_endpoint, id);
-            return DoRequest<Address> (ep, "GET");
+            string ep = String.Format("{0}/addresses/{1}", api_endpoint, id);
+            return DoRequest<Address>(ep, "GET");
         }
 
-        public Address ValidateAddress (String id)
+        public Address ValidateAddress(String id)
         {
-            string ep = String.Format ("{0}/addresses/{1}/validate", api_endpoint, id);
-            return DoRequest<Address> (ep, "GET");
+            string ep = String.Format("{0}/addresses/{1}/validate", api_endpoint, id);
+            return DoRequest<Address>(ep, "GET");
         }
 
-        public ShippoCollection<Address> AllAddresss (Hashtable parameters)
+        public ShippoCollection<Address> AllAddresss(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/addresses?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Address>> (ep);
+            string ep = String.Format("{0}/addresses?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Address>>(ep);
         }
 
         #endregion
 
         #region Parcel
 
-        public Parcel CreateParcel (Hashtable parameters)
+        public Parcel CreateParcel(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/parcels", api_endpoint);
-            return DoRequest<Parcel> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/parcels", api_endpoint);
+            return DoRequest<Parcel>(ep, "POST", serialize(parameters));
         }
 
-        public Parcel RetrieveParcel (String id)
+        public Parcel RetrieveParcel(String id)
         {
-            string ep = String.Format ("{0}/parcels/{1}", api_endpoint, id);
-            return DoRequest<Parcel> (ep, "GET");
+            string ep = String.Format("{0}/parcels/{1}", api_endpoint, id);
+            return DoRequest<Parcel>(ep, "GET");
         }
 
-        public ShippoCollection<Parcel> AllParcels (Hashtable parameters)
+        public ShippoCollection<Parcel> AllParcels(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/parcels?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Parcel>> (ep);
+            string ep = String.Format("{0}/parcels?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Parcel>>(ep);
         }
 
         #endregion
 
         #region Shipment
 
-        public Shipment CreateShipment (Hashtable parameters)
+        public Shipment CreateShipment(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/shipments", api_endpoint);
-            return DoRequest<Shipment> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/shipments", api_endpoint);
+            return DoRequest<Shipment>(ep, "POST", serialize(parameters));
         }
 
-        public Shipment RetrieveShipment (String id)
+        public Shipment RetrieveShipment(String id)
         {
-            string ep = String.Format ("{0}/shipments/{1}", api_endpoint, id);
-            return DoRequest<Shipment> (ep, "GET");
+            string ep = String.Format("{0}/shipments/{1}", api_endpoint, id);
+            return DoRequest<Shipment>(ep, "GET");
         }
 
-        public ShippoCollection<Shipment> AllShipments (Hashtable parameters)
+        public ShippoCollection<Shipment> AllShipments(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/shipments?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Shipment>> (ep);
+            string ep = String.Format("{0}/shipments?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Shipment>>(ep);
         }
 
         #endregion
 
         #region Rate
 
-        public ShippoCollection<Rate> CreateRate (Hashtable parameters)
+        public ShippoCollection<Rate> CreateRate(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/shipments/{1}/rates/{2}", api_endpoint, parameters ["id"], parameters ["currency_code"]);
-            return DoRequest<ShippoCollection<Rate>> (ep, "GET");
+            string ep = String.Format("{0}/shipments/{1}/rates/{2}", api_endpoint, parameters ["id"], parameters ["currency_code"]);
+            return DoRequest<ShippoCollection<Rate>>(ep, "GET");
         }
 
-        public ShippoCollection<Rate> GetShippingRatesSync (String objectId)
+        public ShippoCollection<Rate> GetShippingRatesSync(String objectId)
         {
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("id", objectId);
-            parameters.Add ("currency_code", "");
-            return GetShippingRatesSync (parameters);
+            Hashtable parameters = new Hashtable();
+            parameters.Add("id", objectId);
+            parameters.Add("currency_code", "");
+            return GetShippingRatesSync(parameters);
         }
 
-        public ShippoCollection<Rate> GetShippingRatesSync (Hashtable parameters)
+        public ShippoCollection<Rate> GetShippingRatesSync(Hashtable parameters)
         {
 
             String object_id = (String) parameters ["id"];
-            Shipment shipment = RetrieveShipment (object_id);
+            Shipment shipment = RetrieveShipment(object_id);
             String object_status = (String) shipment.Status;
-            long startTime = DateTimeExtensions.UnixTimeNow ();
+            long startTime = DateTimeExtensions.UnixTimeNow();
 
-            while (object_status.Equals ("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals ("WAITING", StringComparison.OrdinalIgnoreCase)) {
-                if (DateTimeExtensions.UnixTimeNow () - startTime > RatesReqTimeout) {
-                    throw new RequestTimeoutException (
+            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase)) {
+                if (DateTimeExtensions.UnixTimeNow() - startTime > RatesReqTimeout) {
+                    throw new RequestTimeoutException(
                         "A timeout has occured while waiting for your rates to generate. Try retreiving the Shipment object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
-                shipment = RetrieveShipment (object_id);
+                shipment = RetrieveShipment(object_id);
                 object_status = (String) shipment.Status;
             }
 
             return CreateRate(parameters);
         }
 
-        public Rate RetrieveRate (String id)
+        public Rate RetrieveRate(String id)
         {
-            string ep = String.Format ("{0}/rates/{1}", api_endpoint, id);
-            return DoRequest<Rate> (ep, "GET");
+            string ep = String.Format("{0}/rates/{1}", api_endpoint, id);
+            return DoRequest<Rate>(ep, "GET");
         }
 
         #endregion
 
         #region Transaction
 
-        public Transaction CreateTransaction (Hashtable parameters)
+        public Transaction CreateTransaction(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/transactions", api_endpoint);
-            return DoRequest<Transaction> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/transactions", api_endpoint);
+            return DoRequest<Transaction>(ep, "POST", serialize(parameters));
         }
 
-        public Transaction CreateTransactionSync (Hashtable parameters)
+        public Transaction CreateTransactionSync(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/transactions", api_endpoint);
-            Transaction transaction = DoRequest<Transaction> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/transactions", api_endpoint);
+            Transaction transaction = DoRequest<Transaction>(ep, "POST", serialize(parameters));
             String object_id = (String) transaction.ObjectId;
             String object_status = (String) transaction.Status;
-            long startTime = DateTimeExtensions.UnixTimeNow ();
+            long startTime = DateTimeExtensions.UnixTimeNow();
 
-            while (object_status.Equals ("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals ("WAITING", StringComparison.OrdinalIgnoreCase)) {
-                if (DateTimeExtensions.UnixTimeNow () - startTime > TransactionReqTimeout) {
-                    throw new RequestTimeoutException (
+            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase)) {
+                if (DateTimeExtensions.UnixTimeNow() - startTime > TransactionReqTimeout) {
+                    throw new RequestTimeoutException(
                         "A timeout has occured while waiting for your label to generate. Try retreiving the Transaction object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
-                transaction = RetrieveTransaction (object_id);
+                transaction = RetrieveTransaction(object_id);
                 object_status = (String) transaction.Status;
             }
 
             return transaction;
         }
 
-        public Transaction RetrieveTransaction (String id)
+        public Transaction RetrieveTransaction(String id)
         {
-            string ep = String.Format ("{0}/transactions/{1}", api_endpoint, id);
-            return DoRequest<Transaction> (ep, "GET");
+            string ep = String.Format("{0}/transactions/{1}", api_endpoint, id);
+            return DoRequest<Transaction>(ep, "GET");
         }
 
-        public ShippoCollection<Transaction> AllTransactions (Hashtable parameters)
+        public ShippoCollection<Transaction> AllTransactions(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/transactions?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Transaction>> (ep);
+            string ep = String.Format("{0}/transactions?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Transaction>>(ep);
         }
 
         #endregion
 
         #region CustomsItem
 
-        public CustomsItem CreateCustomsItem (Hashtable parameters)
+        public CustomsItem CreateCustomsItem(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/customs/items", api_endpoint);
-            return DoRequest<CustomsItem> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/customs/items", api_endpoint);
+            return DoRequest<CustomsItem>(ep, "POST", serialize(parameters));
         }
 
-        public CustomsItem RetrieveCustomsItem (String id)
+        public CustomsItem RetrieveCustomsItem(String id)
         {
-            string ep = String.Format ("{0}/customs/items/{1}", api_endpoint, id);
-            return DoRequest<CustomsItem> (ep, "GET");
+            string ep = String.Format("{0}/customs/items/{1}", api_endpoint, id);
+            return DoRequest<CustomsItem>(ep, "GET");
         }
 
-        public ShippoCollection<CustomsItem> AllCustomsItems (Hashtable parameters)
+        public ShippoCollection<CustomsItem> AllCustomsItems(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/customs/items?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<CustomsItem>> (ep);
+            string ep = String.Format("{0}/customs/items?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<CustomsItem>>(ep);
         }
 
         #endregion
 
         #region CustomsDeclaration
 
-        public CustomsDeclaration CreateCustomsDeclaration (Hashtable parameters)
+        public CustomsDeclaration CreateCustomsDeclaration(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/customs/declarations", api_endpoint);
-            return DoRequest<CustomsDeclaration> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/customs/declarations", api_endpoint);
+            return DoRequest<CustomsDeclaration>(ep, "POST", serialize(parameters));
         }
 
-        public CustomsDeclaration RetrieveCustomsDeclaration (String id)
+        public CustomsDeclaration RetrieveCustomsDeclaration(String id)
         {
-            string ep = String.Format ("{0}/customs/declarations/{1}", api_endpoint, id);
-            return DoRequest<CustomsDeclaration> (ep, "GET");
+            string ep = String.Format("{0}/customs/declarations/{1}", api_endpoint, id);
+            return DoRequest<CustomsDeclaration>(ep, "GET");
         }
 
-        public ShippoCollection<CustomsDeclaration> AllCustomsDeclarations (Hashtable parameters)
+        public ShippoCollection<CustomsDeclaration> AllCustomsDeclarations(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/customs/declarations?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<CustomsDeclaration>> (ep);
+            string ep = String.Format("{0}/customs/declarations?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<CustomsDeclaration>>(ep);
         }
 
         #endregion
 
         #region CarrierAccount
 
-        public CarrierAccount CreateCarrierAccount (Hashtable parameters)
+        public CarrierAccount CreateCarrierAccount(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
-            return DoRequest<CarrierAccount> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/carrier_accounts", api_endpoint);
+            return DoRequest<CarrierAccount>(ep, "POST", serialize(parameters));
         }
 
-        public CarrierAccount UpdateCarrierAccount (String object_id, Hashtable parameters)
+        public CarrierAccount UpdateCarrierAccount(String object_id, Hashtable parameters)
         {
-            string ep = String.Format ("{0}/carrier_accounts/{1}", api_endpoint, object_id);
-            return DoRequest<CarrierAccount> (ep, "PUT", serialize (parameters));
+            string ep = String.Format("{0}/carrier_accounts/{1}", api_endpoint, object_id);
+            return DoRequest<CarrierAccount>(ep, "PUT", serialize(parameters));
         }
 
-        public CarrierAccount RetrieveCarrierAccount (String object_id)
+        public CarrierAccount RetrieveCarrierAccount(String object_id)
         {
-            string ep = String.Format ("{0}/carrier_accounts/{1}", api_endpoint, object_id);
-            return DoRequest<CarrierAccount> (ep, "GET");
+            string ep = String.Format("{0}/carrier_accounts/{1}", api_endpoint, object_id);
+            return DoRequest<CarrierAccount>(ep, "GET");
         }
 
-        public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
+        public ShippoCollection<CarrierAccount> AllCarrierAccount(Hashtable parameters)
         {
-            return AllCarrierAccount ();
+            return AllCarrierAccount();
         }
 
-        public ShippoCollection<CarrierAccount> AllCarrierAccount ()
+        public ShippoCollection<CarrierAccount> AllCarrierAccount()
         {
-            string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
-            return DoRequest<ShippoCollection<CarrierAccount>> (ep);
+            string ep = String.Format("{0}/carrier_accounts", api_endpoint);
+            return DoRequest<ShippoCollection<CarrierAccount>>(ep);
         }
 
         #endregion
 
         #region Refund
 
-        public Refund CreateRefund (Hashtable parameters)
+        public Refund CreateRefund(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/refunds", api_endpoint);
-            return DoRequest<Refund> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/refunds", api_endpoint);
+            return DoRequest<Refund>(ep, "POST", serialize(parameters));
         }
 
-        public Refund RetrieveRefund (String id)
+        public Refund RetrieveRefund(String id)
         {
-            string ep = String.Format ("{0}/refunds/{1}", api_endpoint, id);
-            return DoRequest<Refund> (ep, "GET");
+            string ep = String.Format("{0}/refunds/{1}", api_endpoint, id);
+            return DoRequest<Refund>(ep, "GET");
         }
 
-        public ShippoCollection<Refund> AllRefunds (Hashtable parameters)
+        public ShippoCollection<Refund> AllRefunds(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/refunds?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Refund>> (ep);
+            string ep = String.Format("{0}/refunds?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Refund>>(ep);
         }
 
         #endregion
 
         #region Manifest
 
-        public Manifest CreateManifest (Hashtable parameters)
+        public Manifest CreateManifest(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/manifests", api_endpoint);
-            return DoRequest<Manifest> (ep, "POST", serialize (parameters));
+            string ep = String.Format("{0}/manifests", api_endpoint);
+            return DoRequest<Manifest>(ep, "POST", serialize(parameters));
         }
 
-        public Manifest RetrieveManifest (String id)
+        public Manifest RetrieveManifest(String id)
         {
-            string ep = String.Format ("{0}/manifests/{1}", api_endpoint, id);
-            return DoRequest<Manifest> (ep, "GET");
+            string ep = String.Format("{0}/manifests/{1}", api_endpoint, id);
+            return DoRequest<Manifest>(ep, "GET");
         }
 
-        public ShippoCollection<Manifest> AllManifests (Hashtable parameters)
+        public ShippoCollection<Manifest> AllManifests(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/manifests?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<ShippoCollection<Manifest>> (ep);
+            string ep = String.Format("{0}/manifests?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Manifest>>(ep);
         }
 
         #endregion
 
         #region Batch
 
-        public Batch CreateBatch (String carrierAccount, String servicelevelToken, ShippoEnums.LabelFiletypes labelFiletype,
+        public Batch CreateBatch(String carrierAccount, String servicelevelToken, ShippoEnums.LabelFiletypes labelFiletype,
                                   String metadata, List<BatchShipment> batchShipments)
         {
-            string ep = String.Format ("{0}/batches", api_endpoint);
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("default_carrier_account", carrierAccount);
-            parameters.Add ("default_servicelevel_token", servicelevelToken);
+            string ep = String.Format("{0}/batches", api_endpoint);
+            Hashtable parameters = new Hashtable();
+            parameters.Add("default_carrier_account", carrierAccount);
+            parameters.Add("default_servicelevel_token", servicelevelToken);
             if (labelFiletype != ShippoEnums.LabelFiletypes.NONE)
-                parameters.Add ("label_filetype", labelFiletype);
-            parameters.Add ("metadata", metadata);
-            parameters.Add ("batch_shipments", batchShipments);
-            return DoRequest<Batch> (ep, "POST", serialize(parameters));
+                parameters.Add("label_filetype", labelFiletype);
+            parameters.Add("metadata", metadata);
+            parameters.Add("batch_shipments", batchShipments);
+            return DoRequest<Batch>(ep, "POST", serialize(parameters));
         }
 
-        public Batch RetrieveBatch (String id, uint page, ShippoEnums.ObjectResults objectResults)
+        public Batch RetrieveBatch(String id, uint page, ShippoEnums.ObjectResults objectResults)
         {
-            string ep = String.Format ("{0}/batches/{1}", api_endpoint, HttpUtility.HtmlEncode(id));
-            Hashtable parameters = new Hashtable ();
+            string ep = String.Format("{0}/batches/{1}", api_endpoint, HttpUtility.HtmlEncode(id));
+            Hashtable parameters = new Hashtable();
             if (page > 0)
-                parameters.Add ("page", page);
+                parameters.Add("page", page);
             if (objectResults != ShippoEnums.ObjectResults.none)
-                parameters.Add ("object_results", objectResults);
+                parameters.Add("object_results", objectResults);
             if (parameters.Count != 0)
-                ep = String.Format ("{0}?{1}", ep, generateURLEncodedFromHashmap (parameters));
-            return DoRequest<Batch> (ep, "GET");
+                ep = String.Format("{0}?{1}", ep, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<Batch>(ep, "GET");
         }
 
-        public Batch AddShipmentsToBatch (String id, List<String> shipmentIds)
+        public Batch AddShipmentsToBatch(String id, List<String> shipmentIds)
         {
-            string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
-            List<Hashtable> shipments = new List<Hashtable> ();
+            string ep = String.Format("{0}/batches/{1}/add_shipments", api_endpoint, HttpUtility.HtmlEncode(id));
+            List<Hashtable> shipments = new List<Hashtable>();
             foreach (String shipmentId in shipmentIds)
             {
-                Hashtable shipmentTable = new Hashtable ();
-                shipmentTable.Add ("shipment", shipmentId);
-                shipments.Add (shipmentTable);
+                Hashtable shipmentTable = new Hashtable();
+                shipmentTable.Add("shipment", shipmentId);
+                shipments.Add(shipmentTable);
             }
 
-            return DoRequest<Batch> (ep, "POST", serialize (shipments));
+            return DoRequest<Batch>(ep, "POST", serialize(shipments));
         }
 
-        public Batch RemoveShipmentsFromBatch (String id, List<String> shipmentIds)
+        public Batch RemoveShipmentsFromBatch(String id, List<String> shipmentIds)
         {
-            string ep = String.Format ("{0}/batches/{1}/remove_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
-            return DoRequest<Batch> (ep, "POST", serialize (shipmentIds));
+            string ep = String.Format("{0}/batches/{1}/remove_shipments", api_endpoint, HttpUtility.HtmlEncode(id));
+            return DoRequest<Batch>(ep, "POST", serialize(shipmentIds));
         }
 
-        public Batch PurchaseBatch (String id)
+        public Batch PurchaseBatch(String id)
         {
-            string ep = String.Format ("{0}/batches/{1}/purchase", api_endpoint, HttpUtility.HtmlEncode (id));
-            return DoRequest<Batch> (ep, "POST");
+            string ep = String.Format("{0}/batches/{1}/purchase", api_endpoint, HttpUtility.HtmlEncode(id));
+            return DoRequest<Batch>(ep, "POST");
         }
 
         #endregion
 
         #region Track
 
-        public Track RetrieveTracking (String carrier, String id)
+        public Track RetrieveTracking(String carrier, String id)
         {
-            string encodedCarrier = HttpUtility.HtmlEncode (carrier);
-            string encodedId = HttpUtility.HtmlEncode (id);
-            string ep = String.Format ("{0}/tracks/{1}/{2}", api_endpoint, encodedCarrier, encodedId);
-            return DoRequest<Track> (ep, "GET");
+            string encodedCarrier = HttpUtility.HtmlEncode(carrier);
+            string encodedId = HttpUtility.HtmlEncode(id);
+            string ep = String.Format("{0}/tracks/{1}/{2}", api_endpoint, encodedCarrier, encodedId);
+            return DoRequest<Track>(ep, "GET");
         }
 
-        public Track RegisterTrackingWebhook (Hashtable parameters)
+        public Track RegisterTrackingWebhook(Hashtable parameters)
         {
             // For now the trailing '/' is required.
-            string ep = String.Format ("{0}/tracks/", api_endpoint);
-            return DoRequest<Track> (ep, "POST", serialize(parameters));
+            string ep = String.Format("{0}/tracks/", api_endpoint);
+            return DoRequest<Track>(ep, "POST", serialize(parameters));
         }
 
         #endregion

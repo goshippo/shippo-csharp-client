@@ -1,54 +1,56 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections;
+
 using Shippo;
 
+
 namespace ShippoTesting {
-    [TestFixture ()]
+    [TestFixture]
     public class CustomsItemTest : ShippoTest {
 
-        [Test ()]
-        public void TestValidCreate ()
+        [Test]
+        public void TestValidCreate()
         {
-            CustomsItem testObject = CustomsItemTest.getDefaultObject ();
-            Assert.AreEqual ("VALID", testObject.ObjectState);
+            CustomsItem testObject = CustomsItemTest.getDefaultObject();
+            Assert.AreEqual("VALID", testObject.ObjectState);
         }
 
-        [Test ()]
-        public void testValidRetrieve ()
+        [Test]
+        public void testValidRetrieve()
         {
-            CustomsItem testObject = CustomsItemTest.getDefaultObject ();
+            CustomsItem testObject = CustomsItemTest.getDefaultObject();
             CustomsItem retrievedObject;
 
-            retrievedObject = apiResource.RetrieveCustomsItem ((string) testObject.ObjectId);
-            Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
+            retrievedObject = apiResource.RetrieveCustomsItem((string) testObject.ObjectId);
+            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
-        [Test ()]
-        public void testListAll ()
+        [Test]
+        public void testListAll()
         {
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("results", "1");
-            parameters.Add ("page", "1");
+            Hashtable parameters = new Hashtable();
+            parameters.Add("results", "1");
+            parameters.Add("page", "1");
 
-            var parcels = apiResource.AllCustomsItems (parameters);
-            Assert.AreNotEqual (0, parcels.Data.Count);
+            var parcels = apiResource.AllCustomsItems(parameters);
+            Assert.AreNotEqual(0, parcels.Data.Count);
         }
 
-        public static CustomsItem getDefaultObject ()
+        public static CustomsItem getDefaultObject()
         {
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("description", "T-Shirt");
-            parameters.Add ("quantity", "2");
-            parameters.Add ("net_weight", "400");
-            parameters.Add ("mass_unit", "g");
-            parameters.Add ("value_amount", "20");
-            parameters.Add ("value_currency", "USD");
-            parameters.Add ("tariff_number", "");
-            parameters.Add ("origin_country", "US");
-            parameters.Add ("metadata", "Order ID #123123");
+            Hashtable parameters = new Hashtable();
+            parameters.Add("description", "T-Shirt");
+            parameters.Add("quantity", "2");
+            parameters.Add("net_weight", "400");
+            parameters.Add("mass_unit", "g");
+            parameters.Add("value_amount", "20");
+            parameters.Add("value_currency", "USD");
+            parameters.Add("tariff_number", "");
+            parameters.Add("origin_country", "US");
+            parameters.Add("metadata", "Order ID #123123");
 
-            return getAPIResource ().CreateCustomsItem (parameters);
+            return getAPIResource().CreateCustomsItem(parameters);
         }
     }
 }

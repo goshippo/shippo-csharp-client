@@ -20,35 +20,35 @@ using System.Text;
 using Newtonsoft.Json;
 
 namespace Shippo {
-    [JsonObject (MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ShippoCollection<T> : IEnumerable<T> {
-        [JsonProperty ("url")]
+        [JsonProperty("url")]
         public string Url { get; set; }
 
-        [JsonProperty ("count")]
+        [JsonProperty("count")]
         public int Total { get; set; }
 
-        [JsonProperty ("next")]
+        [JsonProperty("next")]
         public string Next { get; set; }
 
 
-        [JsonProperty ("results")]
+        [JsonProperty("results")]
         public List<T> Data { get; set; }
 
         #region IEnumerable[T] implementation
 
-        public IEnumerator<T> GetEnumerator ()
+        public IEnumerator<T> GetEnumerator()
         {
-            return Data.GetEnumerator ();
+            return Data.GetEnumerator();
         }
 
         #endregion
 
         #region IEnumerable implementation
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator ();
+            return GetEnumerator();
         }
 
         #endregion

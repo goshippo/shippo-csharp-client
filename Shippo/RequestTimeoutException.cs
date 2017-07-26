@@ -2,10 +2,6 @@
 
 namespace Shippo {
     public class RequestTimeoutException : ShippoException {
-        public RequestTimeoutException(
-            string auxMessage ) :
-        base(auxMessage , null )
-        {}
+        public RequestTimeoutException(string auxMessage) : base(auxMessage, null) {}
     }
 }
-
