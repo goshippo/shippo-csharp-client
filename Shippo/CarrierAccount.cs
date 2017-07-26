@@ -19,7 +19,7 @@ namespace Shippo {
         [JsonProperty(PropertyName = "active")]
         public object Active { get; set; }
 
-	    [JsonProperty(PropertyName = "metadata")]
+        [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
     }
 }
