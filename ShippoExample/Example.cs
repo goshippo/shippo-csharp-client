@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿﻿﻿/*
  * Copyright 2011 Xamarin, Inc., Joe Dluzen
  *
  * Author(s):
@@ -83,7 +83,6 @@ namespace ShippoExample {
             if (address.ValidationResults.Messages != null) {
 	            foreach (ValidationMessage message in address.ValidationResults.Messages) {
 	                Console.Out.WriteLine("Address Message Code: " + message.Code);
-	                Console.Out.WriteLine("Address Message Type: " + message.Type);
 	                Console.Out.WriteLine("Address Message Text: " + message.Text);
 	                Console.Out.WriteLine();
                 }
