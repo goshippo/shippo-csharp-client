@@ -18,7 +18,7 @@ namespace ShippoTesting {
         public static ShippoCollection<Rate> getDefaultObject ()
         {
             Shipment testObject = ShipmentTest.getDefaultObject ();
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("id", testObject.ObjectId);
             parameters.Add ("currency_code", "USD");
 

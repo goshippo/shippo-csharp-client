@@ -29,7 +29,7 @@ namespace ShippoTesting {
         [Test ()]
         public void testListAll ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("results", "1");
             parameters.Add ("page", "1");
 
@@ -39,7 +39,7 @@ namespace ShippoTesting {
 
         public static Transaction getDefaultObject ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
 
             ShippoCollection<Rate> rateCollection = RateTest.getDefaultObject ();
             List<Rate> rateList = rateCollection.Data;

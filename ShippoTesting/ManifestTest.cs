@@ -26,7 +26,7 @@ namespace ShippoTesting {
         [Test ()]
         public void testListAll ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("results", "1");
             parameters.Add ("page", "1");
 
@@ -36,7 +36,7 @@ namespace ShippoTesting {
 
         public static Manifest getDefaultObject ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("provider", "USPS");
             parameters.Add ("shipment_date", "2014-05-16T23:59:59Z");
             parameters.Add ("address_from", AddressTest.getDefaultObject ().ObjectId);

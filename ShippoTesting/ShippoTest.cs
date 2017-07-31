@@ -19,9 +19,9 @@ namespace ShippoTesting {
 			return apiResource;
         }
 
-        public static Hashtable getInvalidHashtable ()
+        public static Dictionary<String, Object> getInvalidDictionary<String, Object> ()
         {
-            return new Hashtable ();
+            return new Dictionary<String, Object> ();
         }
     }
 }

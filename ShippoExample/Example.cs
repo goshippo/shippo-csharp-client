@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * Copyright 2011 Xamarin, Inc., Joe Dluzen
  *
  * Author(s):
@@ -69,57 +69,57 @@ namespace ShippoExample {
 			APIResource resource = new APIResource ("<Shippo Token>");
 
 			// to address
-			Hashtable toAddressTable = new Hashtable ();
-			toAddressTable.Add ("name", "Mr. Hippo");
-			toAddressTable.Add ("company", "Shippo");
-			toAddressTable.Add ("street1", "215 Clayton St.");
-			toAddressTable.Add ("city", "San Francisco");
-			toAddressTable.Add ("state", "CA");
-			toAddressTable.Add ("zip", "94117");
-			toAddressTable.Add ("country", "US");
-			toAddressTable.Add ("phone", "+1 555 341 9393");
-			toAddressTable.Add ("email", "support@goshipppo.com");
+			Dictionary<String, Object> toAddressDict = new Dictionary<String, Object> ();
+			toAddressDict.Add ("name", "Mr. Hippo");
+			toAddressDict.Add ("company", "Shippo");
+			toAddressDict.Add ("street1", "215 Clayton St.");
+			toAddressDict.Add ("city", "San Francisco");
+			toAddressDict.Add ("state", "CA");
+			toAddressDict.Add ("zip", "94117");
+			toAddressDict.Add ("country", "US");
+			toAddressDict.Add ("phone", "+1 555 341 9393");
+			toAddressDict.Add ("email", "support@goshipppo.com");
 
 			// from address
-			Hashtable fromAddressTable = new Hashtable ();
-			fromAddressTable.Add ("name", "Ms Hippo");
-			fromAddressTable.Add ("company", "San Diego Zoo");
-			fromAddressTable.Add ("street1", "2920 Zoo Drive");
-			fromAddressTable.Add ("city", "San Diego");
-			fromAddressTable.Add ("state", "CA");
-			fromAddressTable.Add ("zip", "92101");
-			fromAddressTable.Add ("country", "US");
-			fromAddressTable.Add ("email", "hippo@goshipppo.com");
-			fromAddressTable.Add ("phone", "+1 619 231 1515");
-			fromAddressTable.Add ("metadata", "Customer ID 123456");
+			Dictionary<String, Object> fromAddressDict = new Dictionary<String, Object> ();
+			fromAddressDict.Add ("name", "Ms Hippo");
+			fromAddressDict.Add ("company", "San Diego Zoo");
+			fromAddressDict.Add ("street1", "2920 Zoo Drive");
+			fromAddressDict.Add ("city", "San Diego");
+			fromAddressDict.Add ("state", "CA");
+			fromAddressDict.Add ("zip", "92101");
+			fromAddressDict.Add ("country", "US");
+			fromAddressDict.Add ("email", "hippo@goshipppo.com");
+			fromAddressDict.Add ("phone", "+1 619 231 1515");
+			fromAddressDict.Add ("metadata", "Customer ID 123456");
 
 			// parcel
-			Hashtable parcelTable = new Hashtable ();
-			parcelTable.Add ("length", "5");
-			parcelTable.Add ("width", "5");
-			parcelTable.Add ("height", "5");
-			parcelTable.Add ("distance_unit", "in");
-			parcelTable.Add ("weight", "2");
-			parcelTable.Add ("mass_unit", "lb");
+			Dictionary<String, Object> parcelDict = new Dictionary<String, Object> ();
+			parcelDict.Add ("length", "5");
+			parcelDict.Add ("width", "5");
+			parcelDict.Add ("height", "5");
+			parcelDict.Add ("distance_unit", "in");
+			parcelDict.Add ("weight", "2");
+			parcelDict.Add ("mass_unit", "lb");
 
 			// shipment
-			Hashtable shipmentTable = new Hashtable ();
-			shipmentTable.Add ("address_to", toAddressTable);
-			shipmentTable.Add ("address_from", fromAddressTable);
-			shipmentTable.Add ("parcel", parcelTable);
-			shipmentTable.Add ("object_purpose", "PURCHASE");
-			shipmentTable.Add ("async", false);
+			Dictionary<String, Object> shipmentDict = new Dictionary<String, Object> ();
+			shipmentDict.Add ("address_to", toAddressDict);
+			shipmentDict.Add ("address_from", fromAddressDict);
+			shipmentDict.Add ("parcels", parcelDict);
+			shipmentDict.Add ("object_purpose", "PURCHASE");
+			shipmentDict.Add ("async", false);
 
 			// create Shipment object
 			Console.WriteLine ("Creating Shipment object..");
-			Shipment shipment = resource.CreateShipment (shipmentTable);
+			Shipment shipment = resource.CreateShipment (shipmentDict);
 
 			// select desired shipping rate according to your business logic
 			// we simply select the first rate in this example
             Rate rate = shipment.Rates[0];
 
 			Console.WriteLine ("Getting shipping label..");
-			Hashtable transactionParameters = new Hashtable ();
+			Dictionary<String, Object> transactionParameters = new Dictionary<String, Object> ();
 			transactionParameters.Add ("rate", rate.ObjectId);
 			transactionParameters.Add ("async", false);
 			Transaction transaction = resource.CreateTransaction (transactionParameters);
@@ -139,3 +139,4 @@ namespace ShippoExample {
         }
     }
 }
+

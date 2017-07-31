@@ -26,7 +26,7 @@ namespace ShippoTesting {
 
         public static Address getDefaultObject ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("name", "Undefault New Wu");
             parameters.Add ("company", "Shippo");
             parameters.Add ("street1", "Clayton St.");
@@ -43,7 +43,7 @@ namespace ShippoTesting {
         }
 		public static Address getDefaultObject_2 ()
 		{
-			Hashtable parameters = new Hashtable ();
+			Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
 			parameters.Add ("name", "Undefault New Wu");
 			parameters.Add ("company", "Shippo");
 			parameters.Add ("street1", "Francis St.");

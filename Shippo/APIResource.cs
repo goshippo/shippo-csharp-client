@@ -135,10 +135,10 @@ namespace Shippo {
             return str;
         }
         // Generate URL Encoded parameters for GET requests
-        public String generateURLEncodedFromHashmap (Hashtable propertyMap)
+        public String generateURLEncodedFromHashmap (Dictionary<String, Object> propertyMap)
         {
             StringBuilder str = new StringBuilder ();
-            foreach (DictionaryEntry pair in propertyMap) {
+            foreach (KeyValuePair<string, object> pair in propertyMap) {
                 str.AppendFormat ("{0}={1}&", pair.Key, pair.Value);
             }
             str.Length--;
@@ -158,7 +158,7 @@ namespace Shippo {
 
         #region Address
 
-        public Address CreateAddress (Hashtable parameters)
+        public Address CreateAddress (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/addresses", api_endpoint);
             return DoRequest<Address> (ep, "POST", serialize (parameters));
@@ -176,7 +176,7 @@ namespace Shippo {
             return DoRequest<Address> (ep, "GET");
         }
 
-        public ShippoCollection<Address> AllAddresss (Hashtable parameters)
+        public ShippoCollection<Address> AllAddresss (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/addresses?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Address>> (ep);
@@ -186,7 +186,7 @@ namespace Shippo {
 
         #region Parcel
 
-        public Parcel CreateParcel (Hashtable parameters)
+        public Parcel CreateParcel (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/parcels", api_endpoint);
             return DoRequest<Parcel> (ep, "POST", serialize (parameters));
@@ -198,7 +198,7 @@ namespace Shippo {
             return DoRequest<Parcel> (ep, "GET");
         }
 
-        public ShippoCollection<Parcel> AllParcels (Hashtable parameters)
+        public ShippoCollection<Parcel> AllParcels (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/parcels?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Parcel>> (ep);
@@ -208,7 +208,7 @@ namespace Shippo {
 
         #region Shipment
 
-        public Shipment CreateShipment (Hashtable parameters)
+        public Shipment CreateShipment (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/shipments", api_endpoint);
             return DoRequest<Shipment> (ep, "POST", serialize (parameters));
@@ -220,7 +220,7 @@ namespace Shippo {
             return DoRequest<Shipment> (ep, "GET");
         }
 
-        public ShippoCollection<Shipment> AllShipments (Hashtable parameters)
+        public ShippoCollection<Shipment> AllShipments (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/shipments?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Shipment>> (ep);
@@ -230,7 +230,7 @@ namespace Shippo {
 
         #region Rate
 
-        public ShippoCollection<Rate> CreateRate (Hashtable parameters)
+        public ShippoCollection<Rate> CreateRate (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/shipments/{1}/rates/{2}", api_endpoint, parameters ["id"], parameters ["currency_code"]);
             return DoRequest<ShippoCollection<Rate>> (ep, "GET");
@@ -238,13 +238,13 @@ namespace Shippo {
 
         public ShippoCollection<Rate> GetShippingRatesSync (String objectId)
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("id", objectId);
             parameters.Add ("currency_code", "");
             return GetShippingRatesSync (parameters);
         }
 
-        public ShippoCollection<Rate> GetShippingRatesSync (Hashtable parameters)
+        public ShippoCollection<Rate> GetShippingRatesSync (Dictionary<String, Object> parameters)
         {
 
             String object_id = (String) parameters ["id"];
@@ -274,13 +274,13 @@ namespace Shippo {
 
         #region Transaction
 
-        public Transaction CreateTransaction (Hashtable parameters)
+        public Transaction CreateTransaction (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/transactions", api_endpoint);
             return DoRequest<Transaction> (ep, "POST", serialize (parameters));
         }
 
-        public Transaction CreateTransactionSync (Hashtable parameters)
+        public Transaction CreateTransactionSync (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/transactions", api_endpoint);
             Transaction transaction = DoRequest<Transaction> (ep, "POST", serialize (parameters));
@@ -306,7 +306,7 @@ namespace Shippo {
             return DoRequest<Transaction> (ep, "GET");
         }
 
-        public ShippoCollection<Transaction> AllTransactions (Hashtable parameters)
+        public ShippoCollection<Transaction> AllTransactions (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/transactions?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Transaction>> (ep);
@@ -316,7 +316,7 @@ namespace Shippo {
 
         #region CustomsItem
 
-        public CustomsItem CreateCustomsItem (Hashtable parameters)
+        public CustomsItem CreateCustomsItem (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/customs/items", api_endpoint);
             return DoRequest<CustomsItem> (ep, "POST", serialize (parameters));
@@ -328,7 +328,7 @@ namespace Shippo {
             return DoRequest<CustomsItem> (ep, "GET");
         }
 
-        public ShippoCollection<CustomsItem> AllCustomsItems (Hashtable parameters)
+        public ShippoCollection<CustomsItem> AllCustomsItems (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/customs/items?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<CustomsItem>> (ep);
@@ -338,7 +338,7 @@ namespace Shippo {
 
         #region CustomsDeclaration
 
-        public CustomsDeclaration CreateCustomsDeclaration (Hashtable parameters)
+        public CustomsDeclaration CreateCustomsDeclaration (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/customs/declarations", api_endpoint);
             return DoRequest<CustomsDeclaration> (ep, "POST", serialize (parameters));
@@ -350,7 +350,7 @@ namespace Shippo {
             return DoRequest<CustomsDeclaration> (ep, "GET");
         }
 
-        public ShippoCollection<CustomsDeclaration> AllCustomsDeclarations (Hashtable parameters)
+        public ShippoCollection<CustomsDeclaration> AllCustomsDeclarations (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/customs/declarations?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<CustomsDeclaration>> (ep);
@@ -360,13 +360,13 @@ namespace Shippo {
 
         #region CarrierAccount
 
-        public CarrierAccount CreateCarrierAccount (Hashtable parameters)
+        public CarrierAccount CreateCarrierAccount (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/carrier_accounts", api_endpoint);
             return DoRequest<CarrierAccount> (ep, "POST", serialize (parameters));
         }
 
-        public CarrierAccount UpdateCarrierAccount (String object_id, Hashtable parameters)
+        public CarrierAccount UpdateCarrierAccount (String object_id, Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/carrier_accounts/{1}", api_endpoint, object_id);
             return DoRequest<CarrierAccount> (ep, "PUT", serialize (parameters));
@@ -378,7 +378,7 @@ namespace Shippo {
             return DoRequest<CarrierAccount> (ep, "GET");
         }
 
-        public ShippoCollection<CarrierAccount> AllCarrierAccount (Hashtable parameters)
+        public ShippoCollection<CarrierAccount> AllCarrierAccount (Dictionary<String, Object> parameters)
         {
             return AllCarrierAccount ();
         }
@@ -393,7 +393,7 @@ namespace Shippo {
 
         #region Refund
 
-        public Refund CreateRefund (Hashtable parameters)
+        public Refund CreateRefund (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/refunds", api_endpoint);
             return DoRequest<Refund> (ep, "POST", serialize (parameters));
@@ -405,7 +405,7 @@ namespace Shippo {
             return DoRequest<Refund> (ep, "GET");
         }
 
-        public ShippoCollection<Refund> AllRefunds (Hashtable parameters)
+        public ShippoCollection<Refund> AllRefunds (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/refunds?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Refund>> (ep);
@@ -415,7 +415,7 @@ namespace Shippo {
 
         #region Manifest
 
-        public Manifest CreateManifest (Hashtable parameters)
+        public Manifest CreateManifest (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/manifests", api_endpoint);
             return DoRequest<Manifest> (ep, "POST", serialize (parameters));
@@ -427,7 +427,7 @@ namespace Shippo {
             return DoRequest<Manifest> (ep, "GET");
         }
 
-        public ShippoCollection<Manifest> AllManifests (Hashtable parameters)
+        public ShippoCollection<Manifest> AllManifests (Dictionary<String, Object> parameters)
         {
             string ep = String.Format ("{0}/manifests?{1}", api_endpoint, generateURLEncodedFromHashmap (parameters));
             return DoRequest<ShippoCollection<Manifest>> (ep);
@@ -441,7 +441,7 @@ namespace Shippo {
                                   String metadata, List<BatchShipment> batchShipments)
         {
             string ep = String.Format ("{0}/batches", api_endpoint);
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("default_carrier_account", carrierAccount);
             parameters.Add ("default_servicelevel_token", servicelevelToken);
             if (labelFiletype != ShippoEnums.LabelFiletypes.NONE)
@@ -454,7 +454,7 @@ namespace Shippo {
         public Batch RetrieveBatch (String id, uint page, ShippoEnums.ObjectResults objectResults)
         {
             string ep = String.Format ("{0}/batches/{1}", api_endpoint, HttpUtility.HtmlEncode(id));
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             if (page > 0)
                 parameters.Add ("page", page);
             if (objectResults != ShippoEnums.ObjectResults.none)
@@ -467,10 +467,10 @@ namespace Shippo {
         public Batch AddShipmentsToBatch (String id, List<String> shipmentIds)
         {
             string ep = String.Format ("{0}/batches/{1}/add_shipments", api_endpoint, HttpUtility.HtmlEncode (id));
-            List<Hashtable> shipments = new List<Hashtable> ();
+            List<Dictionary<String, Object>> shipments = new List<Dictionary<String, Object>> ();
             foreach (String shipmentId in shipmentIds)
             {
-                Hashtable shipmentTable = new Hashtable ();
+                Dictionary<String, Object> shipmentTable = new Dictionary<String, Object> ();
                 shipmentTable.Add ("shipment", shipmentId);
                 shipments.Add (shipmentTable);
             }
@@ -502,7 +502,7 @@ namespace Shippo {
             return DoRequest<Track> (ep, "GET");
         }
 
-        public Track RegisterTrackingWebhook (Hashtable parameters)
+        public Track RegisterTrackingWebhook (Dictionary<String, Object> parameters)
         {
             // For now the trailing '/' is required.
             string ep = String.Format ("{0}/tracks/", api_endpoint);

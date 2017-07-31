@@ -36,7 +36,7 @@ namespace ShippoTesting
         {
             Track track = getAPIResource ().RetrieveTracking (CARRIER, TRACKING_NO);
 
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("carrier", CARRIER);
             parameters.Add ("tracking_number", track.TrackingNumber);
             Track register = getAPIResource ().RegisterTrackingWebhook (parameters);
@@ -47,7 +47,7 @@ namespace ShippoTesting
         [Test ()]
         public void TestInvalidRegisterWebhook ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("carrier", CARRIER);
             parameters.Add ("tracking_number", "INVALID_ID");
             Assert.That (() => getAPIResource ().RegisterTrackingWebhook (parameters),

@@ -30,7 +30,7 @@ namespace ShippoTesting {
         [Test ()]
         public void testListAll ()
         {
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("results", "1");
             parameters.Add ("page", "1");
 
@@ -41,7 +41,7 @@ namespace ShippoTesting {
         public static CustomsDeclaration getDefaultObject ()
         {
             CustomsItem customsItem = CustomsItemTest.getDefaultObject ();
-            Hashtable parameters = new Hashtable ();
+            Dictionary<String, Object> parameters = new Dictionary<String, Object> ();
             parameters.Add ("exporter_reference", "");
             parameters.Add ("importer_reference", "");
             parameters.Add ("contents_type", "MERCHANDISE");
