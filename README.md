@@ -42,8 +42,8 @@ For convenience, a brief example to create, get, and list all parcels can be fou
             {
                 APIResource resource = new APIResource (“<Your Shippo Token>“);
 
-                // Hash table of properties
-                Hashtable parameters = new Hashtable ();
+                // Dictionary of properties
+                Dictionary <String, Object> parameters = new Dictionary <String, Object> ();
                 parameters.Add("length", "5");
                 parameters.Add("width", "5");
                 parameters.Add("height", "5");
@@ -62,7 +62,7 @@ For convenience, a brief example to create, get, and list all parcels can be fou
                 Console.WriteLine (parcelRetrieved.DistanceUnit);
 
                 // All Parcels
-                parameters = new Hashtable ();
+                parameters = new Dictionary <String, Object> ();
                 parameters.Add ("results", "2");
                 parameters.Add ("page", "1");
 
@@ -81,7 +81,7 @@ of object you can create through the API.
 A particularly important file is [APIResource.cs](/Shippo/APIResource.cs), this file contains the code responsible for making requests. Also contained
 within this file are all the methods for generating different type of API objects. Each object's methods are contained within
 a region tag for convenient navigation. For example, the Parcel's methods are contained within:
-```csharp        
+```csharp
         #region Parcel
         /* Parcel Code */
         #endregion
