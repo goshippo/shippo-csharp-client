@@ -55,7 +55,7 @@ namespace ShippoTesting
             Batch retrieve = getValidBatch(batch.ObjectId);
             Batch newBatch = getAPIResource().AddShipmentsToBatch(retrieve.ObjectId, shipmentIds);
 
-            Assert.AreEqual(retrieve.BatchShipments.Count + shipmentIds.Count, newBatch.BatchShipments.Count);
+            Assert.AreEqual(retrieve.BatchShipments.Results.Count + shipmentIds.Count, newBatch.BatchShipments.Results.Count);
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace ShippoTesting
             shipmentsToRemove.Add(removeId);
 
             Batch removeBatch = getAPIResource().RemoveShipmentsFromBatch(batch.ObjectId, shipmentsToRemove);
-            Assert.AreEqual(retrieve.BatchShipments.Count, removeBatch.BatchShipments.Count);
+            Assert.AreEqual(retrieve.BatchShipments.Results.Count, removeBatch.BatchShipments.Results.Count);
         }
 
         [Test]

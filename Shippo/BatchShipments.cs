@@ -7,9 +7,6 @@ namespace Shippo
     [JsonObject(MemberSerialization.OptIn)]
     public class BatchShipments
     {
-        [JsonProperty(PropertyName = "count")]
-        public int Count;
-
         [JsonProperty(PropertyName = "next")]
         public string Next;
 
@@ -21,8 +18,8 @@ namespace Shippo
 
         public override string ToString()
         {
-            return string.Format("[BatchShipments: Count={0}, Next={1}, Previous={2}, Results={3}]",
-                                 Count, Next, Previous, Results);
+            return string.Format("[BatchShipments: Next={0}, Previous={1}, Results={2}]",
+                                 Next, Previous, Results);
         }
     }
 }

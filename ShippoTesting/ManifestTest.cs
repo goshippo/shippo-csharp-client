@@ -36,7 +36,7 @@ namespace ShippoTesting
             parameters.Add("page", "1");
 
             var Manifests = apiResource.AllManifests(parameters);
-            Assert.AreEqual(0, Manifests.Data.Count);
+            Assert.AreEqual(0, Manifests.Data.Results.Count);
         }
 
         public static Manifest getDefaultObject()

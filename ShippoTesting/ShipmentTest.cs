@@ -33,8 +33,8 @@ namespace ShippoTesting {
             parameters.Add("results", "1");
             parameters.Add("page", "1");
 
-            var parcels = apiResource.AllShipments(parameters);
-            Assert.AreNotEqual(0, parcels.Data.Count);
+            var shipments = apiResource.AllShipments(parameters);
+            Assert.AreNotEqual(0, shipments.Data.Results.Count);
         }
 
         public static Shipment getDefaultObject()

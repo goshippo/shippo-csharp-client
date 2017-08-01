@@ -25,9 +25,6 @@ namespace Shippo {
         [JsonProperty("url")]
         public string Url { get; set; }
 
-        [JsonProperty("count")]
-        public int Total { get; set; }
-
         [JsonProperty("next")]
         public string Next { get; set; }
 

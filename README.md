@@ -67,7 +67,7 @@ For convenience, a brief example to create, get, and list all parcels can be fou
                 parameters.Add ("page", "1");
 
                 var parcels = resource.AllParcels(parameters);
-                Console.WriteLine (parcels.Data.Count);
+                Console.WriteLine (parcels.Data.Results.Count);
 
             }
         }

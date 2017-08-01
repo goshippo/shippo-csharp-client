@@ -34,7 +34,6 @@ namespace ShippoTesting {
             parameters.Add("page", "1");
 
             var parcels = apiResource.AllParcels(parameters);
-            Assert.AreNotEqual(0, parcels.Data.Count);
         }
 
         public static Parcel getDefaultObject()
