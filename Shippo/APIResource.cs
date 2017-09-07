@@ -31,7 +31,7 @@ using Newtonsoft.Json;
 
 namespace Shippo {
     public class APIResource {
-        public static readonly string api_endpoint = "https://api.goshippo.com/v1";
+        public static readonly string api_endpoint = "https://api.goshippo.com/";
         static readonly string user_agent = "Shippo/v1 CSharpBindings/1.0";
         public static readonly int RatesReqTimeout = 25;
         public static readonly int TransactionReqTimeout = 25;
@@ -381,7 +381,8 @@ namespace Shippo {
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount(Hashtable parameters)
         {
-            return AllCarrierAccount();
+            string ep = String.Format ("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<CarrierAccount>> (ep);
         }
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount()

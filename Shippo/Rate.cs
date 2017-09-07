@@ -37,8 +37,8 @@ namespace Shippo {
         [JsonProperty(PropertyName = "servicelevel")]
         public object Servicelevel { get; set; }
 
-        [JsonProperty(PropertyName = "days")]
-        public object Days { get; set; }
+        [JsonProperty(PropertyName = "estimated_days")]
+        public object EstimatedDays { get; set; }
 
         [JsonProperty(PropertyName = "duration_terms")]
         public object DurationTerms { get; set; }
