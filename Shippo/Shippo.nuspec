@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Shippo</id>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
     <title>Shippo client library</title>
     <authors>Shippo</authors>
     <owners>Shippo</owners>
