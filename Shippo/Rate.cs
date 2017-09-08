@@ -35,7 +35,7 @@ namespace Shippo {
         public object ProviderImage200 { get; set; }
 
         [JsonProperty(PropertyName = "servicelevel")]
-        public object Servicelevel { get; set; }
+        public ServiceLevel Servicelevel { get; set; }
 
         [JsonProperty(PropertyName = "estimated_days")]
         public object EstimatedDays { get; set; }
@@ -49,5 +49,15 @@ namespace Shippo {
         [JsonProperty(PropertyName = "zone")]
         public object Zone { get; set; }
 
+        public class ServiceLevel {
+            [JsonProperty (PropertyName = "name")]
+            public object Name { get; set; }
+
+            [JsonProperty (PropertyName = "token")]
+            public object Token { get; set; }
+
+            [JsonProperty (PropertyName = "terms")]
+            public object Terms { get; set; }
+        }
     }
 }
