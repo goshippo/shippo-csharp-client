@@ -48,16 +48,17 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "zone")]
         public object Zone { get; set; }
+    }
 
-        public class ServiceLevel {
-            [JsonProperty (PropertyName = "name")]
-            public object Name { get; set; }
+    public class ServiceLevel
+    {
+        [JsonProperty(PropertyName = "name")]
+        public object Name { get; set; }
 
-            [JsonProperty (PropertyName = "token")]
-            public object Token { get; set; }
+        [JsonProperty(PropertyName = "token")]
+        public object Token { get; set; }
 
-            [JsonProperty (PropertyName = "terms")]
-            public object Terms { get; set; }
-        }
+        [JsonProperty(PropertyName = "terms")]
+        public object Terms { get; set; }
     }
 }
