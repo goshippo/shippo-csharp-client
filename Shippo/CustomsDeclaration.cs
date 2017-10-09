@@ -56,7 +56,7 @@ namespace Shippo {
         public object CertifySigner { get; set; }
 
         [JsonProperty (PropertyName = "address_importer")]
-        public object AddressImporter { get; set; }
+        public Address AddressImporter { get; set; }
 
         [JsonProperty(PropertyName = "disclaimer")]
         public object Discliamer { get; set; }
