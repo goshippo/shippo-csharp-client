@@ -30,6 +30,17 @@ namespace ShippoTesting {
         }
 
         [Test]
+        public void testValidRetrieveWithAddressImporter ()
+        {
+            CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject1();
+            CustomsDeclaration retrievedObject;
+
+            retrievedObject = apiResource.RetrieveCustomsDeclaration ((string)testObject.ObjectId);
+            Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.IsNotNull (retrievedObject.AddressImporter);
+        }
+
+        [Test]
         public void testListAll()
         {
             Hashtable parameters = new Hashtable();
@@ -43,6 +54,7 @@ namespace ShippoTesting {
         public static CustomsDeclaration getDefaultObject()
         {
             CustomsItem customsItem = CustomsItemTest.getDefaultObject();
+            Address addressImporter = AddressTest.getDefaultObject ();
             Hashtable parameters = new Hashtable();
             parameters.Add("exporter_reference", "");
             parameters.Add("importer_reference", "");
@@ -59,7 +71,6 @@ namespace ShippoTesting {
             parameters.Add("certify_signer", "Laura Behrens Wu");
             parameters.Add("disclaimer", "");
             parameters.Add("incoterm", "");
-
             
             JArray customsItems = new JArray();
             customsItems.Add((string) customsItem.ObjectId);
@@ -68,6 +79,37 @@ namespace ShippoTesting {
             parameters.Add("items", customsItems);
             parameters.Add("metadata", "Order ID #123123");
             return getAPIResource().CreateCustomsDeclaration(parameters);
+        }
+
+        public static CustomsDeclaration getDefaultObject1 ()
+        {
+            CustomsItem customsItem = CustomsItemTest.getDefaultObject ();
+            Address addressImporter = AddressTest.getDefaultObject ();
+            Hashtable parameters = new Hashtable ();
+            parameters.Add ("exporter_reference", "");
+            parameters.Add ("importer_reference", "");
+            parameters.Add ("contents_type", "MERCHANDISE");
+            parameters.Add ("contents_explanation", "T-Shirt purchase");
+            parameters.Add ("invoice", "#123123");
+            parameters.Add ("license", "");
+            parameters.Add ("certificate", "");
+            parameters.Add ("notes", "");
+            parameters.Add ("eel_pfc", "NOEEI_30_37_a");
+            parameters.Add ("aes_itn", "");
+            parameters.Add ("non_delivery_option", "ABANDON");
+            parameters.Add ("certify", true);
+            parameters.Add ("certify_signer", "Laura Behrens Wu");
+            parameters.Add ("address_importer", addressImporter.ObjectId);
+            parameters.Add ("disclaimer", "");
+            parameters.Add ("incoterm", "");
+
+            JArray customsItems = new JArray ();
+            customsItems.Add ((string)customsItem.ObjectId);
+
+
+            parameters.Add ("items", customsItems);
+            parameters.Add ("metadata", "Order ID #123123");
+            return getAPIResource ().CreateCustomsDeclaration (parameters);
         }
     }
 }
