@@ -71,7 +71,6 @@ namespace ShippoTesting {
         public static CustomsDeclaration getDefaultObject()
         {
             CustomsItem customsItem = CustomsItemTest.getDefaultObject();
-            Address addressImporter = AddressTest.getDefaultObject ();
             Hashtable parameters = new Hashtable();
             parameters.Add("exporter_reference", "");
             parameters.Add("importer_reference", "");
@@ -91,7 +90,6 @@ namespace ShippoTesting {
             
             JArray customsItems = new JArray();
             customsItems.Add((string) customsItem.ObjectId);
-            
 
             parameters.Add("items", customsItems);
             parameters.Add("metadata", "Order ID #123123");
@@ -122,7 +120,6 @@ namespace ShippoTesting {
 
             JArray customsItems = new JArray ();
             customsItems.Add ((string)customsItem.ObjectId);
-
 
             parameters.Add ("items", customsItems);
             parameters.Add ("metadata", "Order ID #123123");
