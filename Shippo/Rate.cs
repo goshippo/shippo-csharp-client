@@ -10,6 +10,9 @@ namespace Shippo {
         [JsonProperty(PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
+        [JsonProperty(PropertyName = "shipment")]
+        public object Shipment { get; set; }
+
         [JsonProperty(PropertyName = "attributes")]
         public object Attributes { get; set; }
 
