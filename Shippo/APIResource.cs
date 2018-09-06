@@ -65,8 +65,12 @@ namespace Shippo {
             req.Credentials = credential;
             req.PreAuthenticate = true; */
 
-            // Disable line below for basic auth
-            req.Headers.Add("Authorization", "ShippoToken " + accessToken);
+            // Disable lines below for basic auth
+            string tokenType = "ShippoToken";
+            if (accessToken.StartsWith("oauth.")) {
+                tokenType = "Bearer";
+            }
+            req.Headers.Add("Authorization", string.Format("{0} {1}", tokenType, accessToken));
             if (apiVersion != null) {
                 req.Headers.Add("Shippo-API-Version", apiVersion);
             }
