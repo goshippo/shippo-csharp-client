@@ -1,33 +1,14 @@
-﻿﻿﻿/*
- * Copyright 2011 Xamarin, Inc., Joe Dluzen
- *
- * Author(s):
- *  Gonzalo Paniagua Javier (gonzalo@xamarin.com)
- *  Joe Dluzen (jdluzen@gmail.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using Shippo;
 
-
-namespace ShippoExample {
-    class Example {
-
-        static readonly string TRACKING_NO = "9205590164917312751089";
+namespace ShippoExample
+{
+    class Program
+    {
+    	static readonly string TRACKING_NO = "9205590164917312751089";
 
         private static void RunBatchExample(APIResource resource)
         {
@@ -97,7 +78,6 @@ namespace ShippoExample {
             // don't have one? get more info here
             // (https://goshippo.com/docs/#overview)
             APIResource resource = new APIResource("<Shippo Token>");
-
 			// to address
             Hashtable toAddressTable = new Hashtable();
             toAddressTable.Add("name", "Mr. Hippo");
@@ -173,5 +153,6 @@ namespace ShippoExample {
             Console.WriteLine("\nValidating International Address\n");
             RunInternationalAddressValidationExample(resource);
         }
+
     }
 }
