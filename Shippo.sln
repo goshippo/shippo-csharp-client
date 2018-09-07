@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shippo", "Shippo\Shippo.csproj", "{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shippo", "Shippo\Shippo.csproj", "{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippoExample", "ShippoExample\ShippoExample.csproj", "{7712EC9C-2581-49EE-8B61-745843F2CD6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7712EC9C-2581-49EE-8B61-745843F2CD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7712EC9C-2581-49EE-8B61-745843F2CD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7712EC9C-2581-49EE-8B61-745843F2CD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7712EC9C-2581-49EE-8B61-745843F2CD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
