@@ -1,96 +1,26 @@
-﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{218CF4C2-C457-43E4-9D1B-0880D10181FF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shippo</RootNamespace>
-    <AssemblyName>Shippo</AssemblyName>
-    <FileAlignment>512</FileAlignment>
+    <TargetFrameworks>net45;net40</TargetFrameworks>
+    <Version>2.1.8</Version>
+    <Description>Shippo Shipping API client Library (USPS, FedEx, UPS, and more)</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/goshippo/shippo-csharp-client/</RepositoryUrl>
+    <PackageTags>USPS Fedex UPS API Shippo</PackageTags>
+    <PackageReleaseNotes>Added support for OAuth Token with net40 and net45</PackageReleaseNotes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>lib\net40\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ShippoCollection.cs" />
-    <Compile Include="ShippoDateTimeInfo.cs" />
-    <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="ShippoError.cs" />
-    <Compile Include="ShippoException.cs" />
-    <Compile Include="ShippoObjectConverter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnixDateTimeConverter.cs" />
-    <Compile Include="ShippoObject.cs" />
-    <Compile Include="IUrlEncoderInfo.cs" />
-    <Compile Include="ShippoEnumConverter.cs" />
-    <Compile Include="Parcel.cs" />
-    <Compile Include="Address.cs" />
-    <Compile Include="Shipment.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="Rate.cs" />
-    <Compile Include="CarrierAccount.cs" />
-    <Compile Include="CustomsItem.cs" />
-    <Compile Include="CustomsDeclaration.cs" />
-    <Compile Include="Refund.cs" />
-    <Compile Include="Manifest.cs" />
-    <Compile Include="APIResource.cs" />
-    <Compile Include="RequestTimeoutException.cs" />
-    <Compile Include="Batch.cs" />
-    <Compile Include="ObjectResults.cs" />
-    <Compile Include="BatchShipments.cs" />
-    <Compile Include="BatchShipment.cs" />
-    <Compile Include="Track.cs" />
-    <Compile Include="Servicelevel.cs" />
-    <Compile Include="ShortAddress.cs" />
-    <Compile Include="TrackingHistory.cs" />
-    <Compile Include="TrackingStatus.cs" />
-    <Compile Include="ShippoEnums.cs" />
-    <Compile Include="AddressValidation\ValidationResults.cs" />
-    <Compile Include="AddressValidation\ValidationMessage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AddressValidation\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
