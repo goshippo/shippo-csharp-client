@@ -50,7 +50,7 @@ namespace Shippo {
         public object Zone { get; set; }
 
         [JsonProperty(PropertyName = "shipment")]
-        public string Shipment { get; set; }
+        public string ShipmentId { get; set; }
 
         [JsonProperty(PropertyName = "insurance")]
         public bool Insurance { get; set; }
