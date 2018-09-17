@@ -5,43 +5,43 @@ namespace Shippo {
     [JsonObject(MemberSerialization.OptIn)]
     public class CustomsItem : ShippoId {
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUPdated { get; set; }
+        public DateTime ObjectUPdated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "object_state")]
-        public object ObjectState { get; set; }
+        public string ObjectState { get; set; }
 
         [JsonProperty(PropertyName = "description")]
-        public object Description { get; set; }
+        public string Description { get; set; }
 
         [JsonProperty(PropertyName = "quantity")]
-        public object Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [JsonProperty(PropertyName = "net_weight")]
-        public object NetWeight { get; set; }
+        public decimal NetWeight { get; set; }
 
         [JsonProperty(PropertyName = "mass_unit")]
-        public object MassUnit { get; set; }
+        public string MassUnit { get; set; }
 
         [JsonProperty(PropertyName = "value_amount")]
-        public object ValueAmount { get; set; }
+        public decimal ValueAmount { get; set; }
 
         [JsonProperty(PropertyName = "value_currency")]
-        public object ValueCurrency { get; set; }
+        public string ValueCurrency { get; set; }
 
         [JsonProperty(PropertyName = "tariff_number")]
-        public object TariffNumber { get; set; }
+        public string TariffNumber { get; set; }
 
         [JsonProperty(PropertyName = "origin_country")]
-        public object OriginCountry { get; set; }
+        public string OriginCountry { get; set; }
 
         [JsonProperty(PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata { get; set; }
     }
 }
 

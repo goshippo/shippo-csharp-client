@@ -9,52 +9,52 @@ namespace Shippo {
         public object IsComplete { get; set; }
 
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUpdated { get; set; }
+        public DateTime ObjectUpdated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "name")]
-        public object Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty(PropertyName = "company")]
-        public object Company { get; set; }
+        public string Company { get; set; }
 
         [JsonProperty(PropertyName = "street1")]
-        public object Street1 { get; set; }
+        public string Street1 { get; set; }
 
         [JsonProperty(PropertyName = "street_no")]
-        public object StreetNo { get; set; }
+        public string StreetNo { get; set; }
 
         [JsonProperty(PropertyName = "street2")]
-        public object Street2 { get; set; }
+        public string Street2 { get; set; }
 
         [JsonProperty(PropertyName = "street3")]
         public string Street3;
 
         [JsonProperty(PropertyName = "city")]
-        public object City { get; set; }
+        public string City { get; set; }
 
         [JsonProperty(PropertyName = "state")]
-        public object State { get; set; }
+        public string State { get; set; }
 
         [JsonProperty(PropertyName = "zip")]
-        public object Zip { get; set; }
+        public string Zip { get; set; }
 
         [JsonProperty(PropertyName = "country")]
-        public object Country { get; set; }
+        public string Country { get; set; }
 
         [JsonProperty(PropertyName = "phone")]
-        public object Phone { get; set; }
+        public string Phone { get; set; }
 
         [JsonProperty(PropertyName = "email")]
-        public object Email { get; set; }
+        public string Email { get; set; }
 
         [JsonProperty(PropertyName = "is_residential")]
-        public object IsResidential { get; set; }
+        public bool? IsResidential { get; set; }
 
         [JsonProperty(PropertyName = "ip")]
         public object IP { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Shippo {
@@ -7,40 +8,40 @@ namespace Shippo {
     public class Shipment : ShippoId {
 
         [JsonProperty(PropertyName = "status")]
-        public object Status { get; set; }
+        public string Status { get; set; }
 
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUpdated { get; set; }
+        public DateTime ObjectUpdated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "address_from")]
-        public object AddressFrom { get; set; }
+        public string AddressFrom { get; set; }
 
         [JsonProperty(PropertyName = "address_to")]
-        public object AddressTo { get; set; }
+        public string AddressTo { get; set; }
 
         [JsonProperty(PropertyName = "parcels")]
-        public object[] Parcels { get; set; }
+        public string[] Parcels { get; set; }
 
         [JsonProperty(PropertyName = "shipment_date")]
-        public object ShipmentDate { get; set; }
+        public DateTime ShipmentDate { get; set; }
 
         [JsonProperty(PropertyName = "address_return")]
-        public object AddressReturn { get; set; }
+        public string AddressReturn { get; set; }
 
         [JsonProperty(PropertyName = "customs_declaration")]
-        public object CustomsDeclaration { get; set; }
+        public string CustomsDeclaration { get; set; }
 
         [JsonProperty(PropertyName = "carrier_accounts")]
         public List<string> CarrierAccounts;
 
         [JsonProperty(PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata { get; set; }
 
         [JsonProperty(PropertyName = "extra")]
         public object Extra { get; set; }
@@ -65,9 +66,9 @@ namespace Shippo {
                                               Address addressTo, Parcel[] parcels)
         {
             Shipment s = new Shipment();
-            s.AddressFrom = addressFrom;
-            s.AddressTo = addressTo;
-            s.Parcels = parcels;
+            s.AddressFrom = addressFrom.ObjectId;
+            s.AddressTo = addressTo.ObjectId;
+            s.Parcels = parcels?.Select(x => x?.ObjectId)?.ToArray() ?? new string[] { };
             return s;
         }
     }

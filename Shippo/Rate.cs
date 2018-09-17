@@ -1,69 +1,75 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Shippo {
+namespace Shippo
+{
     [JsonObject(MemberSerialization.OptIn)]
     public class Rate : ShippoId {
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "attributes")]
-        public object Attributes { get; set; }
+        public List<string> Attributes { get; set; }
 
         [JsonProperty(PropertyName = "amount_local")]
-        public object AmountLocal { get; set; }
+        public decimal AmountLocal { get; set; }
 
         [JsonProperty(PropertyName = "currency_local")]
-        public object CurrencyLocal { get; set; }
+        public string CurrencyLocal { get; set; }
 
         [JsonProperty(PropertyName = "amount")]
-        public object Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [JsonProperty(PropertyName = "currency")]
-        public object Currency { get; set; }
+        public string Currency { get; set; }
 
         [JsonProperty(PropertyName = "provider")]
-        public object Provider { get; set; }
+        public string Provider { get; set; }
 
         [JsonProperty(PropertyName = "provider_image_75")]
-        public object ProviderImage75 { get; set; }
+        public string ProviderImage75 { get; set; }
 
         [JsonProperty(PropertyName = "provider_image_200")]
-        public object ProviderImage200 { get; set; }
+        public string ProviderImage200 { get; set; }
 
         [JsonProperty(PropertyName = "servicelevel")]
         public ServiceLevel Servicelevel { get; set; }
 
         [JsonProperty(PropertyName = "estimated_days")]
-        public object EstimatedDays { get; set; }
+        public int EstimatedDays { get; set; }
 
         [JsonProperty(PropertyName = "duration_terms")]
-        public object DurationTerms { get; set; }
+        public string DurationTerms { get; set; }
 
         [JsonProperty(PropertyName = "messages")]
-        public object Messages { get; set; }
+        public List<ShippoMessage> Messages { get; set; }
 
         [JsonProperty(PropertyName = "zone")]
-        public object Zone { get; set; }
+        public string Zone { get; set; }
 
         [JsonProperty(PropertyName = "shipment")]
         public string ShipmentId { get; set; }
 
         [JsonProperty(PropertyName = "insurance")]
         public bool Insurance { get; set; }
+
         [JsonProperty(PropertyName = "insurance_amount_local")]
         public float Insurance_Amount_Local { get; set; }
+
         [JsonProperty(PropertyName = "insurance_currency_local")]
         public string Insurance_Currency_Local { get; set; }
+
         [JsonProperty(PropertyName = "insurance_amount")]
         public float Insurance_Amount { get; set; }
+
         [JsonProperty(PropertyName = "insurance_currency")]
         public string Insruance_Currency { get; set; }
-        [JsonProperty(PropertyName = "carrier_account")]
 
+        [JsonProperty(PropertyName = "carrier_account")]
         public string Carrier_Account { get; set; }
 
     }

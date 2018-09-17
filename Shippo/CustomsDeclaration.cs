@@ -1,74 +1,75 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Shippo {
     [JsonObject(MemberSerialization.OptIn)]
     public class CustomsDeclaration : ShippoId {
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUpdated { get; set; }
+        public DateTime ObjectUpdated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "object_state")]
-        public object ObjectState { get; set; }
+        public string ObjectState { get; set; }
 
         [JsonProperty(PropertyName = "exporter_reference")]
-        public object ExporterReference { get; set; }
+        public string ExporterReference { get; set; }
 
         [JsonProperty(PropertyName = "importer_reference")]
-        public object ImporterReference { get; set; }
+        public string ImporterReference { get; set; }
 
         [JsonProperty(PropertyName = "contents_type")]
-        public object ContentsType { get; set; }
+        public string ContentsType { get; set; }
 
         [JsonProperty(PropertyName = "contents_explanation")]
-        public object ContentsExplanation { get; set; }
+        public string ContentsExplanation { get; set; }
 
         [JsonProperty(PropertyName = "invoice")]
-        public object Invoice { get; set; }
+        public string Invoice { get; set; }
 
         [JsonProperty(PropertyName = "license")]
-        public object License { get; set; }
+        public string License { get; set; }
 
         [JsonProperty(PropertyName = "certificate")]
-        public object Certificate { get; set; }
+        public string Certificate { get; set; }
 
         [JsonProperty(PropertyName = "notes")]
-        public object Notes { get; set; }
+        public string Notes { get; set; }
 
         [JsonProperty(PropertyName = "eel_pfc")]
-        public object EelPfc { get; set; }
+        public string EelPfc { get; set; }
 
         [JsonProperty(PropertyName = "aes_itn")]
-        public object AesItn { get; set; }
+        public string AesItn { get; set; }
 
         [JsonProperty(PropertyName = "non_delivery_option")]
-        public object NonDeliveryOption { get; set; }
+        public string NonDeliveryOption { get; set; }
 
         [JsonProperty(PropertyName = "certify")]
-        public object Certify { get; set; }
+        public bool Certify { get; set; }
 
         [JsonProperty(PropertyName = "certify_signer")]
-        public object CertifySigner { get; set; }
+        public string CertifySigner { get; set; }
 
         [JsonProperty (PropertyName = "address_importer")]
         public Address AddressImporter { get; set; }
 
         [JsonProperty(PropertyName = "disclaimer")]
-        public object Discliamer { get; set; }
+        public string Discliamer { get; set; }
 
         [JsonProperty(PropertyName = "incoterm")]
-        public object Incoterm { get; set; }
+        public string Incoterm { get; set; }
 
         [JsonProperty(PropertyName = "items")]
-        public object Items { get; set; }
+        public List<string> Items { get; set; }
 
         [JsonProperty(PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata { get; set; }
     }
 }
 

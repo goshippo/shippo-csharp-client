@@ -7,40 +7,40 @@ namespace Shippo
     public class Parcel : ShippoId
     {
         [JsonProperty(PropertyName = "object_state")]
-        public object ObjectState { get; set; }
+        public string ObjectState { get; set; }
 
         [JsonProperty(PropertyName = "object_created")]
-        public object ObjectCreated { get; set; }
+        public DateTime ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUpdaed { get; set; }
+        public DateTime ObjectUpdaed { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
-        public object ObjectOwner { get; set; }
+        public string ObjectOwner { get; set; }
 
         [JsonProperty(PropertyName = "length")]
-        public object Length { get; set; }
+        public decimal Length { get; set; }
 
         [JsonProperty(PropertyName = "width")]
-        public object Width { get; set; }
+        public decimal Width { get; set; }
 
         [JsonProperty(PropertyName = "height")]
-        public object Height { get; set; }
+        public decimal Height { get; set; }
 
         [JsonProperty(PropertyName = "distance_unit")]
-        public object DistanceUnit { get; set; }
+        public string DistanceUnit { get; set; }
 
         [JsonProperty(PropertyName = "weight")]
-        public object Weight { get; set; }
+        public decimal Weight { get; set; }
 
         [JsonProperty(PropertyName = "mass_unit")]
-        public object MassUnit { get; set; }
+        public string MassUnit { get; set; }
 
         [JsonProperty(PropertyName = "template")]
         public string Template;
 
         [JsonProperty(PropertyName = "metadata")]
-        public object Metadata { get; set; }
+        public string Metadata { get; set; }
 
         [JsonProperty(PropertyName = "extra")]
         public object Extra;
@@ -52,11 +52,11 @@ namespace Shippo
                                                double weight, string massUnit)
         {
             Parcel p = new Parcel();
-            p.Length = length;
-            p.Width = width;
-            p.Height = height;
+            p.Length = Convert.ToDecimal(length);
+            p.Width = Convert.ToDecimal(width);
+            p.Height = Convert.ToDecimal(height);
             p.DistanceUnit = distance_unit;
-            p.Weight = weight;
+            p.Weight = Convert.ToDecimal(weight);
             p.MassUnit = massUnit;
             return p;
 
