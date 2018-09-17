@@ -23,7 +23,7 @@ namespace Shippo
         public string Transaction;
 
         [JsonProperty(PropertyName = "messages")]
-        public object Messages;
+        public IEnumerable<ShippoMessage> Messages;
 
         [JsonProperty(PropertyName = "metadata")]
         public string Metadata;

@@ -5,19 +5,19 @@ namespace Shippo {
     [JsonObject(MemberSerialization.OptIn)]
     public class CarrierAccount : ShippoId {
         [JsonProperty(PropertyName = "account_id")]
-        public object AccountId { get; set; }
+        public string AccountId { get; set; }
 
         [JsonProperty(PropertyName = "carrier")]
-        public object Carrier { get; set; }
+        public string Carrier { get; set; }
 
         [JsonProperty(PropertyName = "parameters")]
         public object Parameters { get; set; }
 
         [JsonProperty(PropertyName = "test")]
-        public object Test { get; set; }
+        public bool Test { get; set; }
 
         [JsonProperty(PropertyName = "active")]
-        public object Active { get; set; }
+        public bool Active { get; set; }
 
         [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
