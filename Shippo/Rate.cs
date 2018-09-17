@@ -62,6 +62,9 @@ namespace Shippo {
         public float Insurance_Amount { get; set; }
         [JsonProperty(PropertyName = "insurance_currency")]
         public string Insruance_Currency { get; set; }
+        [JsonProperty(PropertyName = "carrier_account")]
+
+        public string Carrier_Account { get; set; }
 
     }
 

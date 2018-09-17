@@ -90,8 +90,11 @@ namespace Shippo {
         // GET Requests
         public virtual T DoRequest<T>(string endpoint, string method = "GET", string body = null)
         {
+            var jsonSettings = new JsonSerializerSettings {
+                NullValueHandling = NullValueHandling.Ignore
+            };
             var json = DoRequest(endpoint, method, body);
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, jsonSettings);
         }
         // GET Requests Helper
         public virtual string DoRequest(string endpoint)
