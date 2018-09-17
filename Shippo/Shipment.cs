@@ -50,7 +50,7 @@ namespace Shippo {
         public Rate[] Rates { get; set; }
 
         [JsonProperty(PropertyName = "messages")]
-        public object Messages { get; set; }
+        public IEnumerable<ShippoMessage> Messages { get; set; }
 
         [JsonProperty(PropertyName = "test")]
         public bool? Test;
