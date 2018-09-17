@@ -54,6 +54,13 @@ namespace Shippo {
         [JsonProperty(PropertyName = "test")]
         public bool? Test;
 
+        [JsonProperty(PropertyName = "rates_url")]
+        public string Rates_Url { get; set; }
+
+        [JsonProperty(PropertyName = "insurance_amount")]
+        public decimal Insurance_Amount { get; set; }
+
+
         public static Shipment createForBatch(Address addressFrom,
                                               Address addressTo, Parcel[] parcels)
         {

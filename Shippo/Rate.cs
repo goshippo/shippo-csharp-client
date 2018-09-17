@@ -48,6 +48,21 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "zone")]
         public object Zone { get; set; }
+
+        [JsonProperty(PropertyName = "shipment")]
+        public string Shipment { get; set; }
+
+        [JsonProperty(PropertyName = "insurance")]
+        public bool Insurance { get; set; }
+        [JsonProperty(PropertyName = "insurance_amount_local")]
+        public float Insurance_Amount_Local { get; set; }
+        [JsonProperty(PropertyName = "insurance_currency_local")]
+        public string Insurance_Currency_Local { get; set; }
+        [JsonProperty(PropertyName = "insurance_amount")]
+        public float Insurance_Amount { get; set; }
+        [JsonProperty(PropertyName = "insurance_currency")]
+        public string Insruance_Currency { get; set; }
+
     }
 
     public class ServiceLevel
