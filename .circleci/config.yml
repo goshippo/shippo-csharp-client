@@ -1,0 +1,76 @@
+version: 2
+job_defaults: &job_defaults
+    docker:
+        - image: circleci/builder-base:latest
+    working_directory: ~/scratch
+
+jobs:
+    test:
+      <<: *job_defaults
+      steps:
+        - checkout
+        - run:
+            name: Installing Mono
+            command: |
+                sudo apt-get update
+                sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+                sudo apt install apt-transport-https
+                echo "deb https://download.mono-project.com/repo/ubuntu stable-trusty main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+                sudo apt update
+                sudo apt --yes --force-yes install mono-devel
+        - run:
+            name: Installing Dotnet and Nuget
+            command: |
+                wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
+                sudo dpkg -i packages-microsoft-prod.deb
+                sudo apt-get install apt-transport-https
+                sudo apt-get update
+                sudo apt-get --yes --force-yes install dotnet-sdk-2.1
+                sudo apt-get install nuget
+        - save_cache:
+            paths:
+              - /usr/bin
+            key: mono-dotnet
+        - run: nuget restore
+        - run: msbuild
+        - run: nuget install NUnit.Runners -version 3.9.0
+        - run: mono NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ShippoTesting/bin/Debug/ShippoTesting.dll
+    pack:
+      <<: *job_defaults
+      steps:
+        - checkout
+        - run: sudo-apt-get install jq
+        - run: sudo apt-get install libxml2-utils
+        - restore_cache:
+            keys: mono-dotnet
+        - run:
+            name: Deployment
+            command: |
+                export version=$(xmllint --xpath '/Project/PropertyGroup/Version/text()' Shippo.csproj)
+                msbuild /t:Pack /p:Configuration=Release Shippo/Shippo.csproj
+                cd Shippo/bin/Release
+                dotnet nuget push Shippo.$version.nupkg -k $Nuget_Key -s https://api.nuget.org/v3/index.json
+                export rid=$(curl -H "Content-Type: application/json" -H "Authorization: token $API_Token_Github" -X POST -d '{"tag_name":"'$version'", "target_commitish":"release","name":"'$version'","body":"", "draft":true, "prerelease":false}' https://api.github.com/repos/goshippo/shippo-csharp-client/releases | jq '.id')
+                curl -H "Content-Type: application/octet-stream" -H "Authorization: token $API_Token_Github" -X POST --data-binary @Shippo.$version.nupkg https://uploads.github.com/repos/goshippo/shippo-csharp-client/releases/$rid/assets?name=@Shippo.$version.nupkg
+
+
+
+release_filter: &release_filter
+    filters:
+        branches:
+            only: release
+
+workflows:
+    version: 2
+    test-and-deploy:
+        jobs:
+        - test
+        - hold:
+            type: approval
+            requires:
+                - test
+            <<: *release_filter
+        - pack:
+            requires:
+                - hold
+            <<: *release_filter
