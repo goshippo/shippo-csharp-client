@@ -29,7 +29,7 @@ jobs:
                 sudo apt-get install nuget
         - save_cache:
             paths:
-              - /usr/bin
+              - /usr
             key: mono-dotnet
         - run: nuget restore
         - run: msbuild
@@ -39,14 +39,36 @@ jobs:
       <<: *job_defaults
       steps:
         - checkout
-        - run: sudo-apt-get install jq
-        - run: sudo apt-get install libxml2-utils
+        - run:
+            name: Installing Mono
+            command: |
+                sudo apt-get update
+                sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+                sudo apt install apt-transport-https
+                echo "deb https://download.mono-project.com/repo/ubuntu stable-trusty main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+                sudo apt update
+                sudo apt --yes --force-yes install mono-devel
         - restore_cache:
             keys: mono-dotnet
         - run:
+            name: Installing Dotnet and Nuget
+            command: |
+                wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
+                sudo dpkg -i packages-microsoft-prod.deb
+                sudo apt-get install apt-transport-https
+                sudo apt-get update
+                sudo apt-get --yes --force-yes install dotnet-sdk-2.1
+                sudo apt-get install nuget
+        - run: nuget restore
+        - run: sudo add-apt-repository universe
+        - run: sudo apt-get update
+        - run: sudo apt-get install jq
+        - run: sudo apt-get install libxml2-utils
+        
+        - run:
             name: Deployment
             command: |
-                export version=$(xmllint --xpath '/Project/PropertyGroup/Version/text()' Shippo.csproj)
+                export version=$(xmllint --xpath '/Project/PropertyGroup/Version/text()' Shippo/Shippo.csproj)
                 msbuild /t:Pack /p:Configuration=Release Shippo/Shippo.csproj
                 cd Shippo/bin/Release
                 dotnet nuget push Shippo.$version.nupkg -k $Nuget_Key -s https://api.nuget.org/v3/index.json
@@ -58,8 +80,9 @@ jobs:
 release_filter: &release_filter
     filters:
         branches:
-            only: release
-
+#            only: release
+            only: ci
+            
 workflows:
     version: 2
     test-and-deploy:

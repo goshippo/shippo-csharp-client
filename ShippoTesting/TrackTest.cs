@@ -10,8 +10,8 @@ namespace ShippoTesting
     [TestFixture]
     public class TrackTest : ShippoTest
     {
-        private static readonly String TRACKING_NO = "9205590164917337534322";
-        private static readonly String CARRIER = "usps";
+        private static readonly String TRACKING_NO = "SHIPPO_TRANSIT";
+        private static readonly String CARRIER = "shippo";
 
         [Test]
         public void TestValidGetStatus()
