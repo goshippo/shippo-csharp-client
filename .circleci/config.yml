@@ -64,7 +64,7 @@ jobs:
         - run: sudo apt-get update
         - run: sudo apt-get install jq
         - run: sudo apt-get install libxml2-utils
-        
+        - run: sudo apt-get  --yes --force-yes install curl
         - run:
             name: Deployment
             command: |
@@ -80,8 +80,7 @@ jobs:
 release_filter: &release_filter
     filters:
         branches:
-#            only: release
-            only: ci
+            only: release
             
 workflows:
     version: 2

@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/goshippo/shippo-csharp-client.svg?style=svg)](https://circleci.com/gh/goshippo/shippo-csharp-client)
+
 # Shippo C# API wrapper
 
 Shippo is a shipping API that connects you with [multiple shipping carriers](https://goshippo.com/carriers/) (such as USPS, UPS, DHL, Canada Post, Australia Post, UberRUSH and many others) through one interface.
