@@ -72,16 +72,17 @@ jobs:
                 msbuild /t:Pack /p:Configuration=Release Shippo/Shippo.csproj
                 cd Shippo/bin/Release
                 dotnet nuget push Shippo.$version.nupkg -k $Nuget_Key -s https://api.nuget.org/v3/index.json
-                export rid=$(curl -H "Content-Type: application/json" -H "Authorization: token $API_Token_Github" -X POST -d '{"tag_name":"'$version'", "target_commitish":"release","name":"'$version'","body":"", "draft":true, "prerelease":false}' https://api.github.com/repos/goshippo/shippo-csharp-client/releases | jq '.id')
+                export rid=$(curl -H "Content-Type: application/json" -H "Authorization: token $API_Token_Github" -X POST -d '{"tag_name":"'$version'", "target_commitish":"ci","name":"'$version'","body":"", "draft":true, "prerelease":false}' https://api.github.com/repos/goshippo/shippo-csharp-client/releases | jq '.id')
                 curl -H "Content-Type: application/octet-stream" -H "Authorization: token $API_Token_Github" -X POST --data-binary @Shippo.$version.nupkg https://uploads.github.com/repos/goshippo/shippo-csharp-client/releases/$rid/assets?name=@Shippo.$version.nupkg
 
-
+#                export rid=$(curl -H "Content-Type: application/json" -H "Authorization: token $API_Token_Github" -X POST -d '{"tag_name":"'$version'", "target_commitish":"release","name":"'$version'","body":"", "draft":true, "prerelease":false}' https://api.github.com/repos/goshippo/shippo-csharp-client/releases | jq '.id')
 
 release_filter: &release_filter
     filters:
         branches:
-            only: release
-            
+#            only: release
+            only: ci
+
 workflows:
     version: 2
     test-and-deploy:
