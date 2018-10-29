@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;net40</TargetFrameworks>
-    <Version>2.1.10</Version>
+    <Version>2.1.13</Version>
     <Title>Shippo client library</Title>
     <Description>.NET library which integrates with Shippo Multi Carrier Shipping API. This library provides access to Shippo (goshippo.com) API capabilities. Including label generation, rating, tracking and more.</Description>
     <Summary>Shippo Shipping API client Library (USPS, FedEx, UPS, and more)</Summary>
