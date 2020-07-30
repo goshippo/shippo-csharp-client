@@ -31,7 +31,7 @@ using Newtonsoft.Json;
 
 namespace Shippo {
     public class APIResource {
-        public static readonly string api_endpoint = "https://api.goshippo.com/";
+        public static readonly string api_endpoint = "https://api.goshippo.com";
         static readonly string user_agent = "Shippo/v1 CSharpBindings/1.0";
         public static readonly int RatesReqTimeout = 25;
         public static readonly int TransactionReqTimeout = 25;
