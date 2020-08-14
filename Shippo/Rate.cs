@@ -48,6 +48,9 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "zone")]
         public object Zone { get; set; }
+        
+        [JsonProperty(PropertyName = "carrier_account")]
+        public string Carrier_Account { get; set; }
     }
 
     public class ServiceLevel
