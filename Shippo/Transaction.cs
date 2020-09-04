@@ -26,7 +26,7 @@ namespace Shippo {
         public object Rate { get; set; }
 
         [JsonProperty(PropertyName = "tracking_number")]
-        public object TrackingNumber { get; set; }
+        public string TrackingNumber { get; set; }
 
         [JsonProperty(PropertyName = "tracking_status")]
         public TrackingStatus TrackingStatus { get; set; }
