@@ -32,10 +32,10 @@ namespace Shippo {
         public TrackingStatus TrackingStatus { get; set; }
 
         [JsonProperty(PropertyName = "tracking_url_provider")]
-        public object TrackingUrlProvider { get; set; }
+        public string TrackingUrlProvider { get; set; }
 
         [JsonProperty(PropertyName = "label_url")]
-        public object LabelURL { get; set; }
+        public string LabelURL { get; set; }
 
     	[JsonProperty(PropertyName = "commercial_invoice_url")]
     	public object CommercialInvoiceUrl { get; set; }
