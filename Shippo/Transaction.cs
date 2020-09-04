@@ -14,7 +14,7 @@ namespace Shippo {
         public object ObjectCreated { get; set; }
 
         [JsonProperty(PropertyName = "object_updated")]
-        public object ObjectUPdated { get; set; }
+        public object ObjectUpdated { get; set; }
 
         [JsonProperty(PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
@@ -29,7 +29,7 @@ namespace Shippo {
         public object TrackingNumber { get; set; }
 
         [JsonProperty(PropertyName = "tracking_status")]
-        public object TrackingStatus { get; set; }
+        public TrackingStatus TrackingStatus { get; set; }
 
         [JsonProperty(PropertyName = "tracking_url_provider")]
         public object TrackingUrlProvider { get; set; }
