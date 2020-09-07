@@ -25,9 +25,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Web;
-
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-
 
 namespace Shippo {
     public class APIResource {
@@ -35,13 +34,16 @@ namespace Shippo {
         static readonly string user_agent = "Shippo/v1 CSharpBindings/1.0";
         public static readonly int RatesReqTimeout = 25;
         public static readonly int TransactionReqTimeout = 25;
+
+        public readonly ILogger logger;
         static readonly Encoding encoding = Encoding.UTF8;
         String accessToken;
         String apiVersion;
 
         // API Resource Constructor
-        public APIResource(string inputToken)
+        public APIResource(ILogger logger, string inputToken)
         {
+            this.logger = logger;
             accessToken = inputToken;
             TimeoutSeconds = 25;
             apiVersion = null;
@@ -103,7 +105,9 @@ namespace Shippo {
         {
             string result = null;
             WebRequest req = SetupRequest(method, endpoint);
+            logger.LogInformation($"Shippo Http request endpoint: {endpoint}, method: {method}");
             if (body != null) {
+                logger.LogInformation($"Shippo Http request body: {body}");
                 byte[] bytes = encoding.GetBytes(body.ToString());
                 req.ContentLength = bytes.Length;
                 using (Stream st = req.GetRequestStream()) {
@@ -123,11 +127,15 @@ namespace Shippo {
                     if (resp != null)
                         status_code = resp.StatusCode;
 
+                    logger.LogInformation($"Shippo Http request statuscode: {status_code}");    
+
                     if ((int) status_code <= 500)
                         throw new ShippoException(json_error, wexc);
                 }
                 throw;
             }
+            logger.LogInformation($"Shippo Http request result: {result}");
+            
             return result;
         }
 
