@@ -105,9 +105,9 @@ namespace Shippo {
         {
             string result = null;
             WebRequest req = SetupRequest(method, endpoint);
-            logger.LogInformation($"Shippo Http request endpoint: {endpoint}, method: {method}");
+            logger.LogInformation($"GoShippo Http request endpoint: {endpoint}, method: {method}");
             if (body != null) {
-                logger.LogInformation($"Shippo Http request body: {body}");
+                logger.LogInformation($"GoShippo Http request body: {body}");
                 byte[] bytes = encoding.GetBytes(body.ToString());
                 req.ContentLength = bytes.Length;
                 using (Stream st = req.GetRequestStream()) {
@@ -127,14 +127,14 @@ namespace Shippo {
                     if (resp != null)
                         status_code = resp.StatusCode;
 
-                    logger.LogInformation($"Shippo Http request statuscode: {status_code}");    
+                    logger.LogInformation($"GoShippo Http request statuscode: {status_code}");    
 
                     if ((int) status_code <= 500)
                         throw new ShippoException(json_error, wexc);
                 }
                 throw;
             }
-            logger.LogInformation($"Shippo Http request result: {result}");
+            logger.LogInformation($"GoShippo Http request result: {result}");
             
             return result;
         }

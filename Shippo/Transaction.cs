@@ -8,7 +8,7 @@ namespace Shippo {
         public object ObjectState { get; set; }
 
         [JsonProperty(PropertyName = "status")]
-        public object Status { get; set; }
+        public string Status { get; set; }
 
         [JsonProperty(PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
