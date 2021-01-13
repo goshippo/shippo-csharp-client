@@ -69,6 +69,12 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
+
+        [JsonProperty(PropertyName = "b13a_filing_option")]
+        public object B13aFilingOption { get; set; }
+
+        [JsonProperty(PropertyName = "b13a_number")]
+        public object B13aNumber { get; set; }
     }
 }
 
