@@ -54,25 +54,9 @@ namespace ShippoTesting {
             CustomsDeclaration retrievedObject;
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration ((string)testObject.ObjectId);
-            Console.Write(retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
             Assert.IsNotNull(retrievedObject.AddressImporter);
-            Assert.AreEqual(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual("Undefault New Wu", retrievedObject.AddressImporter.Name);
-            Assert.AreEqual("Shippo", retrievedObject.AddressImporter.Company);
-            Assert.AreEqual("", retrievedObject.AddressImporter.StreetNo);
-            Assert.AreEqual("215 Clayton St", retrievedObject.AddressImporter.Street1);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street2);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street3);
-            Assert.AreEqual("San Francisco", retrievedObject.AddressImporter.City);
-            Assert.AreEqual("CA", retrievedObject.AddressImporter.State);
-            Assert.AreEqual("94117-1913", retrievedObject.AddressImporter.Zip);
-            Assert.AreEqual("US", retrievedObject.AddressImporter.Country);
-            Assert.AreEqual("0015553419393", retrievedObject.AddressImporter.Phone);
-            Assert.AreEqual("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsResidential);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.Test);
+            Assert.AreEqual(testObject.AddressImporter, retrievedObject.AddressImporter);
         }
 
         [Test]
@@ -145,6 +129,8 @@ namespace ShippoTesting {
             parameters.Add ("disclaimer", "");
             parameters.Add ("incoterm", "");
             parameters.Add("metadata", "Order ID #123123");
+            parameters.Add("b13a_filing_option", "FILED_ELECTRONICALLY");
+            parameters.Add("b13a_number", "AA9999202008311");
 
             JArray customsItems = new JArray ();
             customsItems.Add ((string)customsItem.ObjectId);
