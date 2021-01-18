@@ -99,6 +99,7 @@ namespace ShippoTesting
             parameters2.Add("shipment_date", now);
             parameters2.Add("address_from", addressFrom.ObjectId);
             List<String> transactions = new List<String>();
+            transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);
 
             Console.WriteLine("Printing manifest parameters");
