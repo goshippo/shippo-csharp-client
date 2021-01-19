@@ -31,7 +31,6 @@ namespace ShippoTesting {
             Assert.AreEqual(parameters["non_delivery_option"], testObject.NonDeliveryOption);
             Assert.AreEqual(parameters["certify"], testObject.Certify);
             Assert.AreEqual(parameters["certify_signer"], testObject.CertifySigner);
-            Assert.AreEqual(parameters["disclaimer"], testObject.Discliamer);
             Assert.AreEqual(parameters["incoterm"], testObject.Incoterm);
             Assert.AreEqual(parameters["b13a_filing_option"], testObject.B13aFilingOption);
             Assert.AreEqual(parameters["b13a_number"], testObject.B13aNumber);
