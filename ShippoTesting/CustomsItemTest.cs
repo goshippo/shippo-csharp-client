@@ -58,7 +58,7 @@ namespace ShippoTesting {
             parameters.Add("mass_unit", "g");
             parameters.Add("value_amount", "20");
             parameters.Add("value_currency", "USD");
-            parameters.Add("tariff_number", "");
+            parameters.Add("tariff_number", "1234567890");
             parameters.Add("origin_country", "US");
             parameters.Add("sku_code", "AB123");
             parameters.Add("eccn_ear99", "3A001");
