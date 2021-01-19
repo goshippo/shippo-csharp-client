@@ -67,9 +67,10 @@ namespace Shippo {
 
             // Disable lines below for basic auth
             string tokenType = "ShippoToken";
-            if (accessToken.StartsWith("oauth.")) {
-                tokenType = "Bearer";
-            }
+            //if (accessToken.StartsWith("oauth."))
+            //{
+            //    tokenType = "Bearer";
+            //}
             req.Headers.Add("Authorization", string.Format("{0} {1}", tokenType, accessToken));
             if (apiVersion != null) {
                 req.Headers.Add("Shippo-API-Version", apiVersion);
@@ -90,9 +91,7 @@ namespace Shippo {
         // GET Requests
         public virtual T DoRequest<T>(string endpoint, string method = "GET", string body = null)
         {
-            Console.WriteLine("Request body: " + body);
             var json = DoRequest(endpoint, method, body);
-            Console.WriteLine("Response json: " + json);
             return JsonConvert.DeserializeObject<T>(json);
         }
         // GET Requests Helper

@@ -57,42 +57,19 @@ namespace ShippoTesting
             parameters0.Add("metadata", "Customer ID 123456");
             parameters0.Add("async", false);
 
-            Console.WriteLine("Printing shipment parameters");
-            foreach (string key in parameters0.Keys)
-            {
-                Console.WriteLine(String.Format("{0}: {1}", key, parameters0[key]));
-            }
-
             Shipment shipment = getAPIResource().CreateShipment(parameters0);
-            Console.WriteLine("Shipment ID: " + shipment.ObjectId);
-
             Hashtable parameters1 = new Hashtable();
             parameters1.Add("id", shipment.ObjectId);
             parameters1.Add("currency_code", "USD");
-            Console.WriteLine("Printing rates parameters");
-            foreach (string key in parameters1.Keys)
-            {
-                Console.WriteLine(String.Format("{0}: {1}", key, parameters1[key]));
-            }
 
             ShippoCollection<Rate> rateCollection = getAPIResource().GetShippingRatesSync(parameters1);
-            Console.WriteLine("Rate list: " + rateCollection.Data);
-
             List<Rate> rateList = rateCollection.Data;
             Rate[] rateArray = rateList.ToArray();
 
             parameters1.Add("rate", rateArray [0].ObjectId);
             parameters1.Add("metadata", "Customer ID 123456");
 
-            Console.WriteLine("Printing transaction parameters");
-            foreach (string key in parameters1.Keys)
-            {
-                Console.WriteLine(String.Format("{0}: {1}", key, parameters1[key]));
-            }
             Transaction transaction = getAPIResource().CreateTransactionSync(parameters1);
-            Console.WriteLine("Transaction ID: " + transaction.ObjectId);
-            Console.WriteLine("Transaction status: " + transaction.Status);
-            Console.WriteLine("Transaction object state: " + transaction.ObjectState);
 
             Hashtable parameters2 = new Hashtable();
             parameters2.Add("provider", "USPS");
@@ -102,11 +79,6 @@ namespace ShippoTesting
             transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);
 
-            Console.WriteLine("Printing manifest parameters");
-            foreach (string key in parameters2.Keys)
-            {
-                Console.WriteLine(String.Format("{0}: {1}", key, parameters2[key]));
-            }
             return getAPIResource().CreateManifest(parameters2);
         }
 
