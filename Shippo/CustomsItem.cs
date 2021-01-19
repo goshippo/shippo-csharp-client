@@ -40,6 +40,12 @@ namespace Shippo {
         [JsonProperty(PropertyName = "origin_country")]
         public object OriginCountry { get; set; }
 
+        [JsonProperty(PropertyName = "sku_code")]
+        public object SkuCode { get; set; }
+
+        [JsonProperty(PropertyName = "eccn_ear99")]
+        public object EccnEar99 { get; set; }
+
         [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
     }

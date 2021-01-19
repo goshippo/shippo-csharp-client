@@ -2,6 +2,26 @@
 using Newtonsoft.Json;
 
 namespace Shippo {
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class InvoicedCharges : ShippoId
+    {
+        [JsonProperty(PropertyName = "currency")]
+        public object Currency { get; set; }
+
+        [JsonProperty(PropertyName = "total_shipping")]
+        public object TotalShipping { get; set; }
+
+        [JsonProperty(PropertyName = "total_taxes")]
+        public object TotalTaxes { get; set; }
+
+        [JsonProperty(PropertyName = "total_duties")]
+        public object TotalDuties { get; set; }
+
+        [JsonProperty(PropertyName = "other_fees")]
+        public object OtherFees { get; set; }
+    }
+
     [JsonObject(MemberSerialization.OptIn)]
     public class CustomsDeclaration : ShippoId {
         [JsonProperty(PropertyName = "object_created")]
@@ -56,7 +76,7 @@ namespace Shippo {
         public object CertifySigner { get; set; }
 
         [JsonProperty (PropertyName = "address_importer")]
-        public Address AddressImporter { get; set; }
+        public object AddressImporter { get; set; }
 
         [JsonProperty(PropertyName = "disclaimer")]
         public object Discliamer { get; set; }
@@ -69,6 +89,15 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "metadata")]
         public object Metadata { get; set; }
+
+        [JsonProperty(PropertyName = "b13a_filing_option")]
+        public object B13aFilingOption { get; set; }
+
+        [JsonProperty(PropertyName = "b13a_number")]
+        public object B13aNumber { get; set; }
+
+        [JsonProperty(PropertyName = "invoiced_charges")]
+        public InvoicedCharges InvoicedCharges { get; set; }
     }
 }
 

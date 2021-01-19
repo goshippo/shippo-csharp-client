@@ -44,7 +44,7 @@ namespace Shippo {
         {
             accessToken = inputToken;
             TimeoutSeconds = 25;
-            apiVersion = null;
+            apiVersion = "2018-02-08";
         }
 
         public virtual void SetApiVersion(String version) {

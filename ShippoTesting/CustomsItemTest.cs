@@ -12,8 +12,20 @@ namespace ShippoTesting {
         [Test]
         public void TestValidCreate()
         {
+            Hashtable parameters = getDefaultParameters();
             CustomsItem testObject = CustomsItemTest.getDefaultObject();
             Assert.AreEqual("VALID", testObject.ObjectState);
+            Assert.AreEqual(parameters["description"], testObject.Description);
+            Assert.AreEqual(int.Parse((string) parameters["quantity"]), testObject.Quantity);
+            Assert.AreEqual(parameters["net_weight"], testObject.NetWeight);
+            Assert.AreEqual(parameters["mass_unit"], testObject.MassUnit);
+            Assert.AreEqual(parameters["value_amount"], testObject.ValueAmount);
+            Assert.AreEqual(parameters["value_currency"], testObject.ValueCurrency);
+            Assert.AreEqual(parameters["tariff_number"], testObject.TariffNumber);
+            Assert.AreEqual(parameters["origin_country"], testObject.OriginCountry);
+            Assert.AreEqual(parameters["sku_code"], testObject.SkuCode);
+            Assert.AreEqual(parameters["eccn_ear99"], testObject.EccnEar99);
+            Assert.AreEqual(parameters["metadata"], testObject.Metadata);
         }
 
         [Test]
@@ -37,7 +49,7 @@ namespace ShippoTesting {
             Assert.AreNotEqual(0, parcels.Data.Count);
         }
 
-        public static CustomsItem getDefaultObject()
+        public static Hashtable getDefaultParameters()
         {
             Hashtable parameters = new Hashtable();
             parameters.Add("description", "T-Shirt");
@@ -46,11 +58,17 @@ namespace ShippoTesting {
             parameters.Add("mass_unit", "g");
             parameters.Add("value_amount", "20");
             parameters.Add("value_currency", "USD");
-            parameters.Add("tariff_number", "");
+            parameters.Add("tariff_number", "1234567890");
             parameters.Add("origin_country", "US");
+            parameters.Add("sku_code", "AB123");
+            parameters.Add("eccn_ear99", "3A001");
             parameters.Add("metadata", "Order ID #123123");
+            return parameters;
+        }
 
-            return getAPIResource().CreateCustomsItem(parameters);
+        public static CustomsItem getDefaultObject()
+        {
+            return getAPIResource().CreateCustomsItem(getDefaultParameters());
         }
     }
 }

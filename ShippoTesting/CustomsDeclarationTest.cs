@@ -16,7 +16,31 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject();
+            Hashtable parameters = CustomsDeclarationTest.getDefaultParameters();
             Assert.AreEqual("VALID", testObject.ObjectState);
+            Assert.AreEqual(parameters["exporter_reference"], testObject.ExporterReference);
+            Assert.AreEqual(parameters["importer_reference"], testObject.ImporterReference);
+            Assert.AreEqual(parameters["contents_type"], testObject.ContentsType);
+            Assert.AreEqual(parameters["contents_explanation"], testObject.ContentsExplanation);
+            Assert.AreEqual(parameters["invoice"], testObject.Invoice);
+            Assert.AreEqual(parameters["license"], testObject.License);
+            Assert.AreEqual(parameters["certificate"], testObject.Certificate);
+            Assert.AreEqual(parameters["notes"], testObject.Notes);
+            Assert.AreEqual(parameters["eel_pfc"], testObject.EelPfc);
+            Assert.AreEqual(parameters["aes_itn"], testObject.AesItn);
+            Assert.AreEqual(parameters["non_delivery_option"], testObject.NonDeliveryOption);
+            Assert.AreEqual(parameters["certify"], testObject.Certify);
+            Assert.AreEqual(parameters["certify_signer"], testObject.CertifySigner);
+            Assert.AreEqual(parameters["incoterm"], testObject.Incoterm);
+            Assert.AreEqual(parameters["b13a_filing_option"], testObject.B13aFilingOption);
+            Assert.AreEqual(parameters["b13a_number"], testObject.B13aNumber);
+
+            var invoicedChargesParameters = (Dictionary<String, String>)parameters["invoiced_charges"];
+            Assert.AreEqual(invoicedChargesParameters["total_shipping"], testObject.InvoicedCharges.TotalShipping);
+            Assert.AreEqual(invoicedChargesParameters["total_taxes"], testObject.InvoicedCharges.TotalTaxes);
+            Assert.AreEqual(invoicedChargesParameters["total_duties"], testObject.InvoicedCharges.TotalDuties);
+            Assert.AreEqual(invoicedChargesParameters["other_fees"], testObject.InvoicedCharges.OtherFees);
+            Assert.AreEqual(invoicedChargesParameters["currency"], testObject.InvoicedCharges.Currency);
         }
 
         [Test]
@@ -36,25 +60,9 @@ namespace ShippoTesting {
             CustomsDeclaration retrievedObject;
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration ((string)testObject.ObjectId);
-            Console.Write(retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
             Assert.IsNotNull(retrievedObject.AddressImporter);
-            Assert.AreEqual(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual("Undefault New Wu", retrievedObject.AddressImporter.Name);
-            Assert.AreEqual("Shippo", retrievedObject.AddressImporter.Company);
-            Assert.AreEqual("", retrievedObject.AddressImporter.StreetNo);
-            Assert.AreEqual("215 Clayton St", retrievedObject.AddressImporter.Street1);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street2);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street3);
-            Assert.AreEqual("San Francisco", retrievedObject.AddressImporter.City);
-            Assert.AreEqual("CA", retrievedObject.AddressImporter.State);
-            Assert.AreEqual("94117-1913", retrievedObject.AddressImporter.Zip);
-            Assert.AreEqual("US", retrievedObject.AddressImporter.Country);
-            Assert.AreEqual("0015553419393", retrievedObject.AddressImporter.Phone);
-            Assert.AreEqual("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsResidential);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.Test);
+            Assert.AreEqual(testObject.AddressImporter, retrievedObject.AddressImporter);
         }
 
         [Test]
@@ -68,31 +76,48 @@ namespace ShippoTesting {
             Assert.AreNotEqual(0, parcels.Data.Count);
         }
 
-        public static CustomsDeclaration getDefaultObject()
+        public static Hashtable getDefaultParameters()
         {
-            CustomsItem customsItem = CustomsItemTest.getDefaultObject();
             Hashtable parameters = new Hashtable();
-            parameters.Add("exporter_reference", "");
-            parameters.Add("importer_reference", "");
+            parameters.Add("exporter_reference", "Exporter Reference");
+            parameters.Add("importer_reference", "Importer Reference");
             parameters.Add("contents_type", "MERCHANDISE");
             parameters.Add("contents_explanation", "T-Shirt purchase");
             parameters.Add("invoice", "#123123");
-            parameters.Add("license", "");
-            parameters.Add("certificate", "");
-            parameters.Add("notes", "");
+            parameters.Add("license", "License");
+            parameters.Add("certificate", "Certificate");
+            parameters.Add("notes", "Notes");
             parameters.Add("eel_pfc", "NOEEI_30_37_a");
-            parameters.Add("aes_itn", "");
+            parameters.Add("aes_itn", "X20180426506889");
             parameters.Add("non_delivery_option", "ABANDON");
             parameters.Add("certify", true);
             parameters.Add("certify_signer", "Laura Behrens Wu");
-            parameters.Add("disclaimer", "");
             parameters.Add("incoterm", "");
-            
-            JArray customsItems = new JArray();
-            customsItems.Add((string) customsItem.ObjectId);
-
-            parameters.Add("items", customsItems);
+            parameters.Add("b13a_filing_option", "FILED_ELECTRONICALLY");
+            parameters.Add("b13a_number", "AA9999202008311");
             parameters.Add("metadata", "Order ID #123123");
+
+            JArray customsItems = new JArray();
+            CustomsItem customsItem = CustomsItemTest.getDefaultObject();
+            customsItems.Add((string)customsItem.ObjectId);
+            parameters.Add("items", customsItems);
+
+            var invoicedCharges = new Dictionary<String, String>(){
+                {"total_shipping", "1.23"},
+                {"total_taxes", "4.56"},
+                {"total_duties", "78.90"},
+                {"other_fees", "9.87"},
+                {"currency", "USD"}
+            };
+            parameters.Add("invoiced_charges", invoicedCharges);
+
+            return parameters;
+        }
+
+        public static CustomsDeclaration getDefaultObject()
+        {
+            CustomsItem customsItem = CustomsItemTest.getDefaultObject();
+            Hashtable parameters = CustomsDeclarationTest.getDefaultParameters();
             return getAPIResource().CreateCustomsDeclaration(parameters);
         }
 
@@ -115,14 +140,15 @@ namespace ShippoTesting {
             parameters.Add ("certify", true);
             parameters.Add ("certify_signer", "Laura Behrens Wu");
             parameters.Add ("address_importer", addressImporter.ObjectId);
-            parameters.Add ("disclaimer", "");
             parameters.Add ("incoterm", "");
+            parameters.Add("metadata", "Order ID #123123");
+            parameters.Add("b13a_filing_option", "FILED_ELECTRONICALLY");
+            parameters.Add("b13a_number", "AA9999202008311");
 
             JArray customsItems = new JArray ();
             customsItems.Add ((string)customsItem.ObjectId);
 
             parameters.Add ("items", customsItems);
-            parameters.Add ("metadata", "Order ID #123123");
             return getAPIResource ().CreateCustomsDeclaration (parameters);
         }
     }
