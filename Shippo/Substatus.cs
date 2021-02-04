@@ -10,7 +10,7 @@ namespace Shippo
         public string Code;
 
         [JsonProperty(PropertyName = "text")]
-        public string Test;
+        public string Text;
 
         [JsonProperty(PropertyName = "action_required")]
         public bool ActionRequired;
