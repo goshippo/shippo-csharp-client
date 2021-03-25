@@ -21,6 +21,9 @@ namespace Shippo
         [JsonProperty(PropertyName = "status_date")]
         public DateTime? StatusDate;
 
+        [JsonProperty(PropertyName = "substatus")]
+        public Substatus Substatus;
+
         [JsonProperty(PropertyName = "location")]
         public ShortAddress Location;
 
