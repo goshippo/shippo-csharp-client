@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;net40</TargetFrameworks>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Title>Shippo client library</Title>
     <Description>.NET library which integrates with Shippo Multi Carrier Shipping API. This library provides access to Shippo (goshippo.com) API capabilities. Including label generation, rating, tracking and more.</Description>
     <Summary>Shippo Shipping API client Library (USPS, FedEx, UPS, and more)</Summary>
     <PackageProjectUrl>https://github.com/goshippo/shippo-csharp-client/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/goshippo/shippo-csharp-client/</RepositoryUrl>
     <PackageTags>USPS Fedex UPS API Shippo</PackageTags>
-    <PackageReleaseNotes>Adding new fields and updating existing fields in CustomsDeclaration and CustomsItems</PackageReleaseNotes>
+    <PackageReleaseNotes>Added Tracking Sub-statuses and additional Customs and Manifest testing</PackageReleaseNotes>
     <RepositoryType>Github</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
