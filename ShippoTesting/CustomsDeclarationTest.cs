@@ -41,6 +41,9 @@ namespace ShippoTesting {
             Assert.AreEqual(invoicedChargesParameters["total_duties"], testObject.InvoicedCharges.TotalDuties);
             Assert.AreEqual(invoicedChargesParameters["other_fees"], testObject.InvoicedCharges.OtherFees);
             Assert.AreEqual(invoicedChargesParameters["currency"], testObject.InvoicedCharges.Currency);
+
+            var exporterIdentificationParameters = (Dictionary<String, String>)parameters["exporter_identification"];
+            Assert.AreEqual(exporterIdentificationParameters["eori_number"], testObject.ExporterIdentification.EoriNumber);
         }
 
         [Test]
@@ -110,6 +113,11 @@ namespace ShippoTesting {
                 {"currency", "USD"}
             };
             parameters.Add("invoiced_charges", invoicedCharges);
+
+            var exporterIdentification = new Dictionary<String, String>(){
+                {"eori_number", "PL12345678912345"},
+            };
+            parameters.Add("exporter_identification", exporterIdentification);
 
             return parameters;
         }

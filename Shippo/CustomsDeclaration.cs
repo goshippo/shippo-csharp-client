@@ -23,6 +23,13 @@ namespace Shippo {
     }
 
     [JsonObject(MemberSerialization.OptIn)]
+    public class ExporterIdentification : ShippoId
+    {
+        [JsonProperty(PropertyName = "eori_number")]
+        public object EoriNumber { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
     public class CustomsDeclaration : ShippoId {
         [JsonProperty(PropertyName = "object_created")]
         public object ObjectCreated { get; set; }
@@ -98,6 +105,9 @@ namespace Shippo {
 
         [JsonProperty(PropertyName = "invoiced_charges")]
         public InvoicedCharges InvoicedCharges { get; set; }
+
+        [JsonProperty(PropertyName = "exporter_identification")]
+        public ExporterIdentification ExporterIdentification { get; set; }
     }
 }
 
