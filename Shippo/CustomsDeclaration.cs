@@ -27,6 +27,19 @@ namespace Shippo {
     {
         [JsonProperty(PropertyName = "eori_number")]
         public object EoriNumber { get; set; }
+
+        [JsonProperty(PropertyName = "tax_id")]
+        public TaxId TaxId { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class TaxId : ShippoId
+    {
+        [JsonProperty(PropertyName = "number")]
+        public object Number { get; set; }
+
+        [JsonProperty(PropertyName = "type")]
+        public object Type { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]
