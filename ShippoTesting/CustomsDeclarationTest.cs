@@ -42,7 +42,10 @@ namespace ShippoTesting {
             Assert.AreEqual(invoicedChargesParameters["other_fees"], testObject.InvoicedCharges.OtherFees);
             Assert.AreEqual(invoicedChargesParameters["currency"], testObject.InvoicedCharges.Currency);
 
-            var exporterIdentificationParameters = (Dictionary<String, String>)parameters["exporter_identification"];
+            var exporterIdentificationParameters = (Dictionary<String, Object>)parameters["exporter_identification"];
+            var taxIdParameters = (Dictionary<String, String>) exporterIdentificationParameters["tax_id"];
+            Assert.AreEqual(taxIdParameters["number"], testObject.ExporterIdentification.TaxId.Number);
+            Assert.AreEqual(taxIdParameters["type"], testObject.ExporterIdentification.TaxId.Type);
             Assert.AreEqual(exporterIdentificationParameters["eori_number"], testObject.ExporterIdentification.EoriNumber);
         }
 
@@ -114,8 +117,14 @@ namespace ShippoTesting {
             };
             parameters.Add("invoiced_charges", invoicedCharges);
 
-            var exporterIdentification = new Dictionary<String, String>(){
+            var taxId = new Dictionary<String, String>()
+            {
+                {"number", "123456789"},
+                {"type", "EIN" }
+            };
+            var exporterIdentification = new Dictionary<String, Object>(){
                 {"eori_number", "PL12345678912345"},
+                {"tax_id", taxId}
             };
             parameters.Add("exporter_identification", exporterIdentification);
 
