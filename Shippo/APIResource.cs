@@ -500,6 +500,12 @@ namespace Shippo {
 
         #region Track
 
+        public Track CreateTrack(Hashtable parameters)
+        {
+            string ep = String.Format("{0}/tracks", api_endpoint);
+            return DoRequest<Track>(ep, "POST", serialize(parameters));
+        }
+
         public Track RetrieveTracking(String carrier, String id)
         {
             string encodedCarrier = HttpUtility.HtmlEncode(carrier);
@@ -513,6 +519,38 @@ namespace Shippo {
             // For now the trailing '/' is required.
             string ep = String.Format("{0}/tracks/", api_endpoint);
             return DoRequest<Track>(ep, "POST", serialize(parameters));
+        }
+
+        #endregion
+
+        #region Order
+
+        public Order CreateOrder(Hashtable parameters)
+        {
+            string ep = String.Format("{0}/orders", api_endpoint);
+            return DoRequest<Order>(ep, "POST", serialize(parameters));
+        }
+
+        public Order RetrieveOrder(String id)
+        {
+            string ep = String.Format("{0}/orders/{1}", api_endpoint, id);
+            return DoRequest<Order>(ep, "GET");
+        }
+
+        public ShippoCollection<Order> AllOrders(Hashtable parameters)
+        {
+            string ep = String.Format("{0}/orders?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<Order>>(ep);
+        }
+
+        #endregion
+
+        #region Pickup
+
+        public Pickup CreatePickup(Hashtable parameters)
+        {
+            string ep = String.Format("{0}/pickups", api_endpoint);
+            return DoRequest<Pickup>(ep, "POST", serialize(parameters));
         }
 
         #endregion

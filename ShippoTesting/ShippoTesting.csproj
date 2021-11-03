@@ -53,6 +53,8 @@
     <Compile Include="BatchTest.cs" />
     <Compile Include="TrackTest.cs" />
     <Compile Include="CarrierAccountTest.cs" />
+    <Compile Include="OrderTest.cs" />
+    <Compile Include="PickupTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
