@@ -39,6 +39,6 @@ namespace ShippoTesting {
 
             Pickup testObject = getAPIResource().CreatePickup(parameters);
             Assert.AreEqual("SUCCESS", testObject.Status);
-        }
-    }*/
+        }*/
+    }
 }
