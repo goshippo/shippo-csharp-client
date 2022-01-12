@@ -45,12 +45,14 @@ namespace ShippoTesting {
             items.Add("total_amount", "10.45");
             items.Add("weight_unit", "kg");
             items.Add("title", "package");
-            
+            List<Hashtable> lineItems = new List<Hashtable>();
+            lineItems.Add(items);            
 
             Hashtable parameters = new Hashtable();
             parameters.Add("total_tax", "0.00");
             parameters.Add("from_address", addressFrom.ObjectId);
             parameters.Add("to_address", addressTo.ObjectId);
+            parameters.Add("line_items", lineItems);
             parameters.Add("shipping_method", null);
             parameters.Add("weight", 0);
             parameters.Add("shop_app", "Shippo");
