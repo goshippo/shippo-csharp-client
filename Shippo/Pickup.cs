@@ -4,9 +4,6 @@ using Newtonsoft.Json;
 namespace Shippo {
     [JsonObject(MemberSerialization.OptIn)]
     public class Pickup : ShippoId {
-        [JsonProperty(PropertyName = "object_id")]
-        public object ObjectId { get; set; }
-
         [JsonProperty(PropertyName = "carrier_account")]
         public object CarrierAccount { get; set; }
 

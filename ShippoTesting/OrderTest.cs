@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 using Shippo;
 
@@ -46,7 +47,7 @@ namespace ShippoTesting {
             items.Add("weight_unit", "kg");
             items.Add("title", "package");
             List<Hashtable> lineItems = new List<Hashtable>();
-            lineItems.Add(items);            
+            lineItems.Add(items);
 
             Hashtable parameters = new Hashtable();
             parameters.Add("total_tax", "0.00");
