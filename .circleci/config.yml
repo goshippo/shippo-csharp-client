@@ -1,8 +1,11 @@
-version: 2
+version: 2.1
 job_defaults: &job_defaults
     docker:
         - image: circleci/builder-base:latest
     working_directory: ~/scratch
+
+orbs:
+  snyk: snyk/snyk@1.1.2
 
 jobs:
     test:
@@ -35,6 +38,36 @@ jobs:
         - run: msbuild
         - run: nuget install NUnit.Runners -version 3.9.0
         - run: mono NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ShippoTesting/bin/Debug/ShippoTesting.dll
+    scan:
+      <<: *job_defaults
+      steps:
+        - checkout
+        - run:
+            name: Installing Mono
+            command: |
+                sudo apt-get update
+                sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+                sudo apt install apt-transport-https
+                echo "deb https://download.mono-project.com/repo/ubuntu stable-trusty main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+                sudo apt update
+                sudo apt --yes --force-yes install mono-devel
+        - run:
+            name: Installing Dotnet and Nuget
+            command: |
+                wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
+                sudo dpkg -i packages-microsoft-prod.deb
+                sudo apt-get install apt-transport-https curl
+                sudo apt-get update
+                sudo apt-get --yes --force-yes install dotnet-sdk-2.1
+                sudo apt-get install nuget
+        - save_cache:
+            paths:
+              - /usr
+            key: mono-dotnet
+        - run: nuget restore
+        - run: msbuild
+        - snyk/scan:
+            monitor-on-build: false
     pack:
       <<: *job_defaults
       steps:
@@ -86,10 +119,14 @@ workflows:
     test-and-deploy:
         jobs:
         - test
+        - scan:
+            context:
+              - snyk
         - hold:
             type: approval
             requires:
                 - test
+                - scan
             <<: *release_filter
         - pack:
             requires:
