@@ -1,20 +1,20 @@
-﻿using NUnit.Framework;
-using System;
+﻿using Shippo;
 using System.Collections;
 
-using Shippo;
 
-
-namespace ShippoTesting {
+namespace ShippoTesting
+{
     [TestFixture]
-    public class ShippoTest {
-		static internal APIResource apiResource;
+    public class ShippoTest
+    {
+        static internal APIResource apiResource;
         static internal APIResource liveAPI;
         static internal Boolean live;
         static internal String now;
         public APIResource staticAPIResource;
 
-        [SetUp] public void Init()
+        [SetUp]
+        public void Init()
         {
             String token = Environment.GetEnvironmentVariable("Wrapper_Token");
             apiResource = new APIResource(token);
@@ -25,10 +25,11 @@ namespace ShippoTesting {
 
         public static APIResource getAPIResource()
         {
-            return live?liveAPI:apiResource;
+            return live ? liveAPI : apiResource;
         }
 
-        public static void setLive(Boolean live_api=true){
+        public static void setLive(Boolean live_api = true)
+        {
             live = live_api;
         }
 

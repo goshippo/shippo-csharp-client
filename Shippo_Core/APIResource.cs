@@ -1,36 +1,33 @@
-﻿﻿/*
- * Copyright 2011 - 2012 Xamarin, Inc., 2011 - 2012 Joe Dluzen
- *
- * Author(s):
- *  Gonzalo Paniagua Javier (gonzalo@xamarin.com)
- *  Joe Dluzen (jdluzen@gmail.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-using System;
-using System.Collections.Generic;
+﻿/*
+* Copyright 2011 - 2012 Xamarin, Inc., 2011 - 2012 Joe Dluzen
+*
+* Author(s):
+*  Gonzalo Paniagua Javier (gonzalo@xamarin.com)
+*  Joe Dluzen (jdluzen@gmail.com)
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+using Newtonsoft.Json;
 using System.Collections;
-using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Text;
 using System.Web;
 
-using Newtonsoft.Json;
 
-
-namespace Shippo {
-    public class APIResource {
+namespace Shippo
+{
+    public class APIResource
+    {
         public static readonly string api_endpoint = "https://api.goshippo.com";
         static readonly string user_agent = "Shippo/v1 CSharpBindings/1.0";
         public static readonly int RatesReqTimeout = 25;
@@ -47,7 +44,8 @@ namespace Shippo {
             apiVersion = "2018-02-08";
         }
 
-        public virtual void SetApiVersion(String version) {
+        public virtual void SetApiVersion(String version)
+        {
             apiVersion = version;
         }
 
@@ -55,10 +53,11 @@ namespace Shippo {
         // Setup Request handles headers, credentials etc for WebRequests
         protected virtual WebRequest SetupRequest(string method, string url)
         {
-            WebRequest req = (WebRequest) WebRequest.Create(url);
+            WebRequest req = (WebRequest)WebRequest.Create(url);
             req.Method = method;
-            if (req is HttpWebRequest) {
-                ((HttpWebRequest) req).UserAgent = user_agent;
+            if (req is HttpWebRequest)
+            {
+                ((HttpWebRequest)req).UserAgent = user_agent;
             }
 
             /* ENABLE BLOCK FOR BASIC AUTH
@@ -67,11 +66,13 @@ namespace Shippo {
 
             // Disable lines below for basic auth
             string tokenType = "ShippoToken";
-            if (accessToken.StartsWith("oauth.")) {
+            if (accessToken.StartsWith("oauth."))
+            {
                 tokenType = "Bearer";
             }
             req.Headers.Add("Authorization", string.Format("{0} {1}", tokenType, accessToken));
-            if (apiVersion != null) {
+            if (apiVersion != null)
+            {
                 req.Headers.Add("Shippo-API-Version", apiVersion);
             }
             req.Timeout = TimeoutSeconds * 1000;
@@ -83,7 +84,8 @@ namespace Shippo {
         // Return response as String
         static string GetResponseAsString(WebResponse response)
         {
-            using (StreamReader sr = new StreamReader(response.GetResponseStream(), encoding)) {
+            using (StreamReader sr = new StreamReader(response.GetResponseStream(), encoding))
+            {
                 return sr.ReadToEnd();
             }
         }
@@ -103,27 +105,34 @@ namespace Shippo {
         {
             string result = null;
             WebRequest req = SetupRequest(method, endpoint);
-            if (body != null) {
+            if (body != null)
+            {
                 byte[] bytes = encoding.GetBytes(body.ToString());
                 req.ContentLength = bytes.Length;
-                using (Stream st = req.GetRequestStream()) {
+                using (Stream st = req.GetRequestStream())
+                {
                     st.Write(bytes, 0, bytes.Length);
                 }
             }
 
-            try {
-                using (WebResponse resp = (WebResponse) req.GetResponse()) {
+            try
+            {
+                using (WebResponse resp = (WebResponse)req.GetResponse())
+                {
                     result = GetResponseAsString(resp);
                 }
-            } catch (WebException wexc) {
-                if (wexc.Response != null) {
+            }
+            catch (WebException wexc)
+            {
+                if (wexc.Response != null)
+                {
                     string json_error = GetResponseAsString(wexc.Response);
                     HttpStatusCode status_code = HttpStatusCode.BadRequest;
                     HttpWebResponse resp = wexc.Response as HttpWebResponse;
                     if (resp != null)
                         status_code = resp.StatusCode;
 
-                    if ((int) status_code <= 500)
+                    if ((int)status_code <= 500)
                         throw new ShippoException(json_error, wexc);
                 }
                 throw;
@@ -143,7 +152,8 @@ namespace Shippo {
         public String generateURLEncodedFromHashmap(Hashtable propertyMap)
         {
             StringBuilder str = new StringBuilder();
-            foreach (DictionaryEntry pair in propertyMap) {
+            foreach (DictionaryEntry pair in propertyMap)
+            {
                 str.AppendFormat("{0}={1}&", pair.Key, pair.Value);
             }
             str.Length--;
@@ -237,7 +247,7 @@ namespace Shippo {
 
         public ShippoCollection<Rate> CreateRate(Hashtable parameters)
         {
-            string ep = String.Format("{0}/shipments/{1}/rates/{2}", api_endpoint, parameters ["id"], parameters ["currency_code"]);
+            string ep = String.Format("{0}/shipments/{1}/rates/{2}", api_endpoint, parameters["id"], parameters["currency_code"]);
             return DoRequest<ShippoCollection<Rate>>(ep, "GET");
         }
 
@@ -252,18 +262,20 @@ namespace Shippo {
         public ShippoCollection<Rate> GetShippingRatesSync(Hashtable parameters)
         {
 
-            String object_id = (String) parameters ["id"];
+            String object_id = (String)parameters["id"];
             Shipment shipment = RetrieveShipment(object_id);
-            String object_status = (String) shipment.Status;
+            String object_status = (String)shipment.Status;
             long startTime = DateTimeExtensions.UnixTimeNow();
 
-            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase)) {
-                if (DateTimeExtensions.UnixTimeNow() - startTime > RatesReqTimeout) {
+            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase))
+            {
+                if (DateTimeExtensions.UnixTimeNow() - startTime > RatesReqTimeout)
+                {
                     throw new RequestTimeoutException(
                         "A timeout has occured while waiting for your rates to generate. Try retreiving the Shipment object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
                 shipment = RetrieveShipment(object_id);
-                object_status = (String) shipment.Status;
+                object_status = (String)shipment.Status;
             }
 
             return CreateRate(parameters);
@@ -289,17 +301,19 @@ namespace Shippo {
         {
             string ep = String.Format("{0}/transactions", api_endpoint);
             Transaction transaction = DoRequest<Transaction>(ep, "POST", serialize(parameters));
-            String object_id = (String) transaction.ObjectId;
-            String object_status = (String) transaction.Status;
+            String object_id = (String)transaction.ObjectId;
+            String object_status = (String)transaction.Status;
             long startTime = DateTimeExtensions.UnixTimeNow();
 
-            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase)) {
-                if (DateTimeExtensions.UnixTimeNow() - startTime > TransactionReqTimeout) {
+            while (object_status.Equals("QUEUED", StringComparison.OrdinalIgnoreCase) || object_status.Equals("WAITING", StringComparison.OrdinalIgnoreCase))
+            {
+                if (DateTimeExtensions.UnixTimeNow() - startTime > TransactionReqTimeout)
+                {
                     throw new RequestTimeoutException(
                         "A timeout has occured while waiting for your label to generate. Try retreiving the Transaction object again and check if object_status is updated. If this issue persists, please contact support@goshippo.com");
                 }
                 transaction = RetrieveTransaction(object_id);
-                object_status = (String) transaction.Status;
+                object_status = (String)transaction.Status;
             }
 
             return transaction;
@@ -385,8 +399,8 @@ namespace Shippo {
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount(Hashtable parameters)
         {
-            string ep = String.Format ("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
-            return DoRequest<ShippoCollection<CarrierAccount>> (ep);
+            string ep = String.Format("{0}/carrier_accounts?{1}", api_endpoint, generateURLEncodedFromHashmap(parameters));
+            return DoRequest<ShippoCollection<CarrierAccount>>(ep);
         }
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount()
