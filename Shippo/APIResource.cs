@@ -555,6 +555,40 @@ namespace Shippo {
 
         #endregion
 
+        #region UserParcelTemplate
+
+        public UserParcelTemplate CreateUserParcelTemplate(Hashtable parameters)
+        {
+            string ep = String.Format("{0}/user-parcel-templates", api_endpoint);
+            return DoRequest<UserParcelTemplate>(ep, "POST", serialize(parameters));
+        }
+
+        public UserParcelTemplate UpdateUserParcelTemplate(String id, Hashtable parameters)
+        {
+            string ep = String.Format("{0}/user-parcel-templates/{1}", api_endpoint, id);
+            return DoRequest<UserParcelTemplate>(ep, "PUT", serialize(parameters));
+        }
+
+        public void DeleteUserParcelTemplate(String id)
+        {
+            string ep = String.Format("{0}/user-parcel-templates/{1}", api_endpoint, id);
+            DoRequest(ep, "DELETE", null);
+        }
+
+        public UserParcelTemplate RetrieveUserParcelTemplate(String id)
+        {
+            string ep = String.Format("{0}/user-parcel-templates/{1}", api_endpoint, id);
+            return DoRequest<UserParcelTemplate>(ep);
+        }
+
+        public ShippoCollection<UserParcelTemplate> AllUserParcelTemplates()
+        {
+            string ep = String.Format("{0}/user-parcel-templates", api_endpoint);
+            return DoRequest<ShippoCollection<UserParcelTemplate>>(ep);
+        }
+
+        #endregion
+
         public int TimeoutSeconds { get; set; }
     }
 }
