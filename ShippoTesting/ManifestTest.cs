@@ -25,7 +25,7 @@ namespace ShippoTesting
             Manifest retrievedObject;
 
             retrievedObject = apiResource.RetrieveManifest((string) testObject.ObjectId);
-            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace ShippoTesting
             parameters.Add("page", "1");
 
             var Manifests = apiResource.AllManifests(parameters);
-        //    Assert.AreEqual(0, Manifests.Data.Count);
+        //    Assert.Equals(0, Manifests.Data.Count);
         // Kind of a none sensical test. Taking no account of previous test cases causing side effects
         }
 

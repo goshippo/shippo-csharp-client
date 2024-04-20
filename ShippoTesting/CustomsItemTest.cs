@@ -13,7 +13,7 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             CustomsItem testObject = CustomsItemTest.getDefaultObject();
-            Assert.AreEqual("VALID", testObject.ObjectState);
+            Assert.Equals("VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace ShippoTesting {
             CustomsItem retrievedObject;
 
             retrievedObject = apiResource.RetrieveCustomsItem((string) testObject.ObjectId);
-            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]

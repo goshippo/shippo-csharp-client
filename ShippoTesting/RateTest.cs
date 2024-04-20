@@ -4,6 +4,7 @@ using System.Collections;
 using System.Threading;
 
 using Shippo;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace ShippoTesting {
@@ -14,7 +15,7 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             ShippoCollection<Rate> testObject = RateTest.getDefaultObject();
-            Assert.IsNotNull(testObject.Data);
+            Assert.That(testObject.Data != null);
         }
 
         public static ShippoCollection<Rate> getDefaultObject()

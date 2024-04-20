@@ -17,7 +17,7 @@ namespace ShippoTesting
         public void TestValidGetStatus()
         {
             Track track = getAPIResource().RetrieveTracking(CARRIER, TRACKING_NO);
-            Assert.AreEqual(TRACKING_NO, track.TrackingNumber);
+            Assert.Equals(TRACKING_NO, track.TrackingNumber);
             Assert.IsNotNull(track.TrackingStatus);
             Assert.IsNotNull(track.TrackingHistory);
         }

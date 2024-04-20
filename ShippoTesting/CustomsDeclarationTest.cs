@@ -16,7 +16,7 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject();
-            Assert.AreEqual("VALID", testObject.ObjectState);
+            Assert.Equals("VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace ShippoTesting {
             CustomsDeclaration retrievedObject;
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration((string) testObject.ObjectId);
-            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]
@@ -39,22 +39,22 @@ namespace ShippoTesting {
             Console.Write(retrievedObject.AddressImporter.IsComplete);
             Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
             Assert.IsNotNull(retrievedObject.AddressImporter);
-            Assert.AreEqual(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual("Undefault New Wu", retrievedObject.AddressImporter.Name);
-            Assert.AreEqual("Shippo", retrievedObject.AddressImporter.Company);
-            Assert.AreEqual("", retrievedObject.AddressImporter.StreetNo);
-            Assert.AreEqual("215 Clayton St", retrievedObject.AddressImporter.Street1);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street2);
-            Assert.AreEqual("", retrievedObject.AddressImporter.Street3);
-            Assert.AreEqual("San Francisco", retrievedObject.AddressImporter.City);
-            Assert.AreEqual("CA", retrievedObject.AddressImporter.State);
-            Assert.AreEqual("94117-1913", retrievedObject.AddressImporter.Zip);
-            Assert.AreEqual("US", retrievedObject.AddressImporter.Country);
-            Assert.AreEqual("0015553419393", retrievedObject.AddressImporter.Phone);
-            Assert.AreEqual("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.IsResidential);
-            Assert.AreEqual(true, retrievedObject.AddressImporter.Test);
+            Assert.Equals(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
+            Assert.Equals(true, retrievedObject.AddressImporter.IsComplete);
+            Assert.Equals("Undefault New Wu", retrievedObject.AddressImporter.Name);
+            Assert.Equals("Shippo", retrievedObject.AddressImporter.Company);
+            Assert.Equals("", retrievedObject.AddressImporter.StreetNo);
+            Assert.Equals("215 Clayton St", retrievedObject.AddressImporter.Street1);
+            Assert.Equals("", retrievedObject.AddressImporter.Street2);
+            Assert.Equals("", retrievedObject.AddressImporter.Street3);
+            Assert.Equals("San Francisco", retrievedObject.AddressImporter.City);
+            Assert.Equals("CA", retrievedObject.AddressImporter.State);
+            Assert.Equals("94117-1913", retrievedObject.AddressImporter.Zip);
+            Assert.Equals("US", retrievedObject.AddressImporter.Country);
+            Assert.Equals("0015553419393", retrievedObject.AddressImporter.Phone);
+            Assert.Equals("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
+            Assert.Equals(true, retrievedObject.AddressImporter.IsResidential);
+            Assert.Equals(true, retrievedObject.AddressImporter.Test);
         }
 
         [Test]

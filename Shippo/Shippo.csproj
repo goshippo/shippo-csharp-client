@@ -11,7 +11,7 @@
     <PackageReleaseNotes>Bug fix for extra slash in Shippo API URL</PackageReleaseNotes>
     <RepositoryType>Github</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
   </ItemGroup>
 

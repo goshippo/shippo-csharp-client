@@ -19,7 +19,7 @@ namespace ShippoTesting
         public void TestParametersRetreive()
         {
             ShippoCollection<CarrierAccount> testObject = CarrierAccountTest.getParameterObject();
-            Assert.AreEqual(1, testObject.Data.Count);
+            Assert.Equals(1, testObject.Data.Count);
         }
 
         public static ShippoCollection<CarrierAccount> getDefaultObject()

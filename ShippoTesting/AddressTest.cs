@@ -11,7 +11,7 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             Address testObject = AddressTest.getDefaultObject();
-            Assert.AreEqual(true, testObject.IsComplete);
+            Assert.Equals(true, testObject.IsComplete);
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace ShippoTesting {
             Address retrievedObject;
 
             retrievedObject = apiResource.RetrieveAddress((string) testObject.ObjectId);
-            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         public static Address getDefaultObject()

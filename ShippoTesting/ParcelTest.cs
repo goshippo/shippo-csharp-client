@@ -13,7 +13,7 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             Parcel testObject = ParcelTest.getDefaultObject();
-            Assert.AreEqual("VALID", testObject.ObjectState);
+            Assert.Equals("VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace ShippoTesting {
             Parcel retrievedObject;
 
             retrievedObject = apiResource.RetrieveParcel((string) testObject.ObjectId);
-            Assert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]

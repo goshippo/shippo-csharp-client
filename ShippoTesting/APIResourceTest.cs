@@ -1,16 +1,15 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Net;
-
 using Shippo;
-
+using Microsoft.Extensions.Logging;
 
 namespace ShippoTesting {
 	[TestFixture]
 	public class APIResourceTest : ShippoTest {
 		public class MockAPIResource : APIResource
 		{
-			public MockAPIResource(string inputToken) : base(inputToken) {}
+			public MockAPIResource(ILogger logger, string inputToken) : base(logger, inputToken) {}
 			public WebRequest SetupRequestTest(String method, String url)
 			{
 				return SetupRequest(method, url);
@@ -23,11 +22,11 @@ namespace ShippoTesting {
 			String dummyUrl = "http://example.com";
 			String dummyApiToken = "1234abcd";
 			String dummyApiVersion = "2014-02-11";
-			MockAPIResource resource = new MockAPIResource(dummyApiToken);
+			MockAPIResource resource = new MockAPIResource(null, dummyApiToken);
 			resource.SetApiVersion(dummyApiVersion);
 			WebRequest request = resource.SetupRequestTest(dummyMethod, dummyUrl);
-			Assert.AreEqual("ShippoToken " + dummyApiToken, request.Headers.Get("Authorization"));
-			Assert.AreEqual(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
+			Assert.Equals("ShippoToken " + dummyApiToken, request.Headers.Get("Authorization"));
+			Assert.Equals(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
 		}
 
 		[Test]
@@ -36,11 +35,11 @@ namespace ShippoTesting {
 			String dummyUrl = "http://example.com";
 			String dummyApiToken = "oauth.abcdefffff.yyyyassaldjf=";
 			String dummyApiVersion = "2018-02-08";
-			MockAPIResource resource = new MockAPIResource(dummyApiToken);
+			MockAPIResource resource = new MockAPIResource(null, dummyApiToken);
 			resource.SetApiVersion(dummyApiVersion);
 			WebRequest request = resource.SetupRequestTest(dummyMethod, dummyUrl);
-			Assert.AreEqual("Bearer " + dummyApiToken, request.Headers.Get("Authorization"));
-			Assert.AreEqual(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
+			Assert.Equals("Bearer " + dummyApiToken, request.Headers.Get("Authorization"));
+			Assert.Equals(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
 		}
 	}
 

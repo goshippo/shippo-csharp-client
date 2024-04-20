@@ -17,8 +17,8 @@ namespace ShippoTesting {
         [SetUp] public void Init()
         {
             String token = Environment.GetEnvironmentVariable("Wrapper_Token");
-            apiResource = new APIResource(token);
-            liveAPI = new APIResource(Environment.GetEnvironmentVariable("Live_Token"));
+            apiResource = new APIResource(null, token);
+            liveAPI = new APIResource(null, Environment.GetEnvironmentVariable("Live_Token"));
             now = DateTime.Now.ToString("yyyy-MM-dd HH':'mm':'ss");
             live = false;
         }
