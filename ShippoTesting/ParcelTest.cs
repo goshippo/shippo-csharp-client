@@ -5,9 +5,11 @@ using System.Collections;
 using Shippo;
 
 
-namespace ShippoTesting {
+namespace ShippoTesting
+{
     [TestFixture]
-    public class ParcelTest : ShippoTest {
+    public class ParcelTest : ShippoTest
+    {
 
         [Test]
         public void TestValidCreate()
@@ -22,7 +24,7 @@ namespace ShippoTesting {
             Parcel testObject = ParcelTest.getDefaultObject();
             Parcel retrievedObject;
 
-            retrievedObject = apiResource.RetrieveParcel((string) testObject.ObjectId);
+            retrievedObject = apiResource.RetrieveParcel((string)testObject.ObjectId);
             Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
@@ -34,7 +36,7 @@ namespace ShippoTesting {
             parameters.Add("page", "1");
 
             var parcels = apiResource.AllParcels(parameters);
-            Assert.AreNotEqual(0, parcels.Data.Count);
+            Assert.That(parcels.Data.Count > 0);
         }
 
         public static Parcel getDefaultObject()

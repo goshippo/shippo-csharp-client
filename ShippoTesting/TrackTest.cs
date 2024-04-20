@@ -18,8 +18,8 @@ namespace ShippoTesting
         {
             Track track = getAPIResource().RetrieveTracking(CARRIER, TRACKING_NO);
             Assert.Equals(TRACKING_NO, track.TrackingNumber);
-            Assert.IsNotNull(track.TrackingStatus);
-            Assert.IsNotNull(track.TrackingHistory);
+            Assert.That(track.TrackingStatus!=null);
+            Assert.That(track.TrackingHistory!=null);
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace ShippoTesting
             parameters.Add("carrier", CARRIER);
             parameters.Add("tracking_number", track.TrackingNumber);
             Track register = getAPIResource().RegisterTrackingWebhook(parameters);
-            Assert.IsNotNull(register.TrackingNumber);
-            Assert.IsNotNull(register.TrackingHistory);
+            Assert.That(register.TrackingNumber !=null);
+            Assert.That(register.TrackingHistory!=null);
         }
 
         [Test]

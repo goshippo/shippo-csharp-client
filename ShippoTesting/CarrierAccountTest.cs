@@ -7,12 +7,13 @@ using Shippo;
 namespace ShippoTesting
 {
     [TestFixture]
-    public class CarrierAccountTest : ShippoTest {
+    public class CarrierAccountTest : ShippoTest
+    {
         [Test]
         public void TestValidRetrieve()
         {
             ShippoCollection<CarrierAccount> testObject = CarrierAccountTest.getDefaultObject();
-            Assert.Greater(testObject.Data.Count, 0);
+            Assert.That(testObject.Data.Count > 0);
         }
 
         [Test]

@@ -36,7 +36,7 @@ namespace ShippoTesting {
             parameters.Add("page", "1");
 
             var parcels = apiResource.AllTransactions(parameters);
-            Assert.AreNotEqual(0, parcels.Data.Count);
+            Assert.That(parcels.Data.Count > 0);
         }
 
         public static Transaction getDefaultObject()

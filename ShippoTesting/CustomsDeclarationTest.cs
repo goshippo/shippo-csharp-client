@@ -8,9 +8,11 @@ using System.Collections.Generic;
 using Shippo;
 
 
-namespace ShippoTesting {
+namespace ShippoTesting
+{
     [TestFixture]
-    public class CustomsDeclarationTest : ShippoTest {
+    public class CustomsDeclarationTest : ShippoTest
+    {
 
         [Test]
         public void TestValidCreate()
@@ -25,20 +27,20 @@ namespace ShippoTesting {
             CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject();
             CustomsDeclaration retrievedObject;
 
-            retrievedObject = apiResource.RetrieveCustomsDeclaration((string) testObject.ObjectId);
+            retrievedObject = apiResource.RetrieveCustomsDeclaration((string)testObject.ObjectId);
             Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]
-        public void testValidRetrieveWithAddressImporter ()
+        public void testValidRetrieveWithAddressImporter()
         {
             CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject_2();
             CustomsDeclaration retrievedObject;
 
-            retrievedObject = apiResource.RetrieveCustomsDeclaration ((string)testObject.ObjectId);
+            retrievedObject = apiResource.RetrieveCustomsDeclaration((string)testObject.ObjectId);
             Console.Write(retrievedObject.AddressImporter.IsComplete);
-            Assert.AreEqual (testObject.ObjectId, retrievedObject.ObjectId);
-            Assert.IsNotNull(retrievedObject.AddressImporter);
+            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            Assert.That(retrievedObject.AddressImporter != null);
             Assert.Equals(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
             Assert.Equals(true, retrievedObject.AddressImporter.IsComplete);
             Assert.Equals("Undefault New Wu", retrievedObject.AddressImporter.Name);
@@ -65,7 +67,7 @@ namespace ShippoTesting {
             parameters.Add("page", "1");
 
             var parcels = apiResource.AllCustomsDeclarations(parameters);
-            Assert.AreNotEqual(0, parcels.Data.Count);
+            Assert.That(parcels.Data.Count > 0);
         }
 
         public static CustomsDeclaration getDefaultObject()
@@ -87,43 +89,43 @@ namespace ShippoTesting {
             parameters.Add("certify_signer", "Laura Behrens Wu");
             parameters.Add("disclaimer", "");
             parameters.Add("incoterm", "");
-            
+
             JArray customsItems = new JArray();
-            customsItems.Add((string) customsItem.ObjectId);
+            customsItems.Add((string)customsItem.ObjectId);
 
             parameters.Add("items", customsItems);
             parameters.Add("metadata", "Order ID #123123");
             return getAPIResource().CreateCustomsDeclaration(parameters);
         }
 
-        public static CustomsDeclaration getDefaultObject_2 ()
+        public static CustomsDeclaration getDefaultObject_2()
         {
             CustomsItem customsItem = CustomsItemTest.getDefaultObject();
             Address addressImporter = AddressTest.getDefaultObject();
-            Hashtable parameters = new Hashtable ();
-            parameters.Add ("exporter_reference", "");
-            parameters.Add ("importer_reference", "");
-            parameters.Add ("contents_type", "MERCHANDISE");
-            parameters.Add ("contents_explanation", "T-Shirt purchase");
-            parameters.Add ("invoice", "#123123");
-            parameters.Add ("license", "");
-            parameters.Add ("certificate", "");
-            parameters.Add ("notes", "");
-            parameters.Add ("eel_pfc", "NOEEI_30_37_a");
-            parameters.Add ("aes_itn", "");
-            parameters.Add ("non_delivery_option", "ABANDON");
-            parameters.Add ("certify", true);
-            parameters.Add ("certify_signer", "Laura Behrens Wu");
-            parameters.Add ("address_importer", addressImporter.ObjectId);
-            parameters.Add ("disclaimer", "");
-            parameters.Add ("incoterm", "");
+            Hashtable parameters = new Hashtable();
+            parameters.Add("exporter_reference", "");
+            parameters.Add("importer_reference", "");
+            parameters.Add("contents_type", "MERCHANDISE");
+            parameters.Add("contents_explanation", "T-Shirt purchase");
+            parameters.Add("invoice", "#123123");
+            parameters.Add("license", "");
+            parameters.Add("certificate", "");
+            parameters.Add("notes", "");
+            parameters.Add("eel_pfc", "NOEEI_30_37_a");
+            parameters.Add("aes_itn", "");
+            parameters.Add("non_delivery_option", "ABANDON");
+            parameters.Add("certify", true);
+            parameters.Add("certify_signer", "Laura Behrens Wu");
+            parameters.Add("address_importer", addressImporter.ObjectId);
+            parameters.Add("disclaimer", "");
+            parameters.Add("incoterm", "");
 
-            JArray customsItems = new JArray ();
-            customsItems.Add ((string)customsItem.ObjectId);
+            JArray customsItems = new JArray();
+            customsItems.Add((string)customsItem.ObjectId);
 
-            parameters.Add ("items", customsItems);
-            parameters.Add ("metadata", "Order ID #123123");
-            return getAPIResource ().CreateCustomsDeclaration (parameters);
+            parameters.Add("items", customsItems);
+            parameters.Add("metadata", "Order ID #123123");
+            return getAPIResource().CreateCustomsDeclaration(parameters);
         }
     }
 }
