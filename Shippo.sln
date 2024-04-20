@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shippo", "Shippo\Shippo.csproj", "{6816FD58-3FC6-4EFC-95F8-D11E9C1D387F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippoExample", "ShippoExample\ShippoExample.csproj", "{7712EC9C-2581-49EE-8B61-745843F2CD6F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippoTesting", "ShippoTesting\ShippoTesting.csproj", "{4AF39DE0-2FA9-43D1-9254-CF8546FF22C8}"
 EndProject
 Global
