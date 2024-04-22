@@ -286,3 +286,4 @@ __pycache__/
 
 # Editor Config
 .editorconfig
+ShippoTesting/.env
