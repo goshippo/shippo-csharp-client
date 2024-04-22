@@ -13,7 +13,7 @@ namespace Shippo {
         [JsonProperty(PropertyName = "tracking_number")]
         public string TrackingNumber;
 
-        [JsonProperty(PropertyName = "address_from")]
+        [JsonProperty(PropertyName = "from_address")]
         public ShortAddress AddressFrom;
 
         [JsonProperty(PropertyName = "address_to")]

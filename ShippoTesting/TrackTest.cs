@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections;
-
+using NUnit.Framework.Legacy;
 using Shippo;
 
 
@@ -17,7 +17,7 @@ namespace ShippoTesting
         public void TestValidGetStatus()
         {
             Track track = getAPIResource().RetrieveTracking(CARRIER, TRACKING_NO);
-            Assert.Equals(TRACKING_NO, track.TrackingNumber);
+            ClassicAssert.AreEqual(TRACKING_NO, track.TrackingNumber);
             Assert.That(track.TrackingStatus!=null);
             Assert.That(track.TrackingHistory!=null);
         }

@@ -22,7 +22,7 @@ namespace Shippo {
         [JsonProperty(PropertyName = "submission_date")]
         public object SubmissionDate { get; set; }
 
-        [JsonProperty(PropertyName = "address_from")]
+        [JsonProperty(PropertyName = "from_address")]
         public object AddressFrom { get; set; }
 
         [JsonProperty(PropertyName = "documents")]

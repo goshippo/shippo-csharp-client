@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Shippo;
+using NUnit.Framework.Legacy;
 
 
 namespace ShippoTesting
@@ -18,7 +19,8 @@ namespace ShippoTesting
         public void TestValidCreate()
         {
             CustomsDeclaration testObject = CustomsDeclarationTest.getDefaultObject();
-            Assert.Equals("VALID", testObject.ObjectState);
+            ClassicAssert.AreEqual(
+"VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -28,7 +30,8 @@ namespace ShippoTesting
             CustomsDeclaration retrievedObject;
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration((string)testObject.ObjectId);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(
+testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]
@@ -39,24 +42,40 @@ namespace ShippoTesting
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration((string)testObject.ObjectId);
             Console.Write(retrievedObject.AddressImporter.IsComplete);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(
+testObject.ObjectId, retrievedObject.ObjectId);
             Assert.That(retrievedObject.AddressImporter != null);
-            Assert.Equals(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
-            Assert.Equals(true, retrievedObject.AddressImporter.IsComplete);
-            Assert.Equals("Undefault New Wu", retrievedObject.AddressImporter.Name);
-            Assert.Equals("Shippo", retrievedObject.AddressImporter.Company);
-            Assert.Equals("", retrievedObject.AddressImporter.StreetNo);
-            Assert.Equals("215 Clayton St", retrievedObject.AddressImporter.Street1);
-            Assert.Equals("", retrievedObject.AddressImporter.Street2);
-            Assert.Equals("", retrievedObject.AddressImporter.Street3);
-            Assert.Equals("San Francisco", retrievedObject.AddressImporter.City);
-            Assert.Equals("CA", retrievedObject.AddressImporter.State);
-            Assert.Equals("94117-1913", retrievedObject.AddressImporter.Zip);
-            Assert.Equals("US", retrievedObject.AddressImporter.Country);
-            Assert.Equals("0015553419393", retrievedObject.AddressImporter.Phone);
-            Assert.Equals("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
-            Assert.Equals(true, retrievedObject.AddressImporter.IsResidential);
-            Assert.Equals(true, retrievedObject.AddressImporter.Test);
+            ClassicAssert.AreEqual(
+testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
+            ClassicAssert.AreEqual(
+true, retrievedObject.AddressImporter.IsComplete);
+            ClassicAssert.AreEqual(
+"Undefault New Wu", retrievedObject.AddressImporter.Name);
+            ClassicAssert.AreEqual(
+"Shippo", retrievedObject.AddressImporter.Company);
+            ClassicAssert.AreEqual(
+"", retrievedObject.AddressImporter.StreetNo);
+            ClassicAssert.AreEqual(
+"215 Clayton St", retrievedObject.AddressImporter.Street1);
+            ClassicAssert.AreEqual(
+"", retrievedObject.AddressImporter.Street2);
+            ClassicAssert.AreEqual(
+"", retrievedObject.AddressImporter.Street3);
+            ClassicAssert.AreEqual(
+"San Francisco", retrievedObject.AddressImporter.City);
+            ClassicAssert.AreEqual(
+"CA", retrievedObject.AddressImporter.State);
+            ClassicAssert.AreEqual("94117-1913", retrievedObject.AddressImporter.Zip);
+            ClassicAssert.AreEqual(
+"US", retrievedObject.AddressImporter.Country);
+            ClassicAssert.AreEqual(
+"0015553419393", retrievedObject.AddressImporter.Phone);
+            ClassicAssert.AreEqual(
+"laura@goshipppo.com", retrievedObject.AddressImporter.Email);
+            ClassicAssert.AreEqual(
+true, retrievedObject.AddressImporter.IsResidential);
+            ClassicAssert.AreEqual(
+true, retrievedObject.AddressImporter.Test);
         }
 
         [Test]

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Shippo;
+using NUnit.Framework.Legacy;
 
 namespace ShippoTesting {
     [TestFixture]
@@ -11,7 +12,8 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             Address testObject = AddressTest.getDefaultObject();
-            Assert.Equals(true, testObject.IsComplete);
+            ClassicAssert.AreEqual(
+true, testObject.IsComplete);
         }
 
         [Test]
@@ -21,7 +23,8 @@ namespace ShippoTesting {
             Address retrievedObject;
 
             retrievedObject = apiResource.RetrieveAddress((string) testObject.ObjectId);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(
+testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         public static Address getDefaultObject()

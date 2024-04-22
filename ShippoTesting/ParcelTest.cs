@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 using Shippo;
+using NUnit.Framework.Legacy;
 
 
 namespace ShippoTesting
@@ -15,7 +16,7 @@ namespace ShippoTesting
         public void TestValidCreate()
         {
             Parcel testObject = ParcelTest.getDefaultObject();
-            Assert.Equals("VALID", testObject.ObjectState);
+            ClassicAssert.AreEqual("VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -25,7 +26,7 @@ namespace ShippoTesting
             Parcel retrievedObject;
 
             retrievedObject = apiResource.RetrieveParcel((string)testObject.ObjectId);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]

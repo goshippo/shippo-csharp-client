@@ -3,6 +3,7 @@ using System;
 using System.Net;
 using Shippo;
 using Microsoft.Extensions.Logging;
+using NUnit.Framework.Legacy;
 
 namespace ShippoTesting {
 	[TestFixture]
@@ -25,8 +26,8 @@ namespace ShippoTesting {
 			MockAPIResource resource = new MockAPIResource(null, dummyApiToken);
 			resource.SetApiVersion(dummyApiVersion);
 			WebRequest request = resource.SetupRequestTest(dummyMethod, dummyUrl);
-			Assert.Equals("ShippoToken " + dummyApiToken, request.Headers.Get("Authorization"));
-			Assert.Equals(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
+			ClassicAssert.AreEqual("ShippoToken " + dummyApiToken, request.Headers.Get("Authorization"));
+			ClassicAssert.AreEqual(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
 		}
 
 		[Test]
@@ -38,8 +39,8 @@ namespace ShippoTesting {
 			MockAPIResource resource = new MockAPIResource(null, dummyApiToken);
 			resource.SetApiVersion(dummyApiVersion);
 			WebRequest request = resource.SetupRequestTest(dummyMethod, dummyUrl);
-			Assert.Equals("Bearer " + dummyApiToken, request.Headers.Get("Authorization"));
-			Assert.Equals(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
+			ClassicAssert.AreEqual("Bearer " + dummyApiToken, request.Headers.Get("Authorization"));
+			ClassicAssert.AreEqual(dummyApiVersion, request.Headers.Get("Shippo-API-Version"));
 		}
 	}
 

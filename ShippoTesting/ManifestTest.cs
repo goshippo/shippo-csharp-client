@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Shippo;
+using NUnit.Framework.Legacy;
 
 
 namespace ShippoTesting
@@ -25,7 +26,8 @@ namespace ShippoTesting
             Manifest retrievedObject;
 
             retrievedObject = apiResource.RetrieveManifest((string) testObject.ObjectId);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(
+testObject.ObjectId, retrievedObject.ObjectId);
         }
 
         [Test]
@@ -36,7 +38,7 @@ namespace ShippoTesting
             parameters.Add("page", "1");
 
             var Manifests = apiResource.AllManifests(parameters);
-        //    Assert.Equals(0, Manifests.Data.Count);
+            ClassicAssert.AreEqual(0, Manifests.Data.Count);
         // Kind of a none sensical test. Taking no account of previous test cases causing side effects
         }
 
@@ -46,7 +48,7 @@ namespace ShippoTesting
             Address addressFrom = AddressTest.getDefaultObject();
             Address addressTo = AddressTest.getDefaultObject_2();
             Parcel parcel = ParcelTest.getDefaultObject();
-            parameters0.Add("address_from", addressFrom.ObjectId);
+            parameters0.Add("from_address", addressFrom.ObjectId);
             parameters0.Add("address_to", addressTo.ObjectId);
             parameters0.Add("parcels", new String[]{ parcel.ObjectId});
             parameters0.Add("shipment_date", now);
@@ -74,7 +76,7 @@ namespace ShippoTesting
             Hashtable parameters2 = new Hashtable();
             parameters2.Add("provider", "USPS");
             parameters2.Add("shipment_date", now);
-            parameters2.Add("address_from", addressFrom.ObjectId);
+            parameters2.Add("from_address", addressFrom.ObjectId);
             List<String> transactions = new List<String>();
             transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);
@@ -116,7 +118,7 @@ namespace ShippoTesting
             Hashtable parameters2 = new Hashtable();
             parameters2.Add("provider", "USPS");
             parameters2.Add("shipment_date", now);
-            parameters2.Add("address_from", addressFrom.ObjectId);
+            parameters2.Add("from_address", addressFrom.ObjectId);
             List<String> transactions = new List<String>();
             transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);

@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections;
-
 using Shippo;
+using NUnit.Framework.Legacy;
 
 namespace ShippoTesting
 {
@@ -20,7 +20,7 @@ namespace ShippoTesting
         public void TestParametersRetreive()
         {
             ShippoCollection<CarrierAccount> testObject = CarrierAccountTest.getParameterObject();
-            Assert.Equals(1, testObject.Data.Count);
+            ClassicAssert.AreEqual(1, testObject.Data.Count);
         }
 
         public static ShippoCollection<CarrierAccount> getDefaultObject()

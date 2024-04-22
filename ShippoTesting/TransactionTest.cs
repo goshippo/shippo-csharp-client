@@ -15,7 +15,8 @@ namespace ShippoTesting {
         public void TestValidCreate()
         {
             Transaction testObject = TransactionTest.getDefaultObject();
-            Assert.Equals("VALID", testObject.ObjectState);
+            ClassicAssert.AreEqual(
+"VALID", testObject.ObjectState);
         }
 
         [Test]
@@ -25,7 +26,8 @@ namespace ShippoTesting {
             Transaction retrievedObject;
 
             retrievedObject = apiResource.RetrieveTransaction((string) testObject.ObjectId);
-            Assert.Equals(testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(
+testObject.ObjectId, retrievedObject.ObjectId);
         } */
 
         [Test]
