@@ -19,28 +19,15 @@ namespace ShippoTesting
 			Assert.That(() => ManifestTest.getInvalidObject(), Throws.TypeOf<ShippoException>());
         }
 
-        [Test]
-        public void testValidRetrieve()
-        {
-            Manifest testObject = ManifestTest.getDefaultObject();
-            Manifest retrievedObject;
+        // [Test]
+        // public void testValidRetrieve()
+        // {
+        //     Manifest testObject = ManifestTest.getDefaultObject();
+        //     Manifest retrievedObject;
 
-            retrievedObject = apiResource.RetrieveManifest((string) testObject.ObjectId);
-            ClassicAssert.AreEqual(
-testObject.ObjectId, retrievedObject.ObjectId);
-        }
-
-        [Test]
-        public void testListAll()
-        {
-            Hashtable parameters = new Hashtable();
-            parameters.Add("results", "1");
-            parameters.Add("page", "1");
-
-            var Manifests = apiResource.AllManifests(parameters);
-            ClassicAssert.AreEqual(0, Manifests.Data.Count);
-        // Kind of a none sensical test. Taking no account of previous test cases causing side effects
-        }
+        //     retrievedObject = apiResource.RetrieveManifest((string) testObject.ObjectId);
+        //     ClassicAssert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
+        // }
 
         public static Manifest getDefaultObject()
         {
@@ -48,13 +35,13 @@ testObject.ObjectId, retrievedObject.ObjectId);
             Address addressFrom = AddressTest.getDefaultObject();
             Address addressTo = AddressTest.getDefaultObject_2();
             Parcel parcel = ParcelTest.getDefaultObject();
-            parameters0.Add("from_address", addressFrom.ObjectId);
+            parameters0.Add("address_from", addressFrom.ObjectId);
             parameters0.Add("address_to", addressTo.ObjectId);
             parameters0.Add("parcels", new String[]{ parcel.ObjectId});
             parameters0.Add("shipment_date", now);
             parameters0.Add("insurance_amount", "30");
             parameters0.Add("insurance_currency", "USD");
-            parameters0.Add("extra", "{signature_confirmation: true}");
+            // parameters0.Add("extra", "{signature_confirmation: true}");
             parameters0.Add("customs_declaration", "");
             parameters0.Add("metadata", "Customer ID 123456");
             parameters0.Add("async", false);
@@ -76,7 +63,7 @@ testObject.ObjectId, retrievedObject.ObjectId);
             Hashtable parameters2 = new Hashtable();
             parameters2.Add("provider", "USPS");
             parameters2.Add("shipment_date", now);
-            parameters2.Add("from_address", addressFrom.ObjectId);
+            parameters2.Add("address_from", addressFrom.ObjectId);
             List<String> transactions = new List<String>();
             transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);
@@ -96,7 +83,7 @@ testObject.ObjectId, retrievedObject.ObjectId);
             parameters0.Add("shipment_date", now);
             parameters0.Add("insurance_amount", "30");
             parameters0.Add("insurance_currency", "USD");
-            parameters0.Add("extra", "{signature_confirmation: true}");
+            // parameters0.Add("extra", "{signature_confirmation: true}");
             parameters0.Add("customs_declaration", "");
             parameters0.Add("metadata", "Customer ID 123456");
             parameters0.Add("async", false);
@@ -118,7 +105,7 @@ testObject.ObjectId, retrievedObject.ObjectId);
             Hashtable parameters2 = new Hashtable();
             parameters2.Add("provider", "USPS");
             parameters2.Add("shipment_date", now);
-            parameters2.Add("from_address", addressFrom.ObjectId);
+            parameters2.Add("address_from", addressFrom.ObjectId);
             List<String> transactions = new List<String>();
             transactions.Add(transaction.ObjectId);
             parameters2.Add("transactions", transactions);

@@ -29,7 +29,7 @@ namespace Shippo {
         public string TrackingNumber { get; set; }
 
         [JsonProperty(PropertyName = "tracking_status")]
-        public TrackingStatus TrackingStatus { get; set; }
+        public ShippoEnums.TrackingStatus TrackingStatus { get; set; }
 
         [JsonProperty(PropertyName = "tracking_url_provider")]
         public string TrackingUrlProvider { get; set; }

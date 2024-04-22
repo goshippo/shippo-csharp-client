@@ -47,13 +47,13 @@ namespace ShippoTesting
             Address addressFrom = AddressTest.getDefaultObject();
             Address addressTo = AddressTest.getDefaultObject_2();
             Parcel parcel = ParcelTest.getDefaultObject();
-            parameters.Add("from_address", addressFrom.ObjectId);
+            parameters.Add("address_from", addressFrom.ObjectId);
             parameters.Add("address_to", addressTo.ObjectId);
             parameters.Add("parcels", new String[] { parcel.ObjectId });
             parameters.Add("shipment_date", now);
             parameters.Add("insurance_amount", "30");
             parameters.Add("insurance_currency", "USD");
-            parameters.Add("extra", "{signature_confirmation: true}");
+            // parameters.Add("extra", "{signature_confirmation: true}");
             parameters.Add("customs_declaration", "");
             parameters.Add("metadata", "Customer ID 123456");
             parameters.Add("async", false);

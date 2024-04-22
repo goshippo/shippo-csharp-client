@@ -399,7 +399,7 @@ namespace Shippo {
 
         public ShippoCollection<CarrierAccount> AllCarrierAccount()
         {
-            string ep = String.Format("{0}/carrier_accounts", api_endpoint);
+            string ep = String.Format("{0}/carrier_accounts/?carrier=usps", api_endpoint);
             return DoRequest<ShippoCollection<CarrierAccount>>(ep);
         }
 

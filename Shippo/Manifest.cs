@@ -19,10 +19,10 @@ namespace Shippo {
         [JsonProperty(PropertyName = "provider")]
         public object Provider { get; set; }
 
-        [JsonProperty(PropertyName = "submission_date")]
-        public object SubmissionDate { get; set; }
+        [JsonProperty(PropertyName = "shipment_date")]
+        public object ShipmentDate { get; set; }
 
-        [JsonProperty(PropertyName = "from_address")]
+        [JsonProperty(PropertyName = "address_from")]
         public object AddressFrom { get; set; }
 
         [JsonProperty(PropertyName = "documents")]

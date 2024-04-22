@@ -16,8 +16,7 @@ namespace ShippoTesting
         public void TestValidCreate()
         {
             Batch testBatch = getDefaultObject();
-            ClassicAssert.AreEqual(
-ShippoEnums.Statuses.VALIDATING, testBatch.Status);
+            ClassicAssert.AreEqual(ShippoEnums.Statuses.VALIDATING, testBatch.Status);
         }
 
         [Test]
@@ -154,6 +153,8 @@ batch.ObjectCreated, retrieve.ObjectCreated);
                 if (account.Carrier.ToString() == "usps")
                     defaultCarrierAccount = account.ObjectId;
             }
+
+
 
             Address addressFrom = Address.createForPurchase("Mr. Hippo", "965 Mission St.", "Ste 201", "SF",
                                                             "CA", "94103", "US", "4151234567", "ship@gmail.com");

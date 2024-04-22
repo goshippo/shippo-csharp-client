@@ -18,7 +18,7 @@ namespace Shippo {
         [JsonProperty(PropertyName = "object_owner")]
         public object ObjectOwner { get; set; }
 
-        [JsonProperty(PropertyName = "from_address")]
+        [JsonProperty(PropertyName = "address_from")]
         public object AddressFrom { get; set; }
 
         [JsonProperty(PropertyName = "address_to")]

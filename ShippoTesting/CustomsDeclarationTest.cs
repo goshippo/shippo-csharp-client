@@ -42,40 +42,24 @@ testObject.ObjectId, retrievedObject.ObjectId);
 
             retrievedObject = apiResource.RetrieveCustomsDeclaration((string)testObject.ObjectId);
             Console.Write(retrievedObject.AddressImporter.IsComplete);
-            ClassicAssert.AreEqual(
-testObject.ObjectId, retrievedObject.ObjectId);
+            ClassicAssert.AreEqual(testObject.ObjectId, retrievedObject.ObjectId);
             Assert.That(retrievedObject.AddressImporter != null);
-            ClassicAssert.AreEqual(
-testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
-            ClassicAssert.AreEqual(
-true, retrievedObject.AddressImporter.IsComplete);
-            ClassicAssert.AreEqual(
-"Undefault New Wu", retrievedObject.AddressImporter.Name);
-            ClassicAssert.AreEqual(
-"Shippo", retrievedObject.AddressImporter.Company);
-            ClassicAssert.AreEqual(
-"", retrievedObject.AddressImporter.StreetNo);
-            ClassicAssert.AreEqual(
-"215 Clayton St", retrievedObject.AddressImporter.Street1);
-            ClassicAssert.AreEqual(
-"", retrievedObject.AddressImporter.Street2);
-            ClassicAssert.AreEqual(
-"", retrievedObject.AddressImporter.Street3);
-            ClassicAssert.AreEqual(
-"San Francisco", retrievedObject.AddressImporter.City);
-            ClassicAssert.AreEqual(
-"CA", retrievedObject.AddressImporter.State);
+            ClassicAssert.AreEqual(testObject.AddressImporter.ObjectId, retrievedObject.AddressImporter.ObjectId);
+            ClassicAssert.AreEqual(true, retrievedObject.AddressImporter.IsComplete);
+            ClassicAssert.AreEqual("Undefault New Wu", retrievedObject.AddressImporter.Name);
+            ClassicAssert.AreEqual("Shippo", retrievedObject.AddressImporter.Company);
+            ClassicAssert.AreEqual("", retrievedObject.AddressImporter.StreetNo);
+            ClassicAssert.AreEqual("215 Clayton St", retrievedObject.AddressImporter.Street1);
+            ClassicAssert.AreEqual("", retrievedObject.AddressImporter.Street2);
+            ClassicAssert.AreEqual("", retrievedObject.AddressImporter.Street3);
+            ClassicAssert.AreEqual("San Francisco", retrievedObject.AddressImporter.City);
+            ClassicAssert.AreEqual("CA", retrievedObject.AddressImporter.State);
             ClassicAssert.AreEqual("94117-1913", retrievedObject.AddressImporter.Zip);
-            ClassicAssert.AreEqual(
-"US", retrievedObject.AddressImporter.Country);
-            ClassicAssert.AreEqual(
-"0015553419393", retrievedObject.AddressImporter.Phone);
-            ClassicAssert.AreEqual(
-"laura@goshipppo.com", retrievedObject.AddressImporter.Email);
-            ClassicAssert.AreEqual(
-true, retrievedObject.AddressImporter.IsResidential);
-            ClassicAssert.AreEqual(
-true, retrievedObject.AddressImporter.Test);
+            ClassicAssert.AreEqual("US", retrievedObject.AddressImporter.Country);
+            ClassicAssert.AreEqual("0015553419393", retrievedObject.AddressImporter.Phone);
+            ClassicAssert.AreEqual("laura@goshipppo.com", retrievedObject.AddressImporter.Email);
+            ClassicAssert.AreEqual(true, retrievedObject.AddressImporter.IsResidential);
+            ClassicAssert.AreEqual(true, retrievedObject.AddressImporter.Test);
         }
 
         [Test]
