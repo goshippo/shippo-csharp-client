@@ -93,7 +93,7 @@ of object you can create through the API.
 A particularly important file is [APIResource.cs](/Shippo/APIResource.cs), this file contains the code responsible for making requests. Also contained
 within this file are all the methods for generating different type of API objects. Each object's methods are contained within
 a region tag for convenient navigation. For example, the Parcel's methods are contained within:
-```csharp        
+```csharp
         #region Parcel
         /* Parcel Code */
         #endregion
@@ -125,3 +125,4 @@ The Shippo API provides in depth support of carrier and shipping functionalities
 	* UPS Mail Innovations
 	* FedEx Smartpost
 * Additional services: cash-on-delivery, certified mail, delivery confirmation, and more.
+* User parcel templates
